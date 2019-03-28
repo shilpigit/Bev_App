@@ -30,9 +30,9 @@
                 this.state = state;
                 this.currentUser = datacontext.user.item.user;
                 this.companies = datacontext.companies.items;
-                this.filteredCompanies = ko.observableArray();
-                this.countryCode = ko.observable('');
+                this.filteredCompanies = ko.observableArray();               
                 this.countries = localization.getLocalizedCodeSet('country');
+                this.countryCode = ko.observable();
                 this.seekingCodeValues = ko.observable(''); 
                 this.seeking = localization.getLocalizedCodeSet('seeking');
                 this.parent = ko.observable();
@@ -43,7 +43,7 @@
                 this.hasResult = ko.observable();
                 this.filterCompanies = filterCompanies;
                 this.filteredRedundantProfile = ko.observableArray();                
-                this.searchPhrase = ko.observable();
+                this.searchPhrase = ko.observable('');
                 this.startSearch = startSearch;
 
                 this.resourceTypeCodeValue = getResourceValue;
@@ -150,16 +150,24 @@
 
                         for (var d = 0; d < company.innovativePortalContainers().length; d++) {
                             var innovativePortalContainers = company.innovativePortalContainers()[d];
-                            //innovativePortal                              
+                            //innovativePortal   
+                            debugger
                             if (!vm.countryCode() && !vm.searchPhrase()) {
                                 vm.filteredCompanies.push(vm.companies()[c]);
                                 vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
                             }
-                            debugger
-                            var x = vm.searchPhrase().toLowerCase();
-                           
-                            if ((innovativePortalContainers.innovativePortal.description() && innovativePortalContainers.innovativePortal.description().length > 0 && innovativePortalContainers.innovativePortal.description().indexOf(vm.searchPhrase()) > -1) ||
-                                (innovativePortalContainers.innovativePortal.idea() && innovativePortalContainers.innovativePortal.idea().length > 0 && innovativePortalContainers.innovativePortal.idea().indexOf(vm.searchPhrase()) > -1) ||
+                            else if (!vm.searchPhrase()) {
+                                if ((innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode())
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
+                                    //break;
+                                }
+                            }
+                           else if ((innovativePortalContainers.innovativePortal.description()
+                                && innovativePortalContainers.innovativePortal.description().length > 0
+                                && innovativePortalContainers.innovativePortal.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1) ||
+                                (innovativePortalContainers.innovativePortal.idea() && innovativePortalContainers.innovativePortal.idea().length > 0 && innovativePortalContainers.innovativePortal.idea().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1) ||
                                 (innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode())
                             ) 
                             {
