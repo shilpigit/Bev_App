@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\app",
-    "\\app\\services",
-    "\\app\\services\\core",
-    "\\app\\viewmodels",
-    "\\app\\views"
+    ""
   ],
+  "SelectedNode": "\\index.html",
   "PreviewInSolutionExplorer": false
 }

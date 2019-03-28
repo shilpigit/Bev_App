@@ -27,7 +27,7 @@
     </div>
 
     <!-- ko with: $root.selectedCompanyInnovativePortal -->
-    
+
     <div class="form-group">
         <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
         <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
@@ -123,7 +123,7 @@
                id="inputEmail"
                data-bind="value: innovativePortal.email, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"
                required />
-       <!-- <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>-->
+        <!-- <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>-->
     </div>
 
     <div class="form-group">
@@ -145,6 +145,49 @@
                 data-bind="click: $root.addRequirement, text: $root.loc.buttonAdd"></button>
         <button class="btn btn-default"
                 data-bind="click: $root.newRequirement, text: $root.loc.buttonNew"></button>
+    </div>
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <span data-bind="text: $root.loc.stringRequirementsList"></span>
+        </div>
+    </div>
+
+    <div class="row top-pad-10">
+        <!-- ko foreach: company.innovativePortalContainers -->
+        <div class="row inner-tile"
+             data-bind="click: $root.setSelectedCompanyInnovativePortal, css: { selected: $data === $root.selectedCompanyInnovativePortal()}">
+
+            <div class="inner-tile-button-panel"
+                 data-bind="visible: $data === $root.selectedCompanyInnovativePortal()">
+
+                <div data-bind="visible : !$root.companyInnovativePortalIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="click: $root.deleteCompanyInnovativePortalItem">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+
+                <div data-bind="visible : $root.companyInnovativePortalIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="command: $root.deleteCompanyInnovativePortalItemCommand, text: $root.loc.buttonDelete"></button>
+
+                    <button class="btn btn-default btn-xs"
+                            data-bind="click: $root.cancelDeleteInnovativePortal, text: $root.loc.buttonCancel"></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-11">
+                <!--<code class="small pull-right" data-bind="text: $root.getRelativeExpiresOnDateTime($data)"></code>-->
+                <!--<span class="small pull-right" data-bind="text: $root.loc.stringValidUntilColon"></span>-->
+                <span data-bind="text: innovativePortal.category"></span>
+            </div>
+            <!--<div class="col-md-12">
+                <span class="small" data-bind="text: description"></span>
+            </div>-->
+        </div>
+        <!-- /ko -->
     </div>
 
     <!-- /ko -->

@@ -150,11 +150,14 @@
 
                         for (var d = 0; d < company.innovativePortalContainers().length; d++) {
                             var innovativePortalContainers = company.innovativePortalContainers()[d];
-                            //innovativePortal                             
+                            //innovativePortal                              
                             if (!vm.countryCode() && !vm.searchPhrase()) {
                                 vm.filteredCompanies.push(vm.companies()[c]);
                                 vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
                             }
+                            debugger
+                            var x = vm.searchPhrase().toLowerCase();
+                           
                             if ((innovativePortalContainers.innovativePortal.description() && innovativePortalContainers.innovativePortal.description().length > 0 && innovativePortalContainers.innovativePortal.description().indexOf(vm.searchPhrase()) > -1) ||
                                 (innovativePortalContainers.innovativePortal.idea() && innovativePortalContainers.innovativePortal.idea().length > 0 && innovativePortalContainers.innovativePortal.idea().indexOf(vm.searchPhrase()) > -1) ||
                                 (innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode())
