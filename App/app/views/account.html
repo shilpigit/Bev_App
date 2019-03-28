@@ -1,0 +1,241 @@
+﻿<div class="row">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringChangePassword"></h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div data-bind="messageBox: messageDetail"></div>
+
+            <form class="form form-admin">
+                <div class="form-group">
+                    <label for="input-current-password" data-bind="text: $root.loc.stringCurrentPasswordColon"></label>
+                    <input id="input-current-password" type="password" class="form-control"
+                           data-bind="value: currentPassword, attr: {placeholder: $root.loc.placeholderCurrentPassword}"/>
+
+                    <p class="small help-text" data-bind="validationMessage: currentPassword"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-new-password" data-bind="text: $root.loc.stringNewPasswordColon"></label>
+                    <input id="input-new-password" type="password" class="form-control"
+                           data-bind="value: newPassword, attr: {placeholder: $root.loc.placeholderNewPassword}"/>
+
+                    <p class="small help-text" data-bind="validationMessage: newPassword"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-re-new-password" data-bind="text: $root.loc.stringReNewPasswordColon"></label>
+                    <input id="input-re-new-password" type="password" class="form-control"
+                           data-bind="value: confirmNewPassword, attr: {placeholder: $root.loc.placeholderReNewPassword}"/>
+
+                    <p class="small help-text" data-bind="validationMessage: confirmNewPassword"></p>
+                </div>
+
+                <div class="form-group text-right">
+                    <a data-bind="text: $root.loc.linkForgottenMyPassword, attr: {href: '#/troubleloggingin?l='+ statedLanguage }"
+                       href="#/troubleloggingin?l=en">
+                    </a>
+                </div>
+            </form>
+
+            <div class="button-panel text-right">
+                <button type="button"
+                        class="btn btn-success"
+                        data-bind="command: savePasswordCmd, activity: $root.savePasswordCmd.isExecuting">
+
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+
+                    <span data-bind="text: $root.loc.buttonChangePassword"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringUserInformation"></h3>
+        </div>
+
+        <div class="panel-body">
+
+            <form class="form form-admin">
+
+                <div class="alert alert-danger"
+                     data-bind="visible: showAccountUpdateError, text: $root.loc.textUpdateAccountErrorMessage">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+
+                <div class="form-group text-center">
+                    <img class="img-thumbnail img-responsive user-photo-thumb"
+                         data-bind="attr:{ src: $root.selectedImage.fileUrl}"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"
+                           data-bind="text: $root.loc.stringPhotoColon"></label>
+
+                    <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                                        <input id="input-file-select"
+                                               data-bind="fileupload: $root.selectedImage"
+                                               type="file"
+                                               name="file-select"
+                                               accept=".jpg,.jpeg,.png,.gif"
+                                               onchange='$("#upload-file-info").html($(this).val());'>
+                                    </span>
+                                </span>
+
+                        <div class="form-control">
+                            <span class='label label-info' id="upload-file-info"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ko if: $root.selectedImage.percentage  -->
+                <div class="form-group"
+                     data-bind="visible: $root.selectedImage.percentage() && $root.selectedImage.percentage() !== 100">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                             data-bind="attr: {'aria-valuenow' :$root.selectedImage.percentage}, style: {width: $root.selectedImage.percentage() + '%' }, text: $root.selectedImage.percentage() ? $root.selectedImage.percentage() + '%' : '' "
+                             aria-valuemax="100">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                     data-bind="visible: $root.selectedImage.percentage() && $root.selectedImage.percentage() == 100">
+
+                    <div class="progress" data-bind="visible: !$root.selectedImage.uploadCompleted()">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar"
+                             aria-valuemin="0"
+                             data-bind="attr: {'aria-valuenow' :100}, style: {width: '100%' }, text: $root.loc.stringPleaseWaitDots "
+                             aria-valuemax="100">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <div class="form-group">
+                    <label for="input-first-name" data-bind="text: $root.loc.stringFirstNameColon"></label>
+                    <input id="input-first-name" type="text" class="form-control" data-bind="value: firstName"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-last-name" data-bind="text: $root.loc.stringLastNameColon"></label>
+                    <input id="input-last-name" type="text" class="form-control" data-bind="value: lastName"/>
+                </div>
+
+                <div class="form-group">
+                    <label data-bind="text: $root.loc.stringGenderColon"></label>
+
+                    <div class="radio">
+                        <input type="radio" name="gender" value="male" data-bind="checked: selectedGender"/>
+                        <label>
+                            <span data-bind="text: $root.loc.stringMale"></span>
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" name="gender" value="female" data-bind="checked: selectedGender"/>
+                        <label>
+                            <span data-bind="text: $root.loc.stringFemale"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthYear" data-bind="text: $root.loc.stringBirthdayColon"></label>
+                </div>
+
+                <div class="form-group col-sm-4 col-xs-12">
+                    <select id="birthYear"
+                            class="form-control"
+                            data-bind="options: years, value: birthYear">
+                    </select>
+                </div>
+
+                <div class="form-group col-sm-4 col-xs-12">
+                    <select id="birthMonth"
+                            class="form-control"
+                            data-bind="options: months, value: birthMonth">
+                    </select>
+                </div>
+
+                <div class="form-group col-sm-4 col-xs-12">
+                    <select id="birthDate"
+                            class="form-control"
+                            data-bind="options: days, value: birthDate">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputSubscribeForUpdate"
+                           data-bind="text: $root.loc.stringSubscribeForUpdateColon"></label>
+
+                    <div class="input-group" id="inputSubscribeForUpdate">
+                                <span class="input-group-addon beautiful">
+                                    <input type="checkbox"
+                                           data-bind="checked: subscribeForUpdate"
+                                           class="checkbox checkbox-success">
+                                </span>
+                        <input type="text" class="form-control" data-bind="value: $root.loc.stringSignUpForNewsLetter"
+                               disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="visible: false">
+                    <label class="control-label" for="language" data-bind="text: $root.loc.stringLanguageColon"></label>
+
+                    <div class="input-group merged">
+                        <span class="input-group-addon"><i class="fa fa-language"></i></span>
+                        <select id="language"
+                                class="form-control"
+                                data-bind="options: languageSet.codes, optionsText: 'name', value: selectedLanguage">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="visible: false">
+                    <label class="control-label" for="preferredUomLength"
+                           data-bind="text: $root.loc.stringPreferredLengthUnitColon"></label>
+                    <select id="preferredUomLength"
+                            class="form-control"
+                            data-bind="options: preferredUomLengthSet.codes, optionsText: 'name', value: selectedUomLength">
+
+                    </select>
+                </div>
+
+                <div class="form-group" data-bind="visible: false">
+                    <label class="control-label" for="preferredUomWeight"
+                           data-bind="text: $root.loc.stringPreferredWeightUnitColon"></label>
+                    <select id="preferredUomWeight"
+                            class="form-control"
+                            data-bind="options: preferredUomWeightSet.codes, optionsText: 'name', value: selectedUomWeight">
+
+                    </select>
+                </div>
+
+            </form>
+
+            <div class="button-panel text-right">
+                <button type="button"
+                        class="btn btn-success"
+                        data-bind="command: saveUserCmd, activity: $root.saveUserCmd.isExecuting">
+
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+
+                    <span data-bind="text: $root.loc.buttonSave"></span>
+                </button>
+                <button class="btn btn-default"
+                        data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+            </div>
+        </div>
+    </div>
+</div>

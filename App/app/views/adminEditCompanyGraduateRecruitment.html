@@ -1,0 +1,189 @@
+﻿<div data-bind="visible: !isEditing()">
+    <div class="row title-row">
+        <div class="pull-right">
+        </div>
+        <div class="pull-left">
+            <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+        </div>
+    </div>
+
+    <div class="composer-plate">
+
+        <!-- ko foreach: companies -->
+
+        <!--Admin Standard Company Tile-->
+        <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+
+        <!-- /ko -->
+    </div>
+
+</div>
+<form class="form form-admin" data-bind="visible: isEditing()">
+
+    <!-- ko with : selectedItem-->
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <h4 data-bind="text: company.name"></h4>
+
+            <p data-bind="text: $root.loc.stringGraduateRecruitmentIntro"></p>
+            <span class="help" data-bind="text: $root.loc.stringAddOrEditGraduateRecruitment"></span>
+        </div>
+    </div>
+    <div class="row">
+
+        <!-- ko with: $root.selectedCompanyGraduateRecruitment -->
+
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentTitle"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentTitleColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyGraduateRecruitmentTitle"
+                   data-bind="value: campaignTitle, attr: { placeholder: $root.loc.placeholderCompanyGraduateRecruitmentTitle }" />
+        </div>
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentContactPersonFullName"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentContactPersonFullNameColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyGraduateRecruitmentContactPersonFullName"
+                   data-bind="value: contactPersonFullName, attr: { placeholder: $root.loc.placeholderCompanyGraduateRecruitmentContactPersonFullName }" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentContactPersonTitle"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentContactPersonTitleColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyGraduateRecruitmentContactPersonTitle"
+                   data-bind="value: contactPersonTitle, attr: { placeholder: $root.loc.placeholderCompanyGraduateRecruitmentContactPersonTitle }" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentContactPersonNumber"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentContactPersonNumberColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyGraduateRecruitmentContactPersonNumber"
+                   data-bind="value: contactPersonNumber, attr: { placeholder: $root.loc.placeholderCompanyGraduateRecruitmentContactPersonNumber }" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentContactPersonEmailAddress"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentContactPersonEmailAddressColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyGraduateRecruitmentContactPersonEmailAddress"
+                   data-bind="value: contactPersonEmailAddress, attr: { placeholder: $root.loc.placeholderCompanyGraduateRecruitmentContactPersonEmailAddress }" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentAvailablePositions"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentAvailablePositionsColon"></label>
+            <textarea class="form-control"
+                      id="inputCompanyGraduateRecruitmentAvailablePositions"
+                      data-bind="value: availablePositions, attr: { placeholder: $root.loc.placeholderCompanyGraduateRecruitmentAvailablePositions }, event: { focus: function(data, event) { $root.textAreaGotFocus('inputCompanyGraduateRecruitmentAvailablePositions') }, blur: function(data, event) { $root.textAreaLostFocus('inputCompanyGraduateRecruitmentAvailablePositions') } }"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyGraduateRecruitmentPreferredContactMethod"
+                   data-bind="text: $root.loc.stringCompanyGraduateRecruitmentPreferredContactMethodColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyGraduateRecruitmentPreferredContactMethod"
+                   data-bind="value: preferredContactMethod, attr: { placeholder: $root.loc.placeCompanyGraduateRecruitmentPreferredContactMethod }" />
+        </div>
+
+        <div class="form-group">
+            <label data-bind="text: $root.loc.stringCompanyGraduateRecruitmentIntakeDateColon"></label>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="inputCompanyGraduateRecruitmentYear"
+                   data-bind="text: $root.loc.stringYearColon"></label>
+            <select id="inputCompanyGraduateRecruitmentYear"
+                    class="form-control"
+                    data-bind="options: $root.years, value: $root.selectedYear"></select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="inputCompanyGraduateRecruitmentMonth"
+                   data-bind="text: $root.loc.stringMonthColon"></label>
+            <select id="inputCompanyGraduateRecruitmentMonth"
+                    class="form-control"
+                    data-bind="options: $root.months, value: $root.selectedMonth"></select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="inputCompanyGraduateRecruitmentDay"
+                   data-bind="text: $root.loc.stringDayColon"></label>
+            <select id="inputCompanyGraduateRecruitmentDay"
+                    class="form-control"
+                    data-bind="enable: !$root.lockDay(), options: $root.days, value: $root.selectedDay"></select>
+        </div>
+
+        <div class="row text-right">
+            <button class="btn btn-success"
+                    data-bind="enable:campaignTitle , visible: !$root.companyGraduateRecruitmentIsSelected(),click: $root.addCampaign, text: $root.loc.buttonAdd"></button>
+            <button class="btn btn-default"
+                    data-bind="click: $root.newCampaign, visible: $root.companyGraduateRecruitmentIsSelected(), text: $root.loc.buttonNew"></button>
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+
+    
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <span data-bind="text: $root.loc.stringRequirementsList"></span>
+        </div>
+    </div>
+    <div class="row top-pad-10">
+        <!-- ko foreach: company.graduateRecruitments -->
+        <div class="row inner-tile"
+             data-bind="click: $root.setSelectedCompanyGraduateRecruitmentItem, css: { selected: $data === $root.selectedCompanyGraduateRecruitment()}">
+
+            <div class="inner-tile-button-panel"
+                 data-bind="visible: $data === $root.selectedCompanyGraduateRecruitment()">
+
+                <div data-bind="visible : !$root.companyGraduateRecruitmentIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="click: $root.deleteCompanyGraduateRecruitmentItem"><i
+                            class="fa fa-trash"></i></button>
+                </div>
+
+                <div data-bind="visible : $root.companyGraduateRecruitmentIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="command: $root.deleteGraduateRecruitmentItemCommand, text: $root.loc.buttonDelete"></button>
+
+                    <button class="btn btn-default btn-xs"
+                            data-bind="click: $root.cancelDeleteCampaign, text: $root.loc.buttonCancel"></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-11">
+                <span data-bind="text: campaignTitle"></span>
+            </div>
+            <div class="small pull-right">
+                <span data-bind="text: $root.loc.stringCompanyGraduateRecruitmentIntakeDateColon"></span>
+                <code data-bind="text: $root.getRelativeIntakeDateTime($data)"></code>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <!-- /ko -->
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</form>

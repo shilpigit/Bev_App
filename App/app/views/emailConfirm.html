@@ -1,0 +1,31 @@
+<div class="container text-center">
+    <div id="logo-container">
+        <img class="logo-image animated fadeInDown"
+             data-bind="attr: { src: config.imageCdn + 'logo/logo.svg' }"/>
+
+        <br/>
+            <div class="form-signin">
+                <form id="confirmEmail">
+
+                    <h4 data-bind="text: $root.loc.stringEmailConfirmation"></h4>
+
+                    <div class="control-group ">
+                        <div class="form-group ">
+                            <div data-bind="messageBox: messageDetail">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group " data-bind="visible: isDone()">
+                        <div class="form-group">
+                            <a class="btn btn-md  btn-block btn-primary" href="#/home">
+                                <span data-bind="text:$root.loc.buttonSignin"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+    </div>
+</div>

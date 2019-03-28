@@ -1,0 +1,134 @@
+﻿<div class="row title-row">
+    <div class="pull-left">
+        <h4 data-bind="text: $root.loc.stringGraduateRecruitmentSearch"></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="composer-plate">
+        <form class="form form-admin">
+
+            <div class="form-group col-md-12 right-left-padding-remover">
+
+                <!--<label class="control-label" for="inputSearchPhrase"-->
+                <!--data-bind="text: $root.loc.stringJobSearchPhraseColon"></label>-->
+
+                <input
+                        id="inputSearchPhrase"
+                        type="text"
+                        class="form-control"
+                        data-bind="textInput: $root.searchPhrase, attr: {placeholder: $root.loc.placeholderJobSearch}"/>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="composer-plate">
+
+        <!-- ko foreach: filteredCompanies -->
+        <div class="inner-tile row">
+            <div class="col-md-2 hidden-xs hidden-sm">
+                <img class="img img-responsive img-thumbnail"
+                     data-bind="attr:{ src: $root.utilities.resolveFileUrl(company.logoImageId())}"/>
+            </div>
+            <!-- ko with: company -->
+            <div class="col-md-10 col-xs-12 col-sm-12">
+                <a data-bind="attr: {'href': $root.getCompanyProfileUrl($data)}" target="_blank">
+                    <p class="title" data-bind="text: name"></p>
+                </a>
+
+                <div class="tile-body row">
+                    <div class="col-md-5">
+                        <span data-bind="text: $parent.owner.emailAddress"></span>
+                        <button class="btn btn-sm btn-xs-transparent copy"
+                                data-bind="attr: {'data-clipboard-text': $parent.owner.emailAddress }, visible: $parent.owner.emailAddress ">
+                            <i class="fa fa-copy"></i>
+                        </button>
+                        <a class="btn btn-xs-transparent"
+                           type="button"
+                           data-bind="attr: {href: $root.getLinkMailToCompanyOwner($parent.owner.emailAddress)}, visible: $parent.owner.emailAddress">
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-5">
+                        <a data-bind="attr: { href: companyUrl }, visible: companyUrl" target="_blank">
+                            <span data-bind="text: companyUrl"></span>
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-2 pull-right text-right">
+                        <a data-bind="attr: { href: facebookUrl }, visible: facebookUrl" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        &nbsp;
+                        &nbsp;
+                        <a data-bind="attr: { href: linkedinUrl }, visible: linkedinUrl" target="_blank">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="tile-body row">
+                    <div class="col-md-5">
+                        <span data-bind="text:primaryContactNumber"></span>
+                    </div>
+                    <div class="col-md-5">
+                        <span data-bind="text:secondaryContactNumber"></span>
+                    </div>
+                </div>
+                <div class="tile-body row">
+                    <div class="col-md-12">
+                        <a data-bind="attr: {href: $root.getGoogleMapLink($data)}, visible: addressOne" target="_blank">
+                            <span data-bind="text: $root.getLocationName($data)+ ' '+ addressOne()"></span>
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12 col-sm-12 spacer-row"></div>
+            <div class="col-md-12 col-xs-12 col-sm-12 ">
+                <!-- ko foreach: graduateRecruitments -->
+                <div class="row inner-tile" data-bind="visible: $root.includeSearchPhrase($data), css: { disabled: !$root.includeSearchPhrase($data)}">
+
+                    <div class="col-md-12">
+                        <div class="small pull-right">
+                            <span data-bind="text: $root.loc.stringCompanyGraduateRecruitmentIntakeDateColon"></span>
+                            <code data-bind="text: $root.getRelativeIntakeDateTime($data)"></code>
+                        </div>
+                        <span data-bind="text: campaignTitle"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="small" data-bind="text: availablePositions"></span>
+                    </div>
+                    <div class="col-md-12 small">
+                        <div class="col-md-4" data-bind="visible: contactPersonFullName">
+                            <span data-bind="text: $root.loc.stringContactColon"></span>
+                            &nbsp;
+                            &nbsp;
+                            <code data-bind="text: contactPersonFullName"></code>
+                        </div>
+                        <div class="col-md-8">
+                            <span data-bind="visible: contactPersonNumber() || contactPersonEmailAddress(), text: $root.loc.stringViaColon"></span>
+                            <span>&nbsp;</span>
+                            <code data-bind="visible: contactPersonEmailAddress, text: contactPersonEmailAddress"></code>
+                            <span data-bind="visible: contactPersonNumber() || contactPersonEmailAddress()">&nbsp;|&nbsp;</span>
+                            <code data-bind="visible: contactPersonNumber, text: contactPersonNumber"></code>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <!-- /ko -->
+
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="col-md-12 right-left-padding-remover">
+        <div data-bind="messageBox: messageDetail"></div>
+    </div>
+
+</div>
+

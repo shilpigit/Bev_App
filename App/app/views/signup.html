@@ -1,0 +1,119 @@
+<section>
+
+    <div id="logo-container">
+        <img class="logo-image animated fadeInDown"
+             data-bind="attr: { src: config.imageCdn + 'logo/logo.svg' }"/>
+    </div>
+    <form id="signup" class="form-signin">
+
+        <div class="control-group">
+
+            <div data-bind="messageBox: messageDetail"></div>
+
+            <div data-bind="messageBox: invitationMessage"></div>
+
+            <div class="form-group  has-feedback first-input"
+                 data-bind="css: { 'has-success': isValidUsername, 'has-error': showUsernameValidationError() || (!isValidUsername() && emailAddress) }">
+                <input type="text"
+                       class="form-control"
+                       data-bind="textInput: emailAddress, attr : { placeholder: $root.loc.placeholderEnterEmailAddress},valueUpdate: ['input', 'afterkeydown']"
+                       id="inputEmail">
+                    <span class="fa fa-check form-control-feedback"
+                          data-bind="visible: isValidUsername">
+                        </span>
+
+                        <span class="fa fa-spinner fa-spin form-control-feedback"
+                              data-bind="visible: isValidatingUsername"
+                              aria-hidden="true">
+                        </span>
+
+                <p class="small lighter-color" data-bind="validationMessage: emailAddress"></p>
+            </div>
+
+            <div class="form-group" data-bind="if: packageCode">
+                <!--<label for="inputFirstName">First name</label>-->
+                <input type="text"
+                       class="form-control"
+                       data-bind="textInput: companyName,  attr: { placeholder: $root.loc.placeholderCompanyName}"
+                       id="inputCompanyName">
+
+                <p class="small lighter-color" data-bind="validationMessage: companyName"></p>
+            </div>
+
+            <div class="form-group">
+                <!--<label for="inputFirstName">First name</label>-->
+                <input type="text"
+                       class="form-control"
+                       data-bind="textInput: firstName,  attr: { placeholder: $root.loc.placeholderFirstName}"
+                       id="inputFirstName">
+
+                <p class="small lighter-color" data-bind="validationMessage: firstName"></p>
+            </div>
+
+            <div class="form-group">
+                <!--<label for="inputLastName">Last name</label>-->
+                <input type="text"
+                       class="form-control"
+                       data-bind="textInput: lastName, attr: { placeholder: $root.loc.placeholderLastName}"
+                       id="inputLastName">
+
+                <p class="small lighter-color" data-bind="validationMessage: lastName"></p>
+            </div>
+
+            <div class="form-group">
+                <!--<label for="inputPassword">Password</label>-->
+                <input type="password"
+                       class="form-control"
+                       data-bind="textInput: password, attr: { placeholder: $root.loc.placeHolderPassword}"
+                       id="inputPassword">
+
+                <p class="small lighter-color" data-bind="validationMessage: password"></p>
+            </div>
+
+            <div class="form-group last-input">
+                <!--<label for="inputConfirmPassword">Confirm password</label>-->
+                <input type="password"
+                       class="form-control"
+                       data-bind="textInput: confirmPassword , attr: { placeholder: $root.loc.placeholderConfirmPassword}"
+                       id="inputConfirmPassword">
+
+                <p class="small lighter-color" data-bind="validationMessage: confirmPassword"></p>
+            </div>
+        </div>
+
+        <div class="legal">
+            <input type="checkbox"
+                   name="subscribe-for-updates"
+                   data-bind="checked: subscribeForUpdate">
+            <span data-bind="text: $root.loc.stringSignUpForNewsLetter"></span>
+        </div>
+
+        <div class="legal">
+            <input type="checkbox"
+                   name="terms-and-conditions"
+                   data-bind="checked: isAgree">
+            <span data-bind="html: $root.loc.htmlSignupAgreement"></span>
+        </div>
+
+        <div class="control-group" >
+            <div class="form-group">
+                <button type="button"
+                        class="btn btn-lg btn-block btn-primary btn-bottom-padder"
+                        data-bind="click: signup, enable: !isBusy() && isValidInvitee() && isValidUsername()">
+
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+
+                    <span data-bind="visible: isBusy, text: $root.loc.buttonCreatingAccountDots"></span>
+                    <span data-bind="visible: !isBusy(), text: $root.loc.buttonCreateAccount"></span>
+                </button>
+                <div class="row">
+                    <div class="pull-right">
+                        <a data-bind="text: $root.loc.linkBack, attr: {href: '/'}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</section>

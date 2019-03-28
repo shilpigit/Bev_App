@@ -1,0 +1,39 @@
+<div class="row title-row">
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringCandidateSearch"></h3>
+    </div>
+</div>
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#phrasalSearch" data-toggle="tab">
+                <span class="fa fa-file-text-o" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringPhrasalSearch"></span>
+            </a>
+        </li>
+        <!--<li>-->
+            <!--<a href="#advancedSearch" data-toggle="tab">-->
+                <!--<span class="fa fa-search" aria-hidden="true"></span>-->
+                <!--<span class="tab-header-label" data-bind="text: $root.loc.stringAdvancedSearch"></span>-->
+            <!--</a>-->
+        <!--</li>-->
+    </ul>
+    <div class="tab-content">
+        <div id="phrasalSearch"
+             class="tab-pane fade in active">
+            <!-- ko compose: 'homeCompanyCandidateProfilePhrasalSearch.html' --><!-- /ko -->
+        </div>
+        <div id="advancedSearch"
+             class="tab-pane fade">
+            <!-- ko compose: 'homeCompanyCandidateProfileAdvancedSearch.html' --><!-- /ko -->
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group col-md-12  col-sm-12  col-xs-12 right-left-padding-remover">
+    <div data-bind="messageBox: messageDetail"></div>
+    <div class="animated fadeIn x-slow-animated"
+         data-bind="compose: 'homeCompanyCandidateProfileSearchResult.html'"></div>
+</div>

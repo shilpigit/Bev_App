@@ -1,0 +1,44 @@
+@import "../variables.less";
+
+.item-panel-holder {
+  padding: 20px;
+  text-align: center;
+}
+
+.icon-panel-holder {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid @border-color;
+  border-radius: @oil-diversity-border-radius;
+}
+
+.icon-panel-holder i {
+  margin-right: -5px;
+}
+
+.icon-panel-holder:hover {
+  color: @text-color-lighter;
+  cursor: pointer;
+}
+
+.icon-title {
+  color: @oil-diversity-primary;
+}
+
+.icon-title:hover {
+  color: @oil-diversity-primary-lighter;
+}
+
+.icon {
+  width: 80px;
+  height: 100px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  margin: 0 auto;
+  border-style:none !important;
+}
+
+.icon-verifying{
+  background-image: url('@{image-cdn-base-url}/app/icons/verifying.svg');
+}

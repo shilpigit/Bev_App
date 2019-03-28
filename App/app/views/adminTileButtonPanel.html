@@ -1,0 +1,15 @@
+<div class="tile-button-panel" data-bind="if: $root.selectedItem() && $data === $root.selectedItem()">
+
+    <div data-bind="visible : !$root.isDeleting()">
+        <button class="btn btn-default btn-xs" data-bind="visible: $root.canEdit(),click: $root.editItem"><i class="fa fa-pencil"></i></button>
+        <button class="btn btn-danger btn-xs" data-bind="visible: $root.canDelete(), click: $root.deleteItem"><i class="fa fa-trash"></i></button>
+    </div>
+
+    <div data-bind="visible : $root.isDeleting()">
+        <button class="btn btn-danger btn-xs"
+                data-bind="command: $root.deleteItemCommand, text: $root.loc.buttonDelete"></button>
+
+        <button class="btn btn-default btn-xs"
+                data-bind="click: $root.cancelDelete, text: $root.loc.buttonCancel"></button>
+    </div>
+</div>

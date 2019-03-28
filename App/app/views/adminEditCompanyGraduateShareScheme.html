@@ -1,0 +1,105 @@
+﻿<div data-bind="visible: !isEditing()">
+    <div class="row title-row">
+        <div class="pull-right">
+        </div>
+        <div class="pull-left">
+            <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+        </div>
+    </div>
+
+    <div class="composer-plate">
+
+        <!-- ko foreach: companies -->
+
+        <!--Admin Standard Company Tile-->
+        <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+
+        <!-- /ko -->
+    </div>
+</div>
+
+<form class="form form-admin" data-bind="visible: isEditing()">
+
+    <!-- ko with : selectedItem-->
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <h4 data-bind="text: company.name"></h4>
+
+            <p data-bind="text: $root.loc.stringGraduateShareSchemeIntro"></p>
+            <span class="help" data-bind="text: $root.loc.stringEnableOrDisableGraduateShareScheme"></span>
+        </div>
+    </div>
+    <div class="row top-pad-10">
+        <p data-bind="html: $root.introductionText"></p>
+    </div>
+    <div class="row">
+        <div class="form-group">
+
+            <div class="input-group" id="inputIsActive">
+                                <span class="input-group-addon beautiful">
+                                    <input type="checkbox"
+                                           data-bind="checked: company.isParticipatingInGraduateShareScheme"
+                                           class="checkbox checkbox-success">
+                                </span>
+                <input type="text" class="form-control" data-bind="value: $root.loc.stringWeWantToParticipate"
+                       disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <div class="row" data-bind="visible: company.isParticipatingInGraduateShareScheme">
+
+        <div class="form-group">
+            <label for="inputContactPersonFullName"
+                   data-bind="text: $root.loc.stringContactPersonFullNameColon"></label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="inputContactPersonFullName"
+                    data-bind="value: company.graduateShareScheme.contactPersonFullName, attr: { placeholder: $root.loc.placeholderContactPersonFullName }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="inputContactPersonTitle"
+                   data-bind="text: $root.loc.stringContactPersonTitleColon"></label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="inputContactPersonTitle"
+                    data-bind="value: company.graduateShareScheme.contactPersonTitle, attr: { placeholder: $root.loc.placeholderContactPersonTitle }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="inputContactPersonEmailAddress"
+                   data-bind="text: $root.loc.stringContactPersonEmailAddressColon"></label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="inputContactPersonEmailAddress"
+                    data-bind="value: company.graduateShareScheme.contactPersonEmailAddress, attr: { placeholder: $root.loc.placeholderContactPersonEmailAddress }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="inputContactPersonPhone"
+                   data-bind="text: $root.loc.stringContactPersonPhoneNumberColon"></label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="inputContactPersonPhone"
+                    data-bind="value: company.graduateShareScheme.contactPersonNumber, attr: { placeholder: $root.loc.placeholderContactPersonPhoneNumber}"/>
+        </div>
+
+    </div>
+
+    <!-- /ko -->
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</form>

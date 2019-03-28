@@ -1,0 +1,110 @@
+<div class="composer-plate" data-bind="with: selectedItem">
+
+    <!-- ko with: company -->
+    <div class="row title-row">
+        <h2 class="panel-title" data-bind="text: name"></h2>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4 text-center">
+                    <div class="form-group text-center">
+                        <img class="img img-responsive user-photo-thumb"
+                             data-bind="attr:{ src: $root.utilities.resolveFileUrl($parent.company.logoImageId())}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer-row"></div>
+            <div class="row">
+                <div class="form-group">
+                    <div data-bind="html: description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer-row"></div>
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringContactInformation"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <form class="form form-admin">
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringLocationColon"></span>
+                    <span data-bind="text: $root.getCurrentLocation($data)"></span>
+                </div>
+            </form>
+            <form class="form form-admin" data-bind="visible: addressOne">
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringAddressOneColon"></span>
+                    <a data-bind="attr: {href: $root.getAddressOneGoogleMapLink($data)}, visible: addressOne"
+                       target="_blank">
+                        <span data-bind="text: addressOne"></span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </div>
+            </form>
+            <form class="form form-admin" data-bind="visible: addressTwo">
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringAddressTwoColon"></span>
+                    <a data-bind="attr: {href: $root.getAddressTwoGoogleMapLink($data)}, visible: addressTwo"
+                       target="_blank">
+                        <span data-bind="text: addressTwo"></span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </div>
+            </form>
+            <form class="form form-admin" data-bind="visible: primaryContactNumber">
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringPrimaryContactNumberColon"></span>
+                    <span data-bind="text: primaryContactNumber"></span>
+                </div>
+            </form>
+            <form class="form form-admin" data-bind="visible: secondaryContactNumber">
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringSecondaryContactNumberColon"></span>
+                    <span  data-bind="text: secondaryContactNumber"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="spacer-row"></div>
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringKeyPersonnelsList"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <!-- ko foreach: disciplines -->
+            <div class="row tile">
+
+                <div class="col-md-6">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringRegionColon"></span>
+                    <span data-bind="text: $root.getRegionName($data)"></span>
+                </div>
+                <div class="col-md-6">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringExpertiseIndustryColon"></span>
+                    <span data-bind="text: $root.getExpertiseIndustryName($data)"></span>
+                </div>
+                <div class="col-md-6">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringPositionColon"></span>
+                    <span data-bind="text: $root.getPositionName($data)"></span>
+                </div>
+                <div class="col-md-6">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringFullNameColon"></span>
+                    <span data-bind="text: fullName"></span>
+                </div>
+                <div class="col-md-5">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEmailAddressColon"></span>
+                    <span data-bind="text: emailAddress"></span>
+                </div>
+                <div class="col-md-12">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringDescriptionColon"></span>
+                    <span data-bind="text: description"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+
+</div>

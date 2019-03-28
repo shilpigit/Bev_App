@@ -1,0 +1,30 @@
+{
+  "name": "odg",
+  "version": "1.0.0",
+  "description": "Oil Diversity HR Web Application",
+  "main": "app/main.js",
+  "keywords": [],
+  "author": "Mohammad MalekMakan",
+  "private": true,
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-connect": "^5.0.0",
+    "gulp-durandal": "^1.1.7",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.0.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-minify": "0.0.14",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-server-livereload": "^1.2.1",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-util": "^3.0.4",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "mout": "~1.0.0"
+  },
+  "dependencies": {
+    "grunt-cli": "^1.2.0"
+  }
+}

@@ -1,0 +1,89 @@
+<section>
+    <div id="logo-container">
+        <img class="logo-image animated fadeInDown"
+             data-bind="attr: { src: config.imageCdn + 'logo/logo.svg' }"/>
+
+        <form class="form-signin" id="loginExternal" data-bind="visible: isConfirmingSignin()">
+            <strong data-bind="text: $root.loc.stringNiceExclumationMark"></strong>
+            <p data-bind="text:  $root.loc.stringPleaseWaitDots"></p>
+        </form>
+
+
+        <form class="form-signin" id="login" data-bind="visible: !isConfirmingSignin()">
+
+            <h4 data-bind="text: config.systemType, visible: config.systemType!=='Production'"></h4>
+
+            <div class="control-group">
+
+                <div data-bind="messageBox: messageDetail"></div>
+                <div class="form-group first-input">
+                    <input class="form-control input-lg"
+                           data-bind="textInput: username, attr: { placeholder: $root.loc.placeHolderUsername }"
+                           type="text" name="username"/>
+
+                    <p class="small help-text" data-bind="validationMessage: username"></p>
+
+                </div>
+                <div class="form-group last-input">
+                    <input class="form-control input-lg"
+                           data-bind="textInput: password, attr: { placeholder: $root.loc.placeHolderPassword }, executeOnEnter: login"
+                           type="password"
+                           name="password"/>
+
+                    <p class="small help-text" data-bind="validationMessage: password"></p>
+                </div>
+                <button type="button"
+                        class="btn btn-lg btn-block btn-primary btn-bottom-padder"
+                        data-bind="click: login, enable: !isBusy()"
+                        id="signin">
+
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+
+                    <span data-bind="visible: isBusy, text:$root.loc.buttonSigninginDots"></span>
+                    <span data-bind="visible: !isBusy(), text:$root.loc.buttonSignin"></span>
+                </button>
+
+                <div class="pull-left small">
+                    <a data-bind="text: $root.loc.linkTroubleLoggingInQuestionMark, attr: {href: '#/troubleloggingin?'+ redirectParameters() }"></a>
+                </div>
+                <div class="pull-left small help-text lighter-color">
+                    &nbsp;|&nbsp;
+                </div>
+                <div class="pull-left small">
+                    <a data-bind="text: $root.loc.linkJoinNow, attr: {href: signupLink()}"></a>
+                </div>
+                <div class="pull-right small">
+                    <a data-bind="text: $root.loc.linkBackToHome, attr: {href: config.systemType!=='Production' ? 'http://dev.oildiversity.com/' : 'http://dev.oildiversity.com/' }"></a>
+                </div>
+
+            </div>
+
+            <div class="bottom-pad-10"></div>
+
+            <div class="control-group bottom-pad-10 row"
+                 style=" margin-left: -15px !important;  margin-right: -15px !important;margin-top:40px; overflow: auto"
+                 data-bind="visible: !isConfirmingSignin() && !isClient()">
+
+                <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+                    <a class="social-btn-padder btn btn-social btn-facebook btn-sm pull-left"
+                       data-bind="click: loginFacebook" style="width: 100%">
+                        <i class="fa fa-facebook"></i>
+                        <span data-bind="text: $root.loc.linkSigninWithFacebook"></span>
+                    </a>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 hidden-lg hidden-md bottom-pad-10"></div>
+
+                <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+                    <a class="social-btn-padder btn btn-social btn-google btn-sm pull-right"
+                       data-bind="click: loginGoogle" style="width: 100%">
+                        <i class="fa fa-google"></i>
+                        <span data-bind="text: $root.loc.linkSigninWithGoogle"></span>
+                    </a>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>

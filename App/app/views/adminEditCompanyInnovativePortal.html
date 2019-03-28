@@ -1,0 +1,160 @@
+<div data-bind="visible: !isEditing()">
+    <div class="row title-row">
+        <div class="pull-right">
+        </div>
+        <div class="pull-left">
+            <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+        </div>
+    </div>
+
+    <div class="composer-plate">
+
+        <!-- ko foreach: companies -->
+        <!--Admin Standard Company Tile-->
+        <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+        <!-- /ko -->
+    </div>
+</div>
+<form class="form form-admin" data-bind="visible: isEditing()">
+
+    <!-- ko with : selectedItem-->
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <h4 data-bind="text: company.name"></h4>
+            <span class="help" data-bind="text: $root.loc.stringAddOrEditInnovationPortal"></span>
+        </div>
+    </div>
+
+    <!-- ko with: $root.selectedCompanyInnovativePortal -->
+    
+    <div class="form-group">
+        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
+        <select id="inputCountry"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: innovativePortal.countryCode,optionsCaption: 'Select...', optionsDisableDefault: true"></select>
+    </div>
+    <div class="form-group">
+        <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>
+        <input type="text"
+               class="form-control"
+               id="inputEmail"
+               data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
+               required />
+    </div>
+    <div class="form-group">
+        <label for="inputCompanyIdea"
+               data-bind="text: $root.loc.stringCompanyInnovationIdea"></label>
+        <input type="text"
+               class="form-control"
+               id="inputCompanyIdea"
+               data-bind="value: innovativePortal.idea, attr: { placeholder: $root.loc.placeholderCompanyInnovationIdeaColon }" />
+    </div>
+
+    <div class="form-group">
+        <label for="inputSeekingCodeValue"
+               data-bind="text: $root.loc.stringSeeking"></label>
+        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
+        <select multiple="true"
+                size="5"
+                id="inputSeekingCodeValue"
+                class="form-control"
+                data-bind="options: $root.seeking.codes, optionsText: 'name', optionsValue: 'codeValue', selectedOptions: innovativePortal.seekingCodeValues"></select>
+
+        <p class="small help-text" data-bind="text: $root.loc.textMultiSelectHelp"></p>
+    </div>
+
+    <div class="form-group">
+        <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>
+        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
+        <input type="text"
+               class="form-control"
+               id="inputDescription"
+               data-bind="value: innovativePortal.description, attr: { placeholder: $root.loc.placeholderDescription }"
+               required />
+        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: descriptionOfPersonnelAvailable"></p>-->
+    </div>
+
+    <div class="form-group">
+        <!--<a class="small pull-right" target="_blank"
+           data-bind="visible: $root.getFileUrl($data).length > 0, attr: {href: $root.getFileUrl($data)}">
+            <span data-bind="text: $root.loc.linkDownloadRigAndVesselCatalouge"></span>&nbsp;&nbsp;<i class="fa fa-external-link"></i>
+        </a>-->
+
+        <label class="control-label"
+               data-bind="text: $root.loc.stringBrochure"></label>
+
+        <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-primary btn-file">
+                    <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                    <input id="input-cover-select"
+                           data-bind="fileupload: $root.selectedCatalogue"
+                           type="file"
+                           name="file-select"
+                           accept=".pdf,.doc,.docx,.ppt,.pptx"
+                           onchange='$("#upload-catalogue-info").html($(this).val());'>
+                </span>
+            </span>
+
+            <div class="form-control">
+                <span class='label label-info' id="upload-catalogue-info"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>
+        <code data-bind="text: $root.loc.stringRequired"></code>
+        <input type="text"
+               class="form-control"
+               id="inputContactPerson"
+               data-bind="value: innovativePortal.contactPerson, attr: { placeholder: $root.loc.placeholderEnterContactPersonName }"
+               required />
+        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: contactPerson"></p>-->
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>
+        <code data-bind="text: $root.loc.stringRequired"></code>
+        <input type="text"
+               class="form-control"
+               id="inputEmail"
+               data-bind="value: innovativePortal.email, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"
+               required />
+       <!-- <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>-->
+    </div>
+
+    <div class="form-group">
+        <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>
+        <code data-bind="text: $root.loc.stringRequired"></code>
+        <input type="text"
+               class="form-control"
+               id="inputTelephoneNumber"
+               data-bind="value: innovativePortal.telephoneNumber, attr: { placeholder: $root.loc.placeholderEnterTelephoneNumber }" />
+        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: telephoneNumber"></p>-->
+    </div>
+
+
+    <!-- /ko -->
+
+
+    <div class="row text-right">
+        <button class="btn btn-success"
+                data-bind="click: $root.addRequirement, text: $root.loc.buttonAdd"></button>
+        <button class="btn btn-default"
+                data-bind="click: $root.newRequirement, text: $root.loc.buttonNew"></button>
+    </div>
+
+    <!-- /ko -->
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</form>

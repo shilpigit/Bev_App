@@ -1,0 +1,64 @@
+﻿<div data-bind="messageBox: messageDetail"></div>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title" data-bind="text: loc.stringEditAccessList"></h3>
+    </div>
+
+    <div class="panel-body">
+
+        <form class="form form-admin" name="accessControlForm">
+
+            <!-- ko with: selectedItem -->
+            <div class="form-group col-xs-6">
+                <label data-bind="text: $root.loc.stringUserGroupColon"></label>
+                <select
+                        id="inputUserGroup"
+                        class="form-control"
+                        data-bind="options: $root.userGroups, optionsText: 'name', value: $parent.selectedUserGroup">
+
+                </select>
+            </div>
+
+            <div class="form-group col-xs-6">
+                <label for="inputCompany" data-bind="text: $root.loc.stringCompanyColon"></label>
+                <select
+                        id="inputCompany"
+                        class="form-control"
+                        data-bind="options: $parent.companies, optionsText: 'companyName', value: $parent.selectedCompany, optionsCaption: '[Global]'">
+                </select>
+            </div>
+            <!-- /ko -->
+
+            <div class="">
+                <ul class="access-list">
+                    <!-- ko foreach: objects -->
+                    <li>
+                        <div>
+                            <span data-bind="text: code.name"></span>
+                            <ul class="list-inline pull-right access-list-rights">
+                                <!-- ko foreach: operations -->
+                                <li class="list">
+                                    <div class="checkbox checkbox-success">
+                                        <input type="checkbox" data-bind="checked: isSelected"/>
+
+                                        <label data-bind="text: code.name">
+
+                                        </label>
+                                    </div>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+
+            <div class="admin-button-panel text-right">
+                <button class="btn btn-success" data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+                <button class="btn btn-default" data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+            </div>
+        </form>
+    </div>
+</div>

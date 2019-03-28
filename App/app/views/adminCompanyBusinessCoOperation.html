@@ -1,0 +1,33 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringBusinessCoOperation"></h3>
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#search" data-toggle="tab">
+                <span class="fa fa-edit" aria-hidden="true"></span>
+                    <span class="tab-header-label"
+                          data-bind="text: $root.loc.stringPartnersBusinessRequirements"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#businessCoOperation" data-toggle="tab">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringAddRequirement"></span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyBusinessCoOperationSearch'}">
+        </div>
+        <div id="businessCoOperation" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyBusinessCoOperation'}">
+        </div>
+
+    </div>
+</div>

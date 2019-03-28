@@ -1,0 +1,37 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <button class="btn btn-success btn-sm"
+                data-bind="click: newItem, visible: !isEditing()"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringUserGroups"></h3>
+    </div>
+</div>
+<div class="composer-plate">
+    <div data-bind="messageBox: messageDetail"></div>
+    <div data-bind="visible: !isEditing()">
+        <!-- ko foreach: userGroups -->
+        <div class="tile row" data-bind="click: $root.setSelectedItem, css: { selected: id() === $root.selectedItemId()}">
+
+            <!-- Standard update, edit and delete options -->
+            <div data-bind="compose: 'adminTileButtonPanel.html'"></div>
+
+            <span class="title" data-bind="text: name"></span>
+
+            <div class="tile-confirmation make-danger" data-bind="visible: id() === $root.selectedItemId() && $root.isDeleting()">
+                <i class="fa fa-trash-o fa-2x"></i>
+                <span data-bind="text: $root.loc.textDeleteConfirmationMessage"></span>
+            </div>
+
+            <div class="tile-body row" data-bind="visible: id() !== $root.selectedItemId() || !$root.isDeleting()">
+                <div class="col-md-4">
+                    <span class="tile-label"><i class="fa fa-users"></i></span>
+                    <a data-bind="text: users().length"></a>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div data-bind="compose: 'adminEditUserGroup.html', visible: isEditing()"></div>

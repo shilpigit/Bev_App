@@ -1,0 +1,19 @@
+<!--<div class="control-group hidden-xs" style="padding-bottom: 10%;"></div>-->
+
+<section
+        id="content"
+        class="container">
+    <div class="copy-right animated fadeIn" style="display:block;">
+        <a data-bind="click: navigateHome">
+            <img class="desaturate brand-footer"
+                 data-bind="attr: { src: config.imageCdn + 'logo/logo-horizontal.svg' }"/>
+        </a>
+        <br/>
+        <a href="//www.oildiversity.com/#!/show/?key=privacy-policy" target="_blank"
+           data-bind="text: $root.loc.linkPrivacyPolicy"></a>&nbsp;|&nbsp;
+        <a href="//www.oildiversity.com/#!/show/?key=terms-of-service" target="_blank"
+           data-bind="text: $root.loc.linkTermsOfService"></a>
+        <br/>
+        <span data-bind="html: $root.loc.htmlCopyright"></span>
+    </div>
+</section>

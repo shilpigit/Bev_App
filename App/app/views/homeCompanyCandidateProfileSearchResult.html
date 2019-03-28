@@ -1,0 +1,81 @@
+<div data-bind="if: hasResult" class="composer-plate">
+
+    <!-- ko compose: 'dataPaging.html' --><!-- /ko -->
+
+    <!-- ko foreach:  candidateProfiles-->
+    <div class="inner-tile row small">        
+        <div class="col-md-1 col-sm-1 hidden-xs ">
+            <img class="img img-responsive img-thumbnail"
+                 data-bind="attr:{ src: $root.getCandidateImageUrl($data)}"/>
+        </div>
+
+        <div class="col-md-11 col-sm-11 col-xs-12">
+            <div class="row">
+                <div class="col-md-8">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringNameColon"></span>
+                    <span data-bind="text: owner.person.names.fullName"></span>
+                </div>
+
+                <div class="col-md-4 text-right">
+                    <a target="_blank"
+                       data-bind="attr: { 'href': $root.getCandidateProfileUrl($data)}">
+                        <span data-bind="text: $root.loc.linkVisitCandidateProfile"></span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringSalarySoughtColon"></span>
+                    <span data-bind="text: $root.getSalarySought($data)"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEducationColon"></span>
+                    <span data-bind="text: $root.getEducationLevel($data)"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringCurrentLocationColon"></span>
+                    <span data-bind="text: $root.getCurrentLocationName($data)"></span>
+                </div>
+                <div class="col-md-3 text-right"
+                     data-bind="visible: $root.getCandidateCvUrl($data).length > 0">
+                    <a class="lighter-color" target="_blank"
+                       data-bind="attr:{ href: $root.getCandidateCvUrl($data)}">
+                        <span data-bind="text: $root.loc.stringDownloadCv"></span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEmailAddressColon"></span>
+                    <code data-bind="visible: owner.emailAddress, text: owner.emailAddress"></code>
+                    <button class="btn btn-sm btn-xs-transparent copy-candidate-email-address"
+                            data-bind="attr: {'data-clipboard-text': owner.emailAddress }, visible: owner.emailAddress ">
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    <a class="btn btn-xs-transparent"
+                       type="button"
+                       data-bind="attr: {href: $root.getLinkMailToCandidate($data)}, visible: owner.emailAddress">
+                        <i class="fa fa-envelope-o"></i>
+                    </a>
+                </div>
+                <div class="col-md-4 ">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringPrimaryContactNumberColon"></span>
+                    <code data-bind="text: candidateProfile.primaryContactNumber"></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 lighter-color" data-bind="visible: cvHighlightedText()">
+            <br/>
+            <p data-bind="text: $root.loc.stringInCVYouCanFind"></p>
+            <p class="" data-bind="html: cvHighlightedText"></p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko compose: 'dataPaging.html' --><!-- /ko -->
+
+</div>
+

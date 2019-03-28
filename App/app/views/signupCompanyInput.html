@@ -1,0 +1,22 @@
+<div class="form-group has-feedback"
+     data-bind="css: { 'has-success': isValidCompanyCode, 'has-warning': showCompanyValidationError }">
+    <label class="control-label"
+           for="inputCompanyCode"
+           data-bind="text: companyName">
+    </label>
+
+    <input type="text"
+           class="form-control"
+           data-bind="textInput: companyCode"
+           id="inputCompanyCode"
+           placeholder="Enter company code">
+
+    <span class="fa fa-check form-control-feedback"
+          data-bind="visible: isValidCompanyCode">
+    </span>
+
+    <span class="fa fa-spinner fa-spin form-control-feedback"
+          data-bind="visible: isValidatingCompanyCode"
+          aria-hidden="true">
+    </span>
+</div>

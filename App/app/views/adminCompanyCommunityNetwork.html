@@ -1,0 +1,163 @@
+﻿<div class="col-md-3 right-left-padding-remover">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active">
+            <a href="#disciplines" data-toggle="tab">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringCompanyDiscipline"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#inroduction" data-toggle="tab">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringCompanyIntro"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="col-md-9">
+    <div class="tab-content">
+        <div id="disciplines" class="tab-pane fade in active">
+
+            <form class="form form-admin">
+                <div class="row title-row">
+                    <div class="pull-left">
+                        <p data-bind="text: $root.loc.stringAddKeyPersonnelForCommunityNetwork"></p>
+                        <span class="help" data-bind="text: $root.loc.stringAddOrEditKeyPersonnel"></span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!-- ko with: $root.selectedCompanyDiscipline -->
+
+                    <div class="form-group">
+                        <label for="inputRegion" data-bind="text: $root.loc.stringRegionColon"></label>
+                        <select
+                                id="inputRegion"
+                                class="form-control"
+                                data-bind="options: $root.regions.codes, optionsText: 'name', optionsValue: 'codeValue', value: regionCodeValue, optionsCaption: 'Select...', optionsDisableDefault: true">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputExpertiseIndustry"
+                               data-bind="text: $root.loc.stringExpertiseIndustryColon"></label>
+                        <select
+                                id="inputExpertiseIndustry"
+                                class="form-control"
+                                data-bind="options: $root.expertiseIndustries.codes, optionsText: 'name', optionsValue: 'codeValue', value: expertiseIndustryCodeValue, optionsCaption: 'Select...', optionsDisableDefault: true">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPosition" data-bind="text: $root.loc.stringPositionColon"></label>
+                        <select
+                                id="inputPosition"
+                                class="form-control"
+                                data-bind="options: $root.positions.codes, optionsText: 'name', optionsValue: 'codeValue', value: positionCodeValue, optionsCaption: 'Select...', optionsDisableDefault: true">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription" data-bind="text: $root.loc.stringDescriptionColon"></label>
+                                <textarea
+                                        class="form-control"
+                                        id="inputDescription"
+                                        data-bind="value: description, attr: { placeholder: $root.loc.stringPlaceholderDescription }, event: { focus: function(data, event) { $root.textAreaGotFocus('inputDescription') }, blur: function(data, event) { $root.textAreaLostFocus('inputDescription') } }"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-full-name" data-bind="text: $root.loc.stringFullNameColon"></label>
+                        <input id="input-full-name" type="text" class="form-control" data-bind="value: fullName, attr: { placeholder: $root.loc.placeholderFullName}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-email" data-bind="text: $root.loc.stringEmailAddressColon"></label>
+                        <input id="input-email" type="text" class="form-control" data-bind="value: emailAddress, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"/>
+                    </div>
+
+                    <!-- /ko -->
+
+                </div>
+
+                <div class="row text-right">
+                    <button class="btn btn-success"
+                            data-bind="visible: !$root.companyDisciplineIsSelected(),click: $root.addDiscipline, text: $root.loc.buttonAdd, enable: $root.companyDisciplineIsValid()"></button>
+                    <button class="btn btn-default"
+                            data-bind="click: $root.newDiscipline, visible: $root.companyDisciplineIsSelected(), text: $root.loc.buttonNew"></button>
+                </div>
+
+                <div class="row title-row">
+                    <div class="pull-left">
+                        <span data-bind="text: $root.loc.stringKeyPersonnelsList"></span>
+                    </div>
+                </div>
+                <div class="row top-pad-10">
+                    <!-- ko foreach: company.disciplines -->
+                    <div class="row inner-tile small"
+                         data-bind=" click: $root.setSelectedCompanyDisciplineItem, css: { selected: $data === $root.selectedCompanyDiscipline()}">
+
+                        <div class="inner-tile-button-panel"
+                             data-bind="visible: $data === $root.selectedCompanyDiscipline()">
+
+                            <div data-bind="visible : !$root.companyDisciplineIsDeleting()">
+                                <button class="btn btn-danger btn-xs"
+                                        data-bind="click: $root.deleteCompanyDisciplineItem"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+
+                            <div data-bind="visible : $root.companyDisciplineIsDeleting()">
+                                <button class="btn btn-danger btn-xs"
+                                        data-bind="command: $root.deleteDisciplineItemCommand, text: $root.loc.buttonDelete"></button>
+
+                                <button class="btn btn-default btn-xs"
+                                        data-bind="click: $root.cancelDeleteDiscipline, text: $root.loc.buttonCancel"></button>
+                            </div>
+
+                        </div>
+                        <div class="values">
+                            <div class="col-md-2">
+                                <span data-bind="text: $root.getRegionName($data)"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span data-bind="text: $root.getExpertiseIndustryName($data)"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span data-bind="text: $root.getPositionName($data)"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span data-bind="text: fullName"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span data-bind="text: emailAddress"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="small" data-bind="text: description"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+            </form>
+
+        </div>
+        <div id="inroduction" class="tab-pane fade">
+
+            <!-- ko with: company -->
+            <form class="form form-admin" >
+                <div class="form-group">
+                    <label for="inputCompanyDescriptionColon"
+                           data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>
+                            <textarea
+                                    class="form-control"
+                                    id="inputCompanyDescriptionColon"
+                                    data-bind="wysiwyg: description, value: description, attr: { placeholder: $root.loc.placeholderCompanyDesciption }"></textarea>
+
+                    <p class="help" data-bind="text: $root.loc.textCompanyDescriptionHelp"></p>
+                </div>
+            </form>
+            <!-- /ko -->
+
+        </div>
+    </div>
+</div>

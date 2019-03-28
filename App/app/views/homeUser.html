@@ -1,0 +1,7 @@
+﻿<div class="animated fadeIn" data-bind="visible: selectedView() !== 'dashboard'">
+    <div class="pull-right left-padder-10">
+        <div class="btn btn-success btn-sm" data-bind="click: setSelectedView.bind($data,'dashboard'), html: $root.loc.htmlGoBackButton">
+        </div>
+    </div>
+</div>
+<div data-bind="compose: { model: activeView }"></div>

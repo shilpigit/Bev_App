@@ -1,0 +1,494 @@
+﻿<form class="form form-admin">
+
+    <div class="row title-row" data-bind="with : selectedItem">
+        <div class="pull-left">
+            <h4 data-bind="text: company.name"></h4>
+            <p data-bind="text: $root.loc.stringCompanyRedundantProfileIntro"></p>
+            <span class="help" data-bind="text: $root.loc.stringAddOrEditRedundantProfile"></span>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="inputCategoryOfPersonnelCodeValue"
+               data-bind="text: $root.loc.stringCategoryOfPersonnelColon"></label>
+        <select id="inputCategoryOfPersonnelCodeValue"
+                class="form-control"
+                data-bind="options: $root.categoryOfPersonnel.codes, optionsText: 'name', optionsValue: 'codeValue', value: categoryOfPersonnelCodeValue"></select>
+    </div><br />    
+    <div class="row">
+
+
+        <a name="message-box-place" />
+        <div data-bind="messageBox: messageDetail"></div>
+
+        <div id="panel-primary-parent" class="panel panel-default">
+
+            <div class="panel-heading clickable" data-bind="click: $root.wizardShowPrimaryInformation">
+                <h3 class="panel-title" data-bind="text: $root.loc.stringPrimaryInformation"></h3>
+            </div>
+
+            <div id="panel-primary-information" class="panel-body collapse in" data-toggle="false">
+
+                <div class="tab-pane fade in active">
+                    <form class="form form-admin" data-bind="">
+
+                        <!-- ko with: $root.selectedCompanyRedundantProfile -->
+
+                        <div class="form-group">
+                            <label for="inputFirstName"
+                                   data-bind="text: $root.loc.stringFirstNameColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputFirstName"
+                                   data-bind="value: firstName, attr: { placeholder: $root.loc.placeholderFirstName }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: firstName"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputLastName"
+                                   data-bind="text: $root.loc.stringLastNameColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputLastName"
+                                   data-bind="value: lastName, attr: { placeholder: $root.loc.placeholderLastName }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: lastName"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputCurrentJobTitle"
+                                   data-bind="text: $root.loc.stringCurrentJobTitleColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputCurrentJobTitle"
+                                   data-bind="value: currentJobTitle, attr: { placeholder: $root.loc.placeholderCurrentJobTitle }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: currentJobTitle"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAvailabilityCodeValue"
+                                   data-bind="text: $root.loc.stringAvailabilityColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <select id="inputAvailabilityCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.availabilities.codes, optionsText: 'name', optionsValue: 'codeValue', value: availabilityCodeValue"></select>
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: availabilityCodeValue"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputNationalityCodeValue"
+                                   data-bind="text: $root.loc.stringNationalityColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <select id="inputNationalityCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.countries.codes, optionsText: 'name', optionsCaption: 'All', optionsValue: 'codeValue', value: nationalityCodeValue"></select>
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: nationalityCodeValue"></p>
+                        </div>
+
+                        <!-- /ko -->
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="panel-contact-parent" class="panel panel-default ">
+
+            <div class="panel-heading clickable" data-bind="click: $root.wizardShowContactInformation">
+                <h3 class="panel-title" data-bind="text: $root.loc.stringContactInformation"></h3>
+            </div>
+
+            <div id="panel-contact-information" class="panel-body collapse" data-toggle="false">
+
+                <div class="tab-pane fade in active">
+                    <form class="form form-admin" data-bind="">
+
+                        <!-- ko with: $root.selectedCompanyRedundantProfile -->
+                        <div class="form-group">
+                            <label for="inputEmailAddress"
+                                   data-bind="text: $root.loc.stringEmailAddressColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputEmailAddress"
+                                   data-bind="value: emailAddress, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: emailAddress"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <select id="inputCountry"
+                                    class="form-control"
+                                    data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: countryCode,optionsCaption: 'Select...', optionsDisableDefault: true"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputCityName" data-bind="text: $root.loc.stringCityNameColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputCityName"
+                                   data-bind="value: cityName, attr: { placeholder: $root.loc.placeholderCityName }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: cityName"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAddressOne" data-bind="text: $root.loc.stringAddressOneColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <textarea class="form-control"
+                                      id="inputAddressOne"
+                                      data-bind="value: addressOne, attr: { placeholder: $root.loc.placeholderAddressOne }"></textarea>
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: addressOne"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputPostCode" data-bind="text: $root.loc.stringPostCodeColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputPostCode"
+                                   data-bind="value: postCode, attr: { placeholder: $root.loc.placeholderPostCode }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: postCode"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputPrimaryContactNumber"
+                                   data-bind="text: $root.loc.stringPrimaryContactNumberColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputPrimaryContactNumber"
+                                   data-bind="value: primaryContactNumber, attr: { placeholder: $root.loc.placeholderPrimaryContactNumber }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: primaryContactNumber"></p>
+                        </div>
+
+                        <!-- /ko -->
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="panel-professional-parent" class="panel panel-default ">
+
+            <div class="panel-heading clickable" data-bind="click: $root.wizardShowProfessionalPreferences">
+                <h3 class="panel-title" data-bind="text: $root.loc.stringProfessionalPreferences"></h3>
+            </div>
+
+            <div id="panel-professional-preferences" class="panel-body collapse" data-toggle="false">
+
+                <div class="tab-pane fade in active">
+                    <form class="form form-admin" data-bind="">
+
+                        <!-- ko with: $root.selectedCompanyRedundantProfile -->
+
+                        <div class="form-group">
+                            <label for="inputIndustryExperienceCodeValue"
+                                   data-bind="text: $root.loc.stringIndustryExperienceColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <select id="inputIndustryExperienceCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.industryExperiences.codes, optionsText: 'name', optionsValue: 'codeValue', value: industryExperienceCodeValue"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmploymentTypeCodeValue"
+                                   data-bind="text: $root.loc.stringEmploymentTypeColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <select multiple="true"
+                                    size="3"
+                                    id="inputEmploymentTypeCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.employmentTypes.codes, optionsText: 'name', optionsValue: 'codeValue', selectedOptions: employmentTypeCodeValues"></select>
+
+                            <p class="small help-text" data-bind="text: $root.loc.textMultiSelectHelp"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEducationCodeValue"
+                                   data-bind="text: $root.loc.stringEducationColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <select id="inputEducationCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.educations.codes, optionsText: 'name', optionsValue: 'codeValue', value: educationCodeValue"></select>
+                        </div>
+
+                        <div class="form-group" style="display:none">
+                            <select id="inputSummaryOfExperienceCategoryCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.summaryOfExperienceCategories.codes, optionsText: 'name', optionsValue: 'codeValue', value: summaryOfExperienceCategoryCodeValue, optionsCaption: 'Select...', optionsDisableDefault: true"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputSummaryOfExperienceCategoryCodeValue"
+                                   data-bind="text: $root.loc.stringSummaryOfExperienceCategoryColon"></label>
+                            <select id="inputExperienceDisciplineSecondLevelCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.experienceDisciplineSecondLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: experienceDisciplineFirstLevelCodeValue"></select>
+                        </div>
+
+                        <div class="form-group" data-bind="visible: $root.showSecondLevel">
+                            <label for="inputExperienceDisciplineThirdLevelCodeValue"
+                                   data-bind="text: $root.loc.stringSubCategoryColon"></label>
+                            <select id="inputExperienceDisciplineThirdLevelCodeValue"
+                                    class="form-control"
+                                    data-bind="options: $root.experienceDisciplineThirdLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: experienceDisciplineSecondLevelCodeValue"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-file-select"
+                                   data-bind="text: $root.loc.stringCvColon"></label>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                                        <input id="input-file-select"
+                                               data-bind="fileupload: $root.selectedCv"
+                                               type="file"
+                                               name="file-select"
+                                               accept=".doc,.docx,.pdf"
+                                               onchange='$("#upload-file-info").html($(this).val());'>
+                                    </span>
+                                </span>
+
+                                <div class="form-control">
+                                    <span class='label label-info' id="upload-file-info"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko-->
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="panel-company-parent" class="panel panel-default ">
+
+            <div class="panel-heading clickable" data-bind="click: $root.wizardCompanyContactDetails">
+                <h3 class="panel-title" data-bind="text: $root.loc.stringCompanyContactDetails"></h3>
+            </div>
+
+            <div id="panel-company-information" class="panel-body collapse" data-toggle="false">
+
+                <div class="tab-pane fade in active">
+                    <form class="form form-admin" data-bind="">
+
+                        <!-- ko with: $root.selectedCompanyRedundantProfile -->
+                        <div class="form-group">
+                            <label for="inputCompanyName"
+                                   data-bind="text: $root.loc.stringCompanyNameColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputCompanyName"
+                                   data-bind="value: companyName, attr: { placeholder: $root.loc.placeholderEnterCompanyName }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: companyName"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputContactPerson"
+                                   data-bind="value: contactPerson, attr: { placeholder: $root.loc.placeholderEnterContactPersonName }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: contactPerson"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputTitle" data-bind="text: $root.loc.stringTitleColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputTitle"
+                                   data-bind="value: title, attr: { placeholder: $root.loc.placeholderEnterTitle }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: title"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputEmail"
+                                   data-bind="value: email, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputTelephoneNumber"
+                                   data-bind="value: telephoneNumber, attr: { placeholder: $root.loc.placeholderEnterTelephoneNumber }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: telephoneNumber"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputLocation"
+                                   data-bind="text: $root.loc.stringLocationColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputLocation"
+                                   data-bind="value: location, attr: { placeholder: $root.loc.placeholderEnterLocation }" />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: location"></p>
+                        </div>
+
+                        <!-- /ko -->
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="panel-project-parent" class="panel panel-default ">
+
+            <div class="panel-heading clickable" data-bind="click: $root.wizardProjectDetails">
+                <h3 class="panel-title" data-bind="text: $root.loc.stringProjectDetails"></h3>
+            </div>
+
+            <div id="panel-project-information" class="panel-body collapse" data-toggle="false">
+
+                <div class="tab-pane fade in active">
+                    <form class="form form-admin" data-bind="">
+
+                        <!-- ko with: $root.selectedCompanyRedundantProfile -->
+                        <div class="form-group">
+                            <label for="inputProjectBeingDownManned"
+                                   data-bind="text: $root.loc.stringProjectBeingDownMannedColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputProjectBeingDownManned"
+                                   data-bind="value: projectBeingDownManned, attr: { placeholder: $root.loc.placeholderEnterProjectBeingDownManned }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: projectBeingDownManned"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAmountOfPersonnelAvailable" data-bind="text: $root.loc.stringAmountOfPersonnelAvailableColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputAmountOfPersonnelAvailable"
+                                   data-bind="value: amountOfPersonnelAvailable, attr: { placeholder: $root.loc.placeholderEnterAmountOfPersonnelAvailable }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: amountOfPersonnelAvailable"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDescriptionOfPersonnelAvailable" data-bind="text: $root.loc.stringDescriptionOfPersonnelAvailableColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputDescriptionOfPersonnelAvailable"
+                                   data-bind="value: descriptionOfPersonnelAvailable, attr: { placeholder: $root.loc.placeholderEnterDescriptionOfPersonnelAvailable }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: descriptionOfPersonnelAvailable"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAvailableDate" data-bind="text: $root.loc.stringAvailableDateColon"></label>
+                            <code data-bind="text: $root.loc.stringRequired"></code>
+                            <input type="text"
+                                   class="form-control"
+                                   id="inputEmail"
+                                   data-bind="value: availableDate, attr: { placeholder: $root.loc.placeholderEnterAvailableDate }"
+                                   required />
+                            <p class="small help-text validation-summary-errors" data-bind="validationMessage: availableDate"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAdditionalInformation" data-bind="text: $root.loc.stringAdditionalInformationColon"></label>
+                            <textarea class="form-control"
+                                      id="inputAdditionalInformation"
+                                      data-bind="value: additionalInformation, attr: { placeholder: $root.loc.placeholderEnterAdditionalInformation }"></textarea>
+                        </div>
+                        <!-- /ko -->
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row text-right">
+        <button class="btn btn-success"
+                data-bind="enable :$root.addProfileDetailIsValid() ,visible: !$root.companyRedundantProfileIsSelected(),click: $root.addRedundantProfile, text: $root.loc.buttonAdd"></button>
+        <button class="btn btn-default"
+                data-bind="click: $root.newRedundantProfile, visible: $root.companyRedundantProfileIsSelected(), text: $root.loc.buttonNew"></button>
+    </div>
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <span data-bind="text: $root.loc.stringRequirementsList"></span>
+        </div>
+    </div>
+    <div class="row top-pad-10" data-bind="with : selectedItem">
+        <!-- ko foreach: company.redundantProfiles -->
+        <div class="row inner-tile"
+             data-bind="click: $root.setSelectedCompanyRedundantProfileItem, css: { selected: $data === $root.selectedCompanyRedundantProfile()}">
+
+            <div class="inner-tile-button-panel"
+                 data-bind="visible: $data === $root.selectedCompanyRedundantProfile()">
+
+                <div data-bind="visible : !$root.companyRedundantProfileIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="click: $root.deleteRedundantProfileItem">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+
+                <div data-bind="visible : $root.companyRedundantProfileIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="command: $root.deleteDeleteRedundantProfileItemCommand, text: $root.loc.buttonDelete"></button>
+
+                    <button class="btn btn-default btn-xs"
+                            data-bind="click: $root.cancelDeleteRedundantProfile, text: $root.loc.buttonCancel"></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-11">
+                <span data-bind="text: $root.getFullName($data)"></span>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave ,enable: !state.systemIsBusy()" type="submit"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+
+        </div>
+    </div>
+</form>

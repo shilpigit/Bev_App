@@ -1,0 +1,22 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <!-- For now the only way of adding a new company is via sginup form-->
+        <!--<button class="btn btn-success btn-sm"-->
+        <!--data-bind="click: newItem,  visible: !isEditing()"><i class="fa fa-plus"></i></button>-->
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <!-- ko foreach: companies -->
+
+    <!--Admin Standard Company Tile-->
+    <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+
+    <!-- /ko -->
+</div>
+
+<div data-bind="compose: 'adminEditCompany.html', visible: isEditing()" ></div>

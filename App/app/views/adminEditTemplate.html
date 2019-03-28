@@ -1,0 +1,60 @@
+﻿<div class="panel panel-default" data-bind="visible: isEditing">
+
+    <div class="panel-heading">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringEditTemplate"></h3>
+    </div>
+
+    <div class="panel-body">
+        <form class="form form-admin" data-bind="with: selectedItem">
+            <div class="form-group">
+                <label for="inputTemplateType" data-bind="text: $root.loc.stringTemplateTypeColon"></label>
+                <select
+                        disabled
+                        id="inputTemplateType"
+                        class="form-control"
+                        data-bind="options: $root.templateTypeSet.codes, optionsText: 'name', optionsValue: 'codeValue', value: typeCode">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="inputLanguage" data-bind="text: $root.loc.stringLanguageColon"></label>
+                <select
+                        disabled
+                        id="inputLanguage"
+                        class="form-control"
+                        data-bind="options: $root.languageSet.codes, optionsText: 'name', optionsValue: 'codeValue', value: languageCode">
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject" data-bind="text: $root.loc.stringSubjectColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="subject"
+                       data-bind="value: subject"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTemplateId" data-bind="text: $root.loc.stringTemplateIdColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputTemplateId"
+                       data-bind="value: templateId"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTemplateText" data-bind="text: $root.loc.stringTemplateTextColon"></label>
+                <textarea
+                        style="height: 200px"
+                        class="form-control"
+                        id="inputTemplateText"
+                        data-bind="wysiwyg: text, value: text"/>
+            </div>
+        </form>
+
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success" data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default" data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</div>

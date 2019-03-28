@@ -1,0 +1,38 @@
+﻿@import "../variables.less";
+
+.navbar {
+  padding: 8px;
+  background: white;
+  border-bottom: 1px solid @border-color;
+}
+
+.navbar .icon {
+  //font-size: x-large;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.navbar a:hover {
+  text-decoration: none;
+}
+
+.nav-li-selected {
+  background-color: @oil-diversity-primary;
+  color: white !important;
+  font-weight: bold !important;
+  border-radius: 4px;
+
+  a {
+    color: white !important;
+  }
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  //overridden in theme-overrider.less for tabs
+  background-color: @oil-diversity-primary ;
+  color: white;
+}
+
+.nav > li > a {
+  border-radius: 4px;
+}

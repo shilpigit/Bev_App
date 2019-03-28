@@ -1,0 +1,83 @@
+<div data-bind="if: hasResult" class="composer-plate">
+
+    <!-- ko compose: 'dataPaging.html' --><!-- /ko -->
+
+    <!-- ko foreach: vacancySearchResult -->
+
+    <div class="tile row" data-bind="with: vacancy, css: {'left-bordered-info': $root.alreadyApplied($data.vacancy)}">
+
+        <div class="col-md-1 col-sm-1 hidden-xs right-left-padding-remover">
+            <img class="img img-responsive img-thumbnail"
+                 data-bind="attr:{ src: $root.utilities.resolveFileUrl($parent.companyContainer.company.logoImageId())}"/>
+        </div>
+
+        <div class="col-md-11 col-sm-11 col-xs-12 right-padding-remover">
+            <div class="row">
+                <span class="help-text small pull-right" data-bind="text: relativePostedDateTime"></span>
+
+                <p class="small">
+                    <a data-bind="attr: { href: $root.getCompanyProfileUrl($parent) }" target="_blank">
+                        <span data-bind="text: $parent.companyName"></span> <i class="fa fa-external-link"></i>
+                    </a>
+                    &nbsp;
+                    <a data-bind="attr: { href: $parent.companyContainer.company.companyUrl }, visible:$parent.companyContainer.company.companyUrl"
+                       target="_blank">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                    &nbsp;
+                    <a data-bind="attr: { href: $parent.companyContainer.company.facebookUrl }, visible: $parent.companyContainer.company.facebookUrl"
+                       target="_blank">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    &nbsp;
+                    <a data-bind="attr: { href: $parent.companyContainer.company.linkedinUrl }, visible: $parent.companyContainer.company.linkedinUrl"
+                       target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </p>
+                <span class="h3" data-bind="attr: { href: '#' }, text: jobTitle"></span>
+                <code data-bind="text: $root.getLocationName($data)"></code>
+            </div>
+            <div class="row small right-left-padding-remover">
+                <div class="col-md-3">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringSalarySoughtColon"></span>
+                    <code data-bind="text: $root.getSalarySought($data)"></code>
+                </div>
+                <div class="col-md-4">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEducationColon"></span>
+                    <code data-bind="text: $root.getEducationLevel($data)"></code>
+                </div>
+                <div class="col-md-5">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEmploymentTypeColon"></span>
+                    <code data-bind="text: $root.getEmploymentTypeName($data)"></code>
+                </div>
+            </div>
+            <div class="row top-pad-10">
+                <div class="col-md-5 small">
+                        <span class="lighter-color"
+                              data-bind="text: $root.loc.stringIndustryExperienceColon"></span>
+                    <code data-bind="text: $root.getIndustryExperienceName($data)"></code>
+                </div>
+                <a class="btn btn-default btn-xs pull-right" target="_blank"
+                   data-bind="attr: { href: $root.getViewVacancyUrl($data)}">
+                    <span data-bind="text: $root.loc.buttonReadMore"></span>
+                </a>
+
+                <code class="small pull-right" data-bind="text: $root.loc.stringYouAppliedForThisJob() + '  ' , visible: $root.alreadyApplied($data)"></code>
+            </div>
+            <div class="row">
+                <div class="left-bordered left-padder-10" data-bind="visible: vacancyIsLoaded()">
+                    <div class="animated fadeIn x-slow-animated"
+                         data-bind="compose: 'homeUserVacancySearchResultDetail.html'"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- /ko -->
+
+    <!-- ko compose: 'dataPaging.html' --><!-- /ko -->
+
+</div>
+

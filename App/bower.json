@@ -1,0 +1,43 @@
+{
+  "name": "odg",
+  "version": "0.0.0",
+  "authors": [
+    "Mohammad MalekMakan"
+  ],
+  "description": "Oil Diversity HR Web Application",
+  "main": "app/main.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "amplify": "~1.1.2",
+    "moment": "~2.9.0",
+    "durandal": "~2.1.0",
+    "font-awesome": "~4.3.0",
+    "awesome-bootstrap-checkbox": "~0.3.4",
+    "knockout": "~3.3.0",
+    "bootstrap-social": "~4.9.1",
+    "clipboard": "^1.5.12",
+    "less": "^3.5.3",
+    "animate.css": "^3.5.2",
+    "tinymce": "^4.7.13"
+  },
+  "devDependencies": {
+    "font-awesome": "~4.3.0",
+    "toastr": "~2.1.1",
+    "knockout-validation": "~2.0.2",
+    "moment": "~2.9.0",
+    "modernizr": "~2.8.3",
+    "knockout-mapping": "~2.4.1",
+    "bootstrap-datepicker": "~1.4.0",
+    "bootstrap-datetimepicker": "~0.0.11"
+  },
+  "resolutions": {
+    "bootstrap": "~3.3.4"
+  }
+}

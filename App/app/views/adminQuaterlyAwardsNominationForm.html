@@ -1,0 +1,201 @@
+
+
+<style>
+    #quarterly-awards-nomination-form .row {
+        margin-right: -15px !important;
+        margin-left: -15px !important;
+    }
+    #quarterly-awards-nomination-form .mb{ margin-bottom:2.5rem;}
+    #quarterly-awards-nomination-form hr {
+        display: block;
+        clear: both;
+    }
+    #quarterly-awards-nomination-form .radio-inline { width:100%;    }
+</style>
+
+<section id="section-home" class="page-section">
+    
+    <div data-bind="html: contentToShow"></div>
+    <form id="quarterly-awards-nomination-form">
+        <hr />
+        <p><strong>Choose The Award</strong></p>
+        <!-- Choose The Award -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+            <label class="radio-inline"><input type="radio" name="award" value="Women of the Quarter" />Women of the Quarter</label>
+            <label class="radio-inline"><input type="radio" name="award" value="Graduate of the Quarter" />Graduate of the Quarter</label>
+            <label class="radio-inline"><input type="radio" name="award" value="Indigenous Employee of the Quarter" />Indigenous Employee of the Quarter</label>
+            <label class="radio-inline"><input type="radio" name="award" value="Rising Superstar of the Quarter" />Rising Superstar of the Quarter</label>
+            <label class="radio-inline"><input type="radio" name="award" value="Oil Industry Veteran" />Oil Industry Veteran</label>
+        </div>
+        <!-- End Choose The Award -->
+
+        <hr />
+        <p><strong>Nominee Information</strong></p>
+        <!-- Nominee Information -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+            <!-- Nominee’s Name End-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <label>Nominee's Name</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="firstNameNominee" placeholder="First Name" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="lastNameNominee" placeholder="Last Name" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- End Nominee’s Name -->
+            <!-- Current Position held within Company -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                <label>Current Position held within Company</label>
+                <input name="currentPosition" placeholder="Current Position" class="form-control" />
+            </div>
+            <!-- End Current Position held within Company-->
+            <!-- Length of Employment with current Company -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                <label>Length of Employment with current Company</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="from" placeholder="From" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="to" placeholder="To" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- End Length of Employment with current Company -->
+            <!-- Nominee’s Contact Number -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                <label>Nominee's Contact Number</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="areaCodeNominee" placeholder="Area Code" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="phoneNumberNominee" placeholder="Phone Number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- End Nominee’s Contact Number -->
+            <!-- Nominee’s Email Address -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                <label>Nominee's Email Address</label>
+                <input name="emailNominee" placeholder="Email" class="form-control " />
+            </div>
+            <!-- End Nominee’s Email Address -->
+
+
+        </div>
+        <!-- End Nominee Information -->
+        <hr />
+        <p><strong>Nominator's Details</strong></p>
+
+        <!-- Nominator’s Details -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+            <!-- Your (Nominator’s) Name -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 remove-padding ">
+                <label>Your (Nominator's) Name</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="firstNameNominator" placeholder="First Name" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="lastNameNominator" placeholder="Last Name" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- End Your (Nominator’s) Name -->
+            <!-- Company Name -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                <label>Company Name</label>
+                <input name="companyName" placeholder="Company Name" class="form-control" />
+            </div>
+            <!-- End Company Name-->
+            <!-- Address -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                <label>Address</label>
+                <textarea name="address" placeholder="Address" class="form-control" style="height:142px;" />
+            </div>
+            <!-- End Address -->
+            <!-- Nominator’s Contact Number -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                <label>Nominator's Contact Number</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="areaCodeNominator" placeholder="Area Code" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                        <input name="phoneNumberNominator" placeholder="Phone Number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- End Nominator’s Contact Number -->
+            <!-- Nominator’s Email Address -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb">
+                <label>Nominator's Email Address</label>
+                <input name="emailNominator" placeholder="Email" class="form-control" />
+            </div>
+            <!-- End Nominator’s Email Address -->
+
+        </div>
+        <!-- End Nominator’s Details  -->
+
+        <hr />
+        <p><strong>Nomination Form</strong></p>
+
+        <!-- Nomination Form -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+
+            <!-- Personal Criteria -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Personal Criteria</label>
+                <textarea name="personalCriteria" placeholder="Describe the nominee's personal achievements and background" class="form-control large-textarea-box" />
+            </div>
+            <!-- End Personal Criteria -->
+            <!-- Professional Criteria -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Professional Criteria</label>
+                <textarea name="professionalCriteria" placeholder="Describe the Nominees most significant contributions to your organisation" class="form-control large-textarea-box" />
+            </div>
+            <!-- End Professional Criteria -->
+            <!-- Leadership & Integrity -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Leadership & Integrity</label>
+                <textarea name="leadershipAndIntegrity" placeholder="Describe how the nominee leads with high professional standards, ethics and integrity" class="form-control large-textarea-box" />
+            </div>
+
+            <!-- End Leadership & Integrity -->
+            <!-- Innovation -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Innovation</label>
+                <textarea name="innovation" placeholder="Describe the nominee's most significant innovations." class="form-control large-textarea-box" />
+            </div>
+            <!-- End Innovation -->
+            <!-- Results -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Results</label>
+                <textarea name="results" placeholder="Describe the nominee's most significant results for the organisation." class="form-control large-textarea-box" />
+            </div>
+            <!-- End Results -->
+            <!-- Impact -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Impact</label>
+                <textarea name="impact" placeholder="Describe the nominee's impact on your organisation" class="form-control large-textarea-box" />
+            </div>
+            <!-- End Impact -->
+            <!-- Any other Information you would like to include about your Nominee -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb">
+                <label>Any other Information you would like to include about your Nominee</label>
+                <textarea name="additionalInformation" placeholder="Please provide any additional information" class="form-control extra-textarea-box" />
+            </div>
+            <!-- End Any other Information you would like to include about your Nominee -->
+
+        </div>
+        <!-- End Nomination Form  -->
+
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
+            <button id="contact-us-send-btn" class="btn btn-block btn-success" type="submit">SEND</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,273 @@
+@import "../variables.less";
+
+.form-group {
+  margin-bottom: 0 !important;
+}
+
+.form-control {
+  color: @text-color !important;
+  border-color: @border-color !important;
+}
+
+.form-control, input {
+  border-width: 1px !important;
+}
+
+.form-control:focus {
+  border-color: @oil-diversity-primary !important;
+}
+
+.btn-primary {
+  color: @alternate-text-color !important;
+  background-color: @oil-diversity-primary !important;
+  border-color: @oil-diversity-primary !important;
+}
+
+.btn-primary:hover {
+  background-color: @oil-diversity-primary-lighter !important;
+  border-color: @oil-diversity-primary-lighter !important;
+}
+
+.alert {
+  padding: 10px !important;
+  margin-top: 21px !important;
+}
+
+.alert-info {
+  background-color: #FFFFFF !important;
+  border-color: #2980b9 !important;
+  border-left-width: 5px !important;
+  color: #3498db !important;;
+}
+
+.alert-warning {
+  background-color: #FFFFFF !important;
+  border-color: #f39c12 !important;
+  border-left-width: 5px !important;
+  color: #f1c40f !important;;
+}
+
+.alert-danger {
+  background-color: #FFFFFF !important;
+  border-color: #c0392b !important;
+  border-left-width: 5px !important;
+  color: #e74c3c !important;;
+}
+
+.alert-success {
+  background-color: #FFFFFF !important;
+  border-color: @oil-diversity-primary !important;
+  border-left-width: 5px !important;
+  color: @oil-diversity-primary-lighter !important;;
+}
+
+.btn {
+  padding: 10px 15px !important;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default,
+.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+  color: #ffffff;
+  background-color: @oil-diversity-primary-lighter !important;
+  border-color: @oil-diversity-primary !important;
+}
+
+.btn-default:disabled {
+  border-color: @border-color !important;
+}
+
+.btn-default, .open > .dropdown-toggle.btn-default {
+  border-color: @oil-diversity-primary !important;
+}
+
+.btn-success, .open > .dropdown-toggle.btn-success {
+  border-color: @oil-diversity-primary !important;
+  background-color: @oil-diversity-primary !important;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 5px 10px 5px 10px !important;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+  padding: 1px 5px !important;
+}
+
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.badge {
+  background-color: @oil-diversity-primary;
+}
+
+a.list-group-item .list-group-item-heading {
+  color: @text-color;
+}
+
+.list-group-item {
+  border-color: @border-color !important;
+}
+
+.list-group-item-active {
+  text-decoration: none;
+  background-color: @background-selected;
+  border-left: 3px solid @oil-diversity-primary !important;
+}
+
+a.list-group-item:hover, a.list-group-item:focus {
+  text-decoration: none;
+  background-color: @background-selected;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 0 !important;
+  margin-bottom: 5px !important;
+}
+
+.panel-heading {
+  background-color: @background-selected !important;
+  color: @text-color !important;
+}
+
+.panel-default {
+  border-color: @border-color !important;
+  box-shadow: none !important;
+}
+
+label {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  margin: 0 !important;
+  font-weight: normal !important;
+}
+
+.form-admin .form-group {
+  margin-bottom: 15px !important;
+}
+
+.label-info {
+  background-color: @oil-diversity-primary-lighter;
+}
+
+.progress-bar {
+  background-color: @oil-diversity-primary-lighter !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.help {
+  font-size: smaller;
+  colo: @text-color-lighter;
+}
+
+.checkbox {
+  margin-bottom: 0 !important;
+  margin-top: 5px !important;
+}
+
+.checkbox-success input[type="checkbox"]:checked + label::before {
+  background-color: @oil-diversity-primary;
+  border-color: @oil-diversity-primary-lighter;
+}
+
+.checkbox label::after {
+  padding-top: 6px;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: @oil-diversity-primary-darker;
+  background-color: @oil-diversity-primary-lighter-saturated;
+  border-radius: 4px;
+}
+
+.highlighted-code{
+  color: @oil-diversity-info !important;
+  border-bottom: solid @oil-diversity-info 1px !important;;
+  font-weight: bold !important;
+  background-color: @background-color !important;
+}
+
+.make-danger {
+  color: @oil-diversity-danger;
+}
+
+.make-success {
+  color: @oil-diversity-success;
+}
+
+.make-warning {
+  color: @oil-diversity-warning;
+}
+
+.make-info {
+  color: @oil-diversity-info;
+}
+
+.nav-pills {
+  border-bottom: solid 1px @border-color !important;
+  margin-bottom: 15px;
+}
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:active,
+.nav-pills > li > a:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:active,
+.nav-pills > li.active > a:focus {
+  background-color: white !important;
+  border-bottom: solid 3px @oil-diversity-primary !important;;
+  color: @oil-diversity-primary !important;;
+  border-radius: 0 !important;;
+}
+
+.nav-stacked {
+  border-bottom: 0 !important;
+  border-right: solid 1px @border-color !important;
+}
+
+.nav-stacked > li > a:hover,
+.nav-stacked > li > a:active,
+.nav-stacked > li > a:focus,
+.nav-stacked > li.active > a,
+.nav-stacked > li.active > a:active,
+.nav-stacked > li.active > a:focus {
+  background-color: white !important;
+  border-right: solid 3px @oil-diversity-primary !important;;
+  border-bottom: 0 !important;;
+  color: @oil-diversity-primary !important;;
+  border-radius: 0 !important;;
+}
+
+.radio label::after {
+  top: 8px !important;
+  background-color: @oil-diversity-primary;
+}
+
+.x-slow-animated {
+  -webkit-animation-duration: 3s !important;
+  animation-duration: 3s !important;
+}
+
+.btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled.focus, .btn-default.focus[disabled], fieldset[disabled] .btn-default.focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default.active[disabled], fieldset[disabled] .btn-default.active {
+  background-color: #FFFFFF !important;
+  border-color: @oil-diversity-primary-lighter;
+}
+.btn-default.disabled:focus,
+.btn-default.disabled:active,
+.btn-default.disabled:visited,
+{
+  color: @oil-diversity-primary !important;
+}
+.datepicker table tr td.active.active{
+  background-color: @oil-diversity-primary !important;
+  border-color: @oil-diversity-primary-darker !important;
+}
+.datepicker.dropdown-menu{
+  padding: 5px !important;
+}

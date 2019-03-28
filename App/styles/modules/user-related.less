@@ -1,0 +1,31 @@
+@import "../variables.less";
+
+.user-photo-thumb{
+  max-height: 200px !important;
+}
+
+ul.access-list
+{
+  list-style: none;
+  padding-left: 0px;
+}
+
+ul.access-list > li{
+  padding: 8px;
+  border-left: 1px solid @border-color;
+  border-top: 1px solid @border-color;
+  border-right: 1px solid @border-color;
+}
+
+ul.access-list > li:last-child{
+  border-bottom: 1px solid @border-color;
+}
+
+ul.access-list-rights{
+  clear: both;
+  margin-top: -8px;
+}
+
+ul.access-list-rights > li > div.checkbox > label {
+  padding-left: 0px;
+}

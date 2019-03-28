@@ -1,0 +1,188 @@
+<div class="composer-plate" data-bind="visible: $root.profileIsPublic">
+
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringCv"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <form class="form form-admin" data-bind="with: selectedItem">
+                <!-- ko with: candidateProfile -->
+                <div class="col-md-2 right-left-padding-remover">
+                    <div class="form-group text-center">
+                        <img class="img-thumbnail img-responsive user-photo-thumb"
+                             data-bind="attr:{ src: $parent.owner.person.photoImageLocation}"/>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <span class="control-label" data-bind="text: $root.loc.stringLastCvUpdateColon"></span>
+                    <span id="labelLatestCvUpdate"
+                          class="lighter-color"
+                          data-bind="text: formattedLastCvUpdateDateTime"></span>
+                        <a target="_blank"
+                           data-bind="visible: $parent.cvFileLocation, attr: {href: $parent.cvFileLocation}">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </form>
+        </div>
+    </div>
+    <div class="spacer-row"></div>
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringContactInformation"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <form class="form form-admin" data-bind="with: selectedItem">
+                <!-- ko with: candidateProfile -->
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringCurrentLocationColon"></span>
+                    <span data-bind="text: $root.getCurrentLocation"></span>
+                </div>
+                <!-- /ko -->
+            </form>
+        </div>
+    </div>
+
+    <div class="spacer-row"></div>
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringSocialLinks"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <form class="form form-admin" data-bind="with: selectedItem">
+
+                <!-- ko with: candidateProfile -->
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <span class="lighter-color"
+                              data-bind="text: $root.loc.stringPersonalWebSiteAddressColon"></span>
+                        <a data-bind="attr: {'href': personalWebSiteUrl}" target="_blank">                           
+                            <span data-bind="text: personalWebSiteUrl"></span>
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="lighter-color"
+                          data-bind="text: $root.loc.stringFacebookUrlColon"></span>
+                    <a data-bind="attr: {'href': facebookUrl}" target="_blank">
+                        <span data-bind="text: facebookUrl"></span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color"
+                          data-bind="text: $root.loc.stringLinkedinUrlColon"></span>
+                    <a data-bind="attr: {'href': linkedinUrl}" target="_blank">
+                        <span data-bind="text: linkedinUrl"></span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </div>
+
+                <!-- /ko -->
+
+            </form>
+        </div>
+    </div>
+    <div class="spacer-row"></div>
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringPrimaryInformation"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <form class="form form-admin" data-bind="with: selectedItem">
+
+                <!-- ko with: candidateProfile -->
+
+                <div class="form-group">
+                            <span class="lighter-color"
+                                  data-bind="text: $root.loc.stringCurrentCompanyNameColon"></span>
+                    <span data-bind="text: currentCompanyName"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringCurrentJobTitleColon"></span>
+                    <span data-bind="text: currentJobTitle"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringAvailabilityColon"></span>
+                    <span data-bind="text: $root.getAvailability"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringNationalityColon"></span>
+                    <span data-bind="text: $root.getNationality"></span>
+                </div>
+
+                <!-- /ko -->
+
+            </form>
+        </div>
+    </div>
+
+    <div class="spacer-row"></div>
+    <div class="row title-row">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringProfessionalPreferences"></h3>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <form class="form form-admin" data-bind="with: selectedItem">
+
+                <!-- ko with: candidateProfile -->
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringWillingToTravelColon"></span>
+                    <span data-bind="text: willingToTravel() ? $root.loc.stringYes : $root.loc.stringNo"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringWillingToRelocateColon"></span>
+                    <span data-bind="text: $root.getWillingToRelocate"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringAuthorizedToWorkColon"></span>
+                    <span data-bind="text: $root.getAuthorisedToWorkCodeValues"></span>
+                </div>
+
+                <div class="form-group">
+                            <span class="lighter-color"
+                                  data-bind="text: $root.loc.stringIndustryExperienceColon"></span>
+                    <span data-bind="text: $root.getIndustryExperiences"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEmploymentTypeColon"></span>
+                    <span data-bind="text: $root.getEmploymentTypes"></span>
+                </div>
+
+                <div class="form-group col-md-12 right-left-padding-remover">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringSalarySoughtColon"></span>
+                    <span data-bind="text: $root.getSalarySought"></span>
+                </div>
+
+                <div class="form-group">
+                    <span class="lighter-color" data-bind="text: $root.loc.stringEducationColon"></span>
+                    <span data-bind="text: $root.getEducation"></span>
+                </div>
+
+                <div class="form-group">
+                        <span class="lighter-color"
+                              data-bind="text: $root.loc.stringSummaryOfExperienceCategoryColon"></span>
+                    <span data-bind="text: $root.getSummaryOfExperienceCategory"></span>
+                </div>
+
+                <!-- /ko -->
+
+            </form>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+<div class="composer-plate">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <form class="form form-admin">
+
+                <div class="form-group">
+                    <label for="inputMailSubject" data-bind="text: $root.loc.stringMailSubjectColon">Job Title:</label>
+                    <input class="form-control" id="inputMailSubject" data-bind="value: $root.mailSubject, attr: { placeholder: $root.loc.placeholderMailSubject }" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputMailBody" data-bind="text: $root.loc.stringMailBodyColon">Responsibilities:</label>
+                    <textarea
+                            class="form-control"
+                            id="inputMailBody"
+                            data-bind="wysiwyg: $root.mailBody, value: $root.mailBody"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success" data-bind="command: $root.sendCommand, activity: $root.sendCommand.isExecuting, enable: !$root.isBusy() && $root.canSendMail()">
+                <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: $root.isBusy()"></i>
+                <span data-bind="text: $root.loc.buttonSend"></span>
+            </button>
+            <button class="btn btn-default" data-bind="click: $root.cancelSend, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+
+</div>

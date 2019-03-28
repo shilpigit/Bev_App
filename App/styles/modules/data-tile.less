@@ -1,0 +1,112 @@
+@import "../variables";
+
+ul.tile-list {
+  margin-top: 8px;
+  padding-left: 0px;
+  list-style: none;
+}
+
+.tile:hover {
+  background-color: @background-selected;
+}
+
+.tile {
+  border: 1px solid @border-color;
+  cursor: pointer;
+  padding: 8px;
+  margin-bottom: 4px;
+  border-radius: @oil-diversity-border-radius;
+
+}
+
+.tile i {
+  //color: @text-color-more-lighter;
+}
+
+.tile.selected {
+  background-color: @background-selected;
+  border-left: 3px solid @oil-diversity-primary;
+}
+
+.tile .tile-button-panel {
+  float: right;
+}
+
+.tile .tile-body {
+  font-size: 10pt;
+}
+
+.tile .tile-title {
+  font-size: 13pt;
+}
+
+.tile .tile-label {
+  margin-right: 4px;
+}
+
+.tile .tile-confirmation > i {
+  margin-right: 4px;
+}
+
+.tile .tile-icon {
+  color: #353535;
+  margin-right: 4px;
+}
+
+.tile .tile-confirmation > span {
+
+}
+
+.inner-tile {
+  border: 1px solid @border-color;
+  padding: 8px;
+  margin-bottom: 5px;
+  background-color: #FFFFFF;
+}
+
+.inner-tile.disabled {
+}
+.inner-tile.disabled *{
+  color: @text-color-more-lighter !important;
+}
+
+.inner-tile.invisible {
+  display: none !important;
+}
+.inner-tile.invisible *{
+  display: none !important;
+}
+
+.inner-tile.selected {
+  background-color: @background-selected;
+  border-left: 3px solid @oil-diversity-primary;
+}
+
+.inner-tile .inner-tile-button-panel {
+  float: right;
+}
+
+.inner-tile .inner-tile-body {
+  font-size: 10pt;
+}
+
+.inner-tile .inner-tile-title {
+  font-size: 13pt;
+}
+
+.inner-tile .inner-tile-label {
+  margin-right: 4px;
+}
+
+.inner-tile .inner-tile-confirmation > i {
+  margin-right: 4px;
+}
+
+.inner-tile .inner-tile-icon {
+  color: #353535;
+  margin-right: 4px;
+}
+
+.inner-tile .inner-tile-confirmation > span {
+
+}

@@ -1,0 +1,90 @@
+<div class="row title-row">
+    <div class="pull-left">
+        <h4 data-bind="text: $root.loc.stringRedundancyPortalSearch"></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="composer-plate">
+        <div class="form form-admin">
+            <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+                <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+                <select id="inputCountry"
+                        class="form-control"
+                        data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.countryCode, optionsCaption: 'All', optionsDisableDefault: false"></select>
+            </div>
+            <!--<div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+                <label for="inputSeekingCodeValue"
+                       data-bind="text: $root.loc.stringSeeking"></label>
+                <select id="inputSeekingCodeValue"
+                        class="form-control"
+                        data-bind="options: $root.seeking.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.seekingCodeValues, optionsCaption: 'All', optionsDisableDefault: false"></select>
+            </div>-->
+
+            <div class="form-group col-md-12 right-left-padding-remover">
+                <label class="control-label" for="inputSearchPhrase"
+                       data-bind="text: $root.loc.stringJobSearchPhraseColon"></label>
+
+                <div class="input-group merged">
+                    <input id="inputSearchPhrase"
+                           type="text"
+                           class="form-control"
+                           data-bind="textInput: $root.searchPhrase, attr: {placeholder: $root.loc.placeholderJobSearch}, executeOnEnter: startSearch" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success"
+                                type="button"
+                                data-bind="enable: !isBusy(), click: startSearch">
+                            <span data-bind="text: !isBusy() ? $root.loc.stringSearch : $root.loc.stringSearchingDots "></span>
+                            <i data-bind="visible: !isBusy()" class="fa fa-search"></i>
+                            <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row" id="searchResult">
+    <div class="composer-plate">
+        <!-- ko foreach: filteredRedundantProfile -->
+        <div class="inner-tile row">
+            <!--<div class="col-md-2 hidden-xs hidden-sm">
+            <img class="img img-responsive img-thumbnail"
+                 data-bind="attr:{ src: $root.utilities.resolveFileUrl(company.logoImageId())}" />
+        </div>-->
+            <div class="col-md-12">
+                <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>
+                <span data-bind="text: category()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputCompanyIdea"
+                       data-bind="text: $root.loc.stringCompanyInnovationIdea"></label>
+                <span data-bind="text: idea()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputSeekingCodeValue"
+                       data-bind="text: $root.loc.stringSeeking"></label>
+                <span data-bind="text: seekingCodeValues()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>
+                <span data-bind="text: description()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>
+                <span data-bind="text: contactPerson()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>
+                <span data-bind="text: email()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>
+                <span data-bind="text: telephoneNumber()"></span>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+    </div>

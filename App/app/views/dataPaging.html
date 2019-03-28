@@ -1,0 +1,33 @@
+<div class="row">
+    &nbsp;
+</div>
+<div class="row right-left-padding-remover" data-bind="visible: $root.recordsCount() > 0 && $root.pagesCount() > 1">
+
+    <div class="col-md-2 right-left-padding-remover">
+        <button class="btn btn-default col-md-12" data-bind="click: $root.startSearchBack, disable: $root.currentPageIndex() === 1 || $root.isPaging()">
+            <span data-bind="text: $root.loc.buttonPreviousPage"></span>
+        </button>
+    </div>
+    <div data-bind="visible: $root.isPaging()" class="col-md-8 text-center animated fadeIn">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+    </div>
+    <div data-bind="visible: !$root.isPaging()" class="col-md-8 text-center animated fadeIn">
+        <span data-bind="text: $root.loc.stringPage"></span>
+        <span data-bind="text: $root.currentPageIndex"></span>
+        <span data-bind="text: $root.loc.stringOf"></span>
+        <span data-bind="text: $root.pagesCount"></span>
+        <br/>
+        <span data-bind="text: $root.recordsCount()"></span>
+        <span></span>
+        <span data-bind="text: $root.loc.stringItemsFound"></span>
+    </div>
+    <div class="col-md-2 pull-right  right-left-padding-remover">
+        <button class="btn btn-default  col-md-12 pull-right" data-bind="click: $root.startSearchNext, disable: $root.currentPageIndex() === $root.pagesCount() || $root.isPaging()">
+            <span data-bind="text: $root.loc.buttonNextPage"></span>
+        </button>
+    </div>
+
+</div>
+<div class="row">
+    &nbsp;
+</div>

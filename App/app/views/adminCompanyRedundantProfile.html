@@ -1,0 +1,40 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringRedundancyPortal"></h3>
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#search" data-toggle="tab">
+                <span class="fa fa-edit" aria-hidden="true"></span>
+                    <span class="tab-header-label"
+                          data-bind="text: $root.loc.stringPartnersRedundantProfiles"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#redundantProfile" data-toggle="tab">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringAddProfile"></span>
+            </a>
+        </li>
+    </ul><br/>
+         <p>
+             A new business collaboration initiative to keep our highly skilled personnel within the Oil & Gas industry.  
+    Please add your staff who are to be made redundant, contract personnel coming to the end of their contract, and 
+    project personnel who are to be down manned to allow them the opportunity of seeking new positions with Global partners.
+    <br/><br />
+             Select <strong>Candidates Becoming Available</strong> to search for candidates or <strong>Add Profile</strong> to add personnel
+         </p><br/>
+    <div class="tab-content">
+        <div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyRedundantProfileSearch'}">
+        </div>
+        <div id="redundantProfile" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyRedundantProfile'}">
+        </div>
+
+    </div>
+</div>

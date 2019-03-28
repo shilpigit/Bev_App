@@ -1,0 +1,75 @@
+﻿<div data-bind="messageBox: messageDetail"></div>
+<div class="panel panel-default" data-bind="visible: isEditing">
+
+    <div class="panel-heading">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringEditUserGroup"></h3>
+    </div>
+
+    <div class="panel-body">
+        <form class="form form-admin" data-bind="with: selectedItem">
+            <div class="form-group">
+                <label for="inputName" data-bind="text: $root.loc.stringNameColon"></label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="inputName"
+                        data-bind="value: name, attr: { placeholder: $root.loc.placeholderName }"/>
+            </div>
+
+            <div>
+                <H4 data-bind="text: $root.loc.stringMembers"></H4>
+
+                <p class="help" data-bind="text: $root.loc.textAddMemberTip">
+
+                </p>
+
+                <div class="input-group">
+                    <input
+                            type="email"
+                            class="form-control"
+                            id="inputEmail"
+                            data-bind="textInput: $root.enterEmailAddress, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"/>
+
+                    <span class="input-group-btn">
+                        <button class="btn btn-default"
+                                data-bind="click: $root.addSelectedUser, enable: $root.enterEmailAddress() && $root.enterEmailAddress().length > 0, text: $root.loc.buttonAdd"
+                                type="button">
+
+                        </button>
+                    </span>
+                </div>
+
+                <div class="spacing"></div>
+                <p class="help" data-bind="text: $root.loc.textMembersListTip">
+                <div class="row">
+                    <!-- ko foreach: users -->
+
+                    <div class="form-group inner-tile"
+                         data-bind="click: $root.setSelectedUserId, css: { selected: id() === $root.selectedUserId()}">
+
+                            <div class="row">
+                                <div class="">
+                                    <div class="pull-left"
+                                         data-bind="text: person.names.fullName() + ' (' + emailAddress()+')'"></div>
+                                    <div class="tile-button-panel pull-right"
+                                         data-bind="visible: id() === $root.selectedUserId()">
+
+                                        <button class="btn btn-default btn-xs"
+                                                data-bind="text: $root.loc.buttonDelete, click: $root.deleteUserFromGroup"></button>
+
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- /ko -->
+                </div>
+            </div>
+        </form>
+
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success" data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default" data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</div>

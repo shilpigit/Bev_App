@@ -1,0 +1,57 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <button class="btn btn-success btn-sm"
+                data-bind="click: newItem, visible: !isEditing()"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringContents"></h3>
+    </div>
+</div>
+<div class="composer-plate" data-bind="visible: !isEditing()">
+    <div class="row">
+        <div class="form-group">
+            <label for="inputCategory" data-bind="text: $root.loc.stringContentCategoryColon"></label>
+            <select
+                    id="inputCategory"
+                    class="form-control"
+                    data-bind="options: $root.contentCategorySet.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.selectedContentCategory">
+            </select>
+        </div>
+    </div>
+
+    <div class="row spacer-row"></div>
+    <div class="row help" data-bind="text: $root.loc.textContentsOfThisCategory"></div>
+    <div class="row spacer-row"></div>
+
+    <div data-bind="messageBox: messageDetail"></div>
+
+    <!-- ko foreach: filteredCompanies -->
+    <div class="tile row"
+         data-bind="click: $root.setSelectedItem, css: { selected: $data === $root.selectedItem() }">
+
+        <!-- Standard update, edit and delete options -->
+        <div data-bind="compose: 'adminTileButtonPanel.html'"></div>
+
+        <span class="title" data-bind="text: $root.getContentCategory(categoryCodeValue(),keyCodeValue())"></span>
+
+
+        <!--<div class="tile-confirmation make-danger"
+             data-bind="visible: $data === $root.selectedItem() && $root.isDeleting()">
+            <i class="fa fa-trash-o fa-2x"></i>
+            <span data-bind="text: $root.loc.textDeleteConfirmationMessage"></span>
+        </div>-->
+
+        <div class="tile-body row" data-bind="visible:  $data !== $root.selectedItem() || !$root.isDeleting()">
+
+            <div class="col-md-2">
+                <span class="tile-label"><i class="fa fa-language"></i></span>
+                <span data-bind="text: $root.getLanguage(languageCode())"></span>
+            </div>
+
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+
+
+<div data-bind="compose: 'adminEditContent.html', visible: isEditing()"></div>

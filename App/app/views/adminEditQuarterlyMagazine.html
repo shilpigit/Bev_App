@@ -1,0 +1,202 @@
+﻿<div class="composer-plate" data-bind="visible: isEditing">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringEditQaurterlyMagazine"></h3>
+        </div>
+
+        <div class="panel-body">
+            <div id="editCompanyProfile" data-bind="with: selectedItem">
+                <form class="form form-admin" data-bind="with: quarterlyMagazine">
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <img class="img-thumbnail img-responsive"
+                                 data-bind="attr:{ src: $root.selectedCover.fileUrl}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="quarters"
+                                   data-bind="text: $root.loc.stringQuarterColon"></label>
+                            <select
+                                    id="quarters"
+                                    class="form-control"
+                                    data-bind="options: $root.quarters.codes, optionsText: 'name', optionsValue: 'codeValue', value: quarterCodeValue">
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputLanguage" data-bind="text: $root.loc.stringLanguageColon"></label>
+                            <select
+                                    disabled
+                                    id="inputLanguage"
+                                    class="form-control"
+                                    data-bind="options: $root.languageSet.codes, optionsText: 'name', optionsValue: 'codeValue', value: languageCode">
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputTitle" data-bind="text: $root.loc.stringTitleColon"></label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="inputTitle"
+                                    data-bind="value: title, attr: { placeholder: $root.loc.placeholderTitle }"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAuthor" data-bind="text: $root.loc.stringAuthorColon"></label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="inputAuthor"
+                                    data-bind="value: author, attr: { placeholder: $root.loc.placeholderAuthor }"/>
+                        </div>
+
+
+                        <div class="form-group" data-bind="visible: !$root.selectedCover.sizeIsValid()">
+                            <div class="alert-danger alert">
+                                <small data-bind="text: $root.loc.textFileSizeMustBeLessThan()+ ' ' + ($root.selectedCover.size() / 1000000)+' MB'"></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-bind="text: $root.loc.stringQuarterlyMagazineCoverImageColon"></label>
+
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                                        <input id="input-cover-select"
+                                               data-bind="fileupload: $root.selectedCover"
+                                               type="file"
+                                               name="file-select"
+                                               accept=".jpg,.jpeg,.png,.gif"
+                                               onchange='$("#upload-cover-info").html($(this).val());'>
+                                    </span>
+                                </span>
+
+                                <div class="form-control">
+                                    <span class='label label-info' id="upload-cover-info"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ko if: $root.selectedCover.percentage  -->
+                        <div class="form-group"
+                             data-bind="visible: $root.selectedCover.percentage() && $root.selectedCover.percentage() !== 100">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                                     data-bind="attr: {'aria-valuenow' :$root.selectedCover.percentage}, style: {width: $root.selectedCover.percentage() + '%' }, text: $root.selectedCover.percentage() ? $root.selectedCover.percentage() + '%' : '' "
+                                     aria-valuemax="100">
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             data-bind="visible: $root.selectedCover.percentage() && $root.selectedCover.percentage() == 100">
+
+                            <div class="progress" data-bind="visible: !$root.selectedCover.uploadCompleted()">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                     aria-valuemin="0"
+                                     data-bind="attr: {'aria-valuenow' :100}, style: {width: '100%' }, text: $root.loc.stringPleaseWaitDots "
+                                     aria-valuemax="100">
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <div class="form-group" data-bind="visible: !$root.selectedFile.sizeIsValid()">
+                            <div class="alert-danger alert">
+                                <small data-bind="text: $root.loc.textFileSizeMustBeLessThan()+ ' ' + ($root.selectedFile.size() / 1000000)+' MB'"></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-bind="text: $root.loc.stringQuarterlyMagazineFileColon"></label>
+
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                                        <input id="input-file-select"
+                                               data-bind="fileupload: $root.selectedFile"
+                                               type="file"
+                                               name="file-select"
+                                               accept=".pdf,.doc,.docx"
+                                               onchange='$("#upload-file-info").html($(this).val());'>
+                                    </span>
+                                </span>
+
+                                <div class="form-control">
+                                    <span class='label label-info' id="upload-file-info"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ko if: $root.selectedCover.percentage  -->
+                        <div class="form-group"
+                             data-bind="visible: $root.selectedFile.percentage() && $root.selectedFile.percentage() !== 100">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                                     data-bind="attr: {'aria-valuenow' :$root.selectedFile.percentage}, style: {width: $root.selectedFile.percentage() + '%' }, text: $root.selectedFile.percentage() ? $root.selectedCover.percentage() + '%' : '' "
+                                     aria-valuemax="100">
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             data-bind="visible: $root.selectedFile.percentage() && $root.selectedFile.percentage() == 100">
+
+                            <div class="progress" data-bind="visible: !$root.selectedFile.uploadCompleted()">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                     aria-valuemin="0"
+                                     data-bind="attr: {'aria-valuenow' :100}, style: {width: '100%' }, text: $root.loc.stringPleaseWaitDots "
+                                     aria-valuemax="100">
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <div class="form-group">
+                            <label for="inputIsActive"
+                                   data-bind="text: $root.loc.stringActivationStatusColon"></label>
+
+                            <div class="input-group" id="inputIsActive">
+                                <span class="input-group-addon beautiful">
+                                    <input type="checkbox"
+                                           data-bind="checked: isActive"
+                                           class="checkbox checkbox-success">
+                                </span>
+                                <input type="text" class="form-control" data-bind="value: $root.loc.stringIsActive"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDescription" data-bind="text: $root.loc.stringContentColon"></label>
+                                <textarea
+                                        class="form-control"
+                                        id="inputDescription"
+                                        data-bind="value: text, wysiwyg: text"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</div>

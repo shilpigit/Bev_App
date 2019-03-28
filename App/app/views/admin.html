@@ -1,0 +1,26 @@
+﻿<section class="page-section">
+
+    <div class="row">
+        <div class="col-md-3 col-xs-12 right-left-padding-remover" >
+
+            <ul class="list-group" >
+                <!-- ko foreach: views -->
+                <a class="list-group-item" data-bind="click: $parent.setSelectedView, css: {'list-group-item-active': $parent.selectedView().id == id}" href="#">
+
+                    <span class="badge" data-bind="text: items().length"></span>
+
+                    <p class="list-group-item-heading">
+                        <i data-bind="css: icon"></i>
+                        <span data-bind="text: name"></span>
+                    </p>
+                </a>
+                <!-- /ko -->
+            </ul>
+        </div>
+
+        <div id="content-view" class="col-md-9 col-xs-12" data-bind="compose: selectedView().id">
+
+        </div>
+    </div>
+
+</section>

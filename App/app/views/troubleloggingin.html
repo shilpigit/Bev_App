@@ -1,0 +1,46 @@
+<section>
+    <div id="logo-container">
+        <img class="logo-image animated fadeInDown"
+             data-bind="attr: { src: config.imageCdn + 'logo/logo.svg' }"/>
+
+        <form class="form-signin" id="reset-password">
+
+            <h4 data-bind="text: $root.loc.stringForgotPassword"></h4>
+
+            <div class="control-group">
+
+                <div data-bind="messageBox: messageDetail"></div>
+                <div class="form-group first-input last-input">
+                    <input class="form-control input-lg"
+                           data-bind="textInput: username, attr: { placeholder: $root.loc.placeHolderUsername }"
+                           type="text" name="username"/>
+
+                    <p class="small help-text" data-bind="validationMessage: username"></p>
+
+                </div>
+
+                <button type="button"
+                        class="btn btn-lg btn-block btn-primary btn-bottom-padder"
+                        data-bind="click: sendResetLink, enable: !isBusy()"
+                        id="signin">
+
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+
+                    <span data-bind="visible: isBusy, text:$root.loc.buttonSendingDots"></span>
+                    <span data-bind="visible: !isBusy(), text:$root.loc.buttonResetPassword"></span>
+                </button>
+                <div class="row">
+                    <div class="pull-right">
+                        <a data-bind="text: $root.loc.linkBack, attr: {href: '/' }"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="spacer-row"></div>
+                    <span data-bind="html: $root.loc.htmlOtherTroublesLoggingIn"></span>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+

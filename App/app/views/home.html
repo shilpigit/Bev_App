@@ -1,0 +1,13 @@
+﻿<section id="section-home" class="page-section">
+
+    <div class="row" data-bind="if: state.hasPendingRequest()">
+        <div data-bind="compose: { model: 'viewmodels/homePending'}"></div>
+    </div>
+    <div class="row" data-bind="if: state.isCompanyAdmin() && !state.hasPendingRequest()">
+        <div data-bind="compose: { model: 'viewmodels/homeCompany'}"></div>
+    </div>
+    <div class="row" data-bind="if: !state.isCompanyAdmin() && !state.hasPendingRequest()">
+        <div data-bind="compose: { model: 'viewmodels/homeUser'}"></div>
+    </div>
+
+</section>

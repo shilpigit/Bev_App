@@ -1,0 +1,165 @@
+﻿<div data-bind="visible: !isEditing()">
+    <div class="row title-row">
+        <div class="pull-right">
+        </div>
+        <div class="pull-left">
+            <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+        </div>
+    </div>
+
+    <div class="composer-plate">
+
+        <!-- ko foreach: companies -->
+
+        <!--Admin Standard Company Tile-->
+        <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+
+        <!-- /ko -->
+    </div>
+</div>
+<form class="form form-admin" data-bind="visible: isEditing()">
+
+    <!-- ko with : selectedItem-->
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <h4 data-bind="text: company.name"></h4>
+            <p>Ask for Advice, post tender, no-tender requirement(s), procure suppliers, equipment, products, services and know how within the industry .&nbsp;&nbsp; Business Collaborate with your industry peers.</p>
+            <span class="help" data-bind="text: $root.loc.stringAddOrEditRequirement"></span>
+        </div>
+    </div>
+    <div class="row">
+
+        <!-- ko with: $root.selectedCompanyRequirement -->
+
+        <div class="form-group">
+            <label for="inputCompanyRequirementSubject"
+                   data-bind="text: $root.loc.stringCompanyRequirementSubjectColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyRequirementSubject"
+                   data-bind="value: subject, attr: { placeholder: $root.loc.placeholderCompanyRequirementSubjectColon }" />
+        </div>
+        <div class="form-group">
+            <label for="inputCompanyRequirementDescription"
+                   data-bind="text: $root.loc.stringDescriptionOfCompanyRequirementColon"></label>
+            <textarea class="form-control"
+                      id="inputCompanyRequirementDescription"
+                      data-bind="value: description, attr: { placeholder: $root.loc.placeholderDescriptionOfCompanyRequirementColon }, event: { focus: function(data, event) { $root.textAreaGotFocus('inputCompanyRequirementDescription') }, blur: function(data, event) { $root.textAreaLostFocus('inputCompanyRequirementDescription') } }"></textarea>
+        </div>
+        <div class="form-group">
+                <div class="form-group">
+                    <label for="inputRegion" data-bind="text: $root.loc.stringRegionColon"></label>
+                    <select id="inputRegion"
+                            class="form-control"
+                            data-bind="options: $root.regions.codes, optionsText: 'name', optionsValue: 'codeValue',optionsCaption: 'All', value: regionCodeValue" ></select>
+                </div>
+            </div>
+
+        <div class="form-group">
+                <label for="inputExpertiseIndustry"
+                       data-bind="text: $root.loc.stringExpertiseIndustryColon"></label>
+                <select id="inputExpertiseIndustry"
+                        class="form-control"
+                        data-bind="options: $root.expertiseIndustries.codes, optionsText: 'name', optionsValue: 'codeValue', optionsCaption: 'All'"></select>
+            </div>  
+        
+        <div class="form-group">
+            <label for="inputSectionCodeValue"
+                   data-bind="text: $root.loc.stringSectionColon"></label>
+            <select id="inputSectionCodeValue"
+                    class="form-control"
+                    data-bind="options: $root.companyRequirementSections.codes, optionsText: 'name', optionsValue: 'codeValue', value: sectionCodeValue"></select>
+        </div>
+       
+
+        <div class="form-group">
+            <label for="inputCompanyRequirementContactPersonFullName"
+                   data-bind="text: $root.loc.stringContactPersonFullNameColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyRequirementContactPersonFullName"
+                   data-bind="value: contactPersonFullName, attr: { placeholder: $root.loc.placeholderContactPersonFullName }" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyRequirementContactPersonEmailAddress"
+                   data-bind="text: $root.loc.stringContactPersonEmailAddressColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyRequirementContactPersonEmailAddress"
+                   data-bind="value: contactPersonEmailAddress, attr: { placeholder: $root.loc.placeholderContactPersonEmailAddress }" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCompanyRequirementContactPersonPhoneNumber"
+                   data-bind="text: $root.loc.stringContactPersonPhoneNumberColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyRequirementContactPersonPhoneNumber"
+                   data-bind="value: contactPersonPhoneNumber, attr: { placeholder: $root.loc.PlaceholderContactPersonPhoneNumber}" />
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+
+    <div class="row text-right">
+        <button class="btn btn-success"
+                data-bind="enable: $root.checkValues(), visible: !$root.companyRequirementIsSelected(),click: $root.addRequirement, text: $root.loc.buttonAdd"></button>
+        <button class="btn btn-default"
+                data-bind="click: $root.newRequirement, visible: $root.companyRequirementIsSelected(), text: $root.loc.buttonNew"></button>
+    </div>
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <span data-bind="text: $root.loc.stringRequirementsList"></span>
+        </div>
+    </div>
+    <div class="row top-pad-10">
+        <!-- ko foreach: company.requirements -->
+        <div class="row inner-tile"
+             data-bind="click: $root.setSelectedCompanyRequirementItem, css: { selected: $data === $root.selectedCompanyRequirement()}">
+
+            <div class="inner-tile-button-panel"
+                 data-bind="visible: $data === $root.selectedCompanyRequirement()">
+
+                <div data-bind="visible : !$root.companyRequirementIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="click: $root.deleteCompanyRequirementItem"><i
+                            class="fa fa-trash"></i></button>
+                </div>
+
+                <div data-bind="visible : $root.companyRequirementIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="command: $root.deleteRequirementItemCommand, text: $root.loc.buttonDelete"></button>
+
+                    <button class="btn btn-default btn-xs"
+                            data-bind="click: $root.cancelDeleteRequirement, text: $root.loc.buttonCancel"></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-11">
+                <!--<code class="small pull-right" data-bind="text: $root.getRelativeExpiresOnDateTime($data)"></code>-->
+                <!--<span class="small pull-right" data-bind="text: $root.loc.stringValidUntilColon"></span>-->
+                <span data-bind="text: subject"></span>
+            </div>
+            <div class="col-md-12">
+                <span class="small" data-bind="text: description"></span>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <!-- /ko -->
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</form>

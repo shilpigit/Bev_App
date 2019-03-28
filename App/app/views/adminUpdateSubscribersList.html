@@ -1,0 +1,28 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <button class="btn btn-success btn-sm copy-csv" data-bind="attr: {'data-clipboard-text': $root.csvValue }"><i class="fa fa-copy"></i></button>
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringUpdateSubscriberesList"></h3>
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <table class="table table-hover table-bordered table-condensed table-responsive table-striped">
+        <thead>
+        <th data-bind="text: $root.loc.stringUserInfo">
+
+        </th>
+        </thead>
+        <tbody data-bind='foreach: users'>
+        <tr>
+            <td>
+                <div class="pull-left"
+                     data-bind="text: user.person.names.fullName() + ' (' + user.emailAddress()+')'"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

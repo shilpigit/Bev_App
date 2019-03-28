@@ -1,0 +1,21 @@
+<section>
+    <div class="container">
+        <div id="logo-container">
+            <img class="logo-image animated fadeInDown"
+                 data-bind="attr: { src: config.imageCdn + 'logo/logo.svg' }"/>
+
+            <p>&nbsp;</p>
+
+            <H4 data-bind="text: $root.loc.textThanksForSigningUpExclamation"></H4>
+
+            <h6 class="block" data-bind="visible: !isCompany(), text: $root.loc.textAccountIsBeingValidated"></h6>
+            <h6 class="block" data-bind="visible: isCompany(), html: $root.loc.htmlClientRegistrationIsDone"></h6>
+            <h5 data-bind="visible: !isCompany()">
+                <i class="fa fa-envelope-o fa-5x"></i>
+                <br/>
+                <span data-bind="text: $root.loc.textConfirmationEmailWillSend"></span>
+            </h5>
+        </div>
+
+    </div>
+</section>

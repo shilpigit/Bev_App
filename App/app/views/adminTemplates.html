@@ -1,0 +1,51 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <button class="btn btn-success btn-sm"
+                data-bind="click: newItem, visible: !isEditing()"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringTemplates"></h3>
+    </div>
+</div>
+<div class="composer-plate">
+    <div data-bind="visible: !isEditing()">
+
+        <!-- ko foreach: templates -->
+        <div class="tile row"
+             data-bind="click: $root.setSelectedItem, css: { selected: $data === $root.selectedItem() }">
+
+            <!-- Standard update, edit and delete options -->
+            <div data-bind="compose: 'adminTileButtonPanel.html'"></div>
+
+            <span class="title" data-bind="text: $root.getTemplateType(typeCode())"></span>
+
+
+            <div class="tile-confirmation make-danger"
+                 data-bind="visible: $data === $root.selectedItem() && $root.isDeleting()">
+                <i class="fa fa-trash-o fa-2x"></i>
+                <span data-bind="text: $root.loc.textDeleteConfirmationMessage"></span>
+            </div>
+
+            <div class="tile-body row" data-bind="visible:  $data !== $root.selectedItem() || !$root.isDeleting()">
+
+                <div class="col-md-2">
+                    <span class="tile-label"><i class="fa fa-language"></i></span>
+                    <span data-bind="text: $root.getLanguage(languageCode())"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <span class="tile-label"><i class="fa fa-html5"></i></span>
+                    <code data-bind="text: templateId"></code>
+                </div>
+                <div class="col-md-6">
+                    <span class="tile-label"><i class="fa fa-file-text"></i></span>
+                    <sapn data-bind="text: subject"></sapn>
+                </div>
+
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div data-bind="compose: 'adminEditTemplate.html', visible: isEditing()"></div>

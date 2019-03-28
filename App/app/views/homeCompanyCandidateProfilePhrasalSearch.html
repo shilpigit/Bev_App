@@ -1,0 +1,94 @@
+<form class="form form-admin">
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+        <select
+                id="inputCountry"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: currentCountryCodeValue, optionsCaption: 'All'">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputNationality" data-bind="text: $root.loc.stringNationalityColon"></label>
+        <select
+                id="inputNationality"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: nationalityCodeValue,  optionsCaption: 'All'">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputIndustryExperienceCodeValue"
+               data-bind="text: $root.loc.stringIndustryExperienceColon"></label>
+        <select
+                id="inputIndustryExperienceCodeValue"
+                class="form-control"
+                data-bind="options: $root.industryExperiences.codes, optionsText: 'name', optionsValue: 'codeValue', value: industryExperienceCodeValue,optionsCaption: 'All'">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputEducationCodeValue"
+               data-bind="text: $root.loc.stringEducationColon"></label>
+        <select
+                id="inputEducationCodeValue"
+                class="form-control"
+                data-bind="options: $root.educations.codes, optionsText: 'name', optionsValue: 'codeValue', value: advancedEducationCodeValue,optionsCaption: 'All'">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputExperienceDisciplineSecondLevelCodeValue"
+               data-bind="text: $root.loc.stringSummaryOfExperienceCategoryColon"></label>
+        <select
+                id="inputExperienceDisciplineSecondLevelCodeValue"
+                class="form-control"
+                data-bind="options: $root.experienceDisciplineSecondLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: selectedExperienceDisciplineFirstLevelCodeValue, optionsCaption: 'All'">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12" data-bind="visible: $root.showSecondLevel()">
+        <label for="inputExperienceDisciplineThirdLevelCodeValue"
+               data-bind="text: $root.loc.stringSubCategoryColon"></label>
+        <select
+                id="inputExperienceDisciplineThirdLevelCodeValue"
+                class="form-control"
+                data-bind="options: $root.experienceDisciplineThirdLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: selectedExperienceDisciplineSecondLevelCodeValue,optionsCaption: 'All'">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-12  col-sm-12  col-xs-12">
+
+        <label class="control-label" for="inputSearchPhrase"
+               data-bind="text: $root.loc.stringJobSearchPhraseColon"></label>
+        <a data-bind="html: $root.loc.htmlLearnMoreAboutSearch, click: $root.showGuide"></a>
+
+        <div class="input-group merged">
+            <input
+                    id="inputSearchPhrase"
+                    type="text"
+                    class="form-control"
+                    data-bind="value: $root.searchPhrase,valueUpdate: 'afterkeydown', attr: {placeholder: $root.loc.placeholderJobSearch}, executeOnEnter: startSearch"/>
+
+            <span class="input-group-btn">
+                <!--enable:searchPhrase ,enable: !isBusy(), -->
+                <button class="btn btn-success"
+                        type="button"
+                        data-bind="click: startSearch">
+                    <span data-bind="text: !isBusy() ? $root.loc.stringSearch : $root.loc.stringSearchingDots "></span>
+                    <i data-bind="visible: !isBusy()" class="fa fa-search"></i>
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="form-group col-md-12  col-sm-12  col-xs-12 animated fadeIn"
+         data-bind="visible: $root.isShowingGuide">
+        <div data-bind="compose: 'homeCompanyCandidateProfileSearchGuide.html'">
+
+        </div>
+    </div>
+</form>

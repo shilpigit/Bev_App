@@ -1,0 +1,48 @@
+<div class="row" id="searchResult">
+    <div class="composer-plate">
+
+        <!-- ko foreach: filteredRedundantProfile -->
+        <div class="inner-tile row small">
+
+            <div class="col-md-11 col-sm-11 col-xs-12">
+                <div class="row">
+                    <div class="col-md-8">
+                        <span class="lighter-color" data-bind="text: $root.loc.stringNameColon">Name</span>
+                        <span data-bind="text: firstName()"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="inputNationalityCodeValue"
+                               data-bind="text: $root.loc.stringNationalityColon"></label>
+                        <span data-bind="text: $data.nationalityCodeValue()"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="inputIndustryExperienceCodeValue"
+                               data-bind="text: $root.loc.stringIndustryExperienceColon"></label>
+                        <span data-bind="text: $data.industryExperienceCodeValue"></span>
+                    </div>
+                </div>
+                <div class="col-md-4  col-sm-12  col-xs-12 ">
+                    <label for="inputEducationCodeValue"
+                           data-bind="text: $root.loc.stringEducationColon"></label>
+                    <span data-bind="text: $data.educationCodeValue"></span>
+                </div>
+                <div class="col-md-4  col-sm-12  col-xs-12 ">
+                    <label for="inputCategoryOfPersonnelCodeValue"
+                           data-bind="text: $root.loc.stringCategoryOfPersonnelColon"></label>
+                    <span data-bind="text: categoryOfPersonnelCodeValue"></span>
+                </div>
+                <!--<div class="col-md-4  col-sm-12  col-xs-12 ">
+                    <label for="inputCategoryOfPersonnelCodeValue"
+                           data-bind="text: $root.loc.stringCategoryOfPersonnelColon"></label>
+                    <span data-bind="text: categoryOfPersonnelCodeValue"></span>
+                </div>-->
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

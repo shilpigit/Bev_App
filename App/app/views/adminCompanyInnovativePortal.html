@@ -1,0 +1,33 @@
+<div class="row title-row">
+    <div class="pull-right">
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringInnovationPortal"></h3>
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#search" data-toggle="tab">
+                <span class="fa fa-edit" aria-hidden="true"></span>
+                <span class="tab-header-label"
+                      data-bind="text: $root.loc.stringSearchInnovation"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#businessCoOperation" data-toggle="tab">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringAddInnovation"></span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyInnovativePortalSearch'}">
+        </div>
+        <div id="businessCoOperation" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyInnovativePortal'}">
+        </div>
+
+    </div>
+</div>

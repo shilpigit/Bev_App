@@ -1,0 +1,82 @@
+<div class="composer-plate">
+
+
+    <!-- ko with: companyContainer -->
+    <div class="row title-row">
+        <h2 class="panel-title" data-bind="text: companyName"></h2>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="form-group text-center">
+                        <img class="img img-responsive user-photo-thumb"
+                             data-bind="attr:{ src: $root.utilities.resolveFileUrl(company.logoImageId())}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <code class="pull-left small" data-bind="text: $root.getLocationName($data)"></code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /ko -->
+
+    <div class="spacer-row"></div>
+
+    <!-- ko with: vacancy -->
+    <div class="row title-row">
+        <h2 class="panel-title" data-bind="text: jobTitle"></h2>
+    </div>
+    <div class="row composer-plate">
+        <div class="row inner-tile">
+            <div class="row" >
+                <span class="help-text small pull-right" data-bind="text: relativePostedDateTime"></span>
+            </div>
+            <div class="row" data-bind="visible: responsibilities">
+                <h4 data-bind="text: $root.loc.stringResponsibilities"></h4>
+
+                <div data-bind="html: responsibilities"></div>
+            </div>
+            <div class="row" data-bind="visible: scopeOfResponsibilities">
+                <h4 data-bind="text: $root.loc.stringScopeOfResponsibilities"></h4>
+
+                <div data-bind="html: scopeOfResponsibilities"></div>
+            </div>
+            <div class="row" data-bind="visible: entryRequirements">
+                <h4 data-bind="text: $root.loc.stringEntryRequirements"></h4>
+
+                <div data-bind="html: entryRequirements"></div>
+            </div>
+            <div class="row" data-bind="visible: additionalInformation">
+                <h4 data-bind="text: $root.loc.stringAdditionalInformation"></h4>
+
+                <div data-bind="html: additionalInformation"></div>
+            </div>
+            <div class="row">
+                <h4 data-bind="text: $root.loc.stringRequireVisa"></h4>
+
+                <div data-bind="visible:requireVisa ,text: $root.loc.stringYes"></div>
+                <div data-bind="visible:!requireVisa ,text: $root.loc.stringNo"></div>
+            </div>
+            <div class="row top-pad-10">
+                <button
+                        type="button"
+                        class="btn btn-block"
+                        data-bind="enable: !$root.isBusy(), click: $root.applyForVacancyCmd, css: { 'btn-primary': $root.userCanApply(), 'btn-default': !$root.userCanApply(), 'disabled': !$root.userCanApply()}">
+                    <span data-bind="visible: !$root.isBusy(), text: $root.userCanApply() ? $root.loc.buttonApplyNowExclamation : $root.loc.stringYouHaveAppliedAlready"></span>
+                    <i class="fa fa-check" data-bind="visible: !$root.userCanApply()"></i>
+                    <span data-bind="visible: $root.isBusy(), text: $root.loc.stringApplyingDots"></span>
+                    <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: $root.isBusy()"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- /ko -->
+
+</div>

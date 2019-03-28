@@ -1,0 +1,153 @@
+﻿<div data-bind="if: vacancyIsLoaded()" class="composer-plate inner-tile-container">
+    <div class="row">
+        <h5 data-bind="text: $root.selectedCompany().companyName"></h5>
+        <h4 data-bind="text: $root.selectedVacancy().jobTitle"></h4>
+    </div>
+    <div class="spacer-row"></div>
+    <div class="row">
+        <div class="form-group col-md-12 right-left-padding-remover">
+            <label for="inputLoadOnly"
+                   data-bind="text: $root.loc.stringStatusColon"></label>
+            <select
+                    id="inputLoadOnly"
+                    class="form-control"
+                    data-bind="value: $root.applicantStatus, enable: !$root.isBusy()">
+                <option value="" data-bind="text: $root.loc.stringNotCheckedYet"></option>
+                <option value="unsuccessfulApplicationMessage" data-bind="text: $root.loc.stringUnsuccessful"></option>
+                <option value="underConsiderationApplicationMessage"
+                        data-bind="text: $root.loc.stringUnderConsideration"></option>
+            </select>
+        </div>
+
+    </div>
+    <div class="spacer-row"></div>
+    <div class="inner-tile row">
+        <div class="col-md-3">
+            <input id="selectAll" type="checkbox" data-bind="checked: $root.allApplicantsAreSelected"/>
+            <label for="selectAll"
+                   data-bind="text: $root.loc.stringSelectAllApplicants"></label>
+        </div>
+        <div class="col-md-9 right-left-padding-remover">
+            <div class="pull-right">
+                <button
+                        type="button"
+                        class="btn btn-default btn-xs left-bordered-danger"
+                        data-bind="click: function() { $root.showSendMail('unsuccessfulApplicationMessage') }, enable: $root.canSendMail()">
+                    <span data-bind="text: $root.loc.buttonSendUnsuccessfulMessage"></span>
+                </button>
+                <span>&nbsp;</span>
+                <button
+                        type="button"
+                        class="btn btn-default btn-xs left-bordered-info"
+                        data-bind="click: function() { $root.showSendMail('underConsiderationApplicationMessage') }, enable: $root.canSendMail()">
+                    <span data-bind="text: $root.loc.buttonSendUnderConsiderationMessage"></span>
+                </button>
+                <span>&nbsp;</span>
+                <button
+                        type="button"
+                        class="btn btn-success btn-xs"
+                        data-bind="click: $root.backToList">
+                    <span data-bind="text: $root.loc.buttonBackToVacancies"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="if: $root.hasResult" class="composer-plate">
+
+        <!-- ko compose: 'dataPaging.html' --><!-- /ko -->
+
+        <div>
+
+            <!-- ko foreach: $root.applications -->
+
+            <!-- with: applicantProfileContainer -->
+            <div class="inner-tile row small" data-bind="css: {'left-bordered-info': applicant.sentMessageTemplateId() === 'underConsiderationApplicationMessage', 'left-bordered-danger': applicant.sentMessageTemplateId() === 'unsuccessfulApplicationMessage' }">
+
+                <div class="col-md-1 col-sm-1 hidden-xs ">
+                    <input type="checkbox" data-bind="checked: isSelected, click: $root.applicantSelect($data)">
+                    <img class="img img-responsive img-thumbnail"
+                         data-bind="attr:{ src: $root.getCandidateImageUrl($data)}"/>
+                </div>
+
+                <div class="col-md-11 col-sm-11 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <span class="lighter-color" data-bind="text: $root.loc.stringNameColon"></span>
+                            <span data-bind="text: applicantProfileContainer.owner.person.names.fullName"></span>
+                        </div>
+
+                        <div class="col-md-4 text-right">
+                            <a target="_blank"
+                               data-bind="attr: { 'href': $root.getCandidateProfileUrl($data)}">
+                                <span data-bind="text: $root.loc.linkVisitCandidateProfile"></span>
+                                <i class="fa fa-external-link"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="lighter-color" data-bind="text: $root.loc.stringSalarySoughtColon"></span>
+                            <span data-bind="text: $root.getSalarySought($data)"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="lighter-color" data-bind="text: $root.loc.stringEducationColon"></span>
+                            <span data-bind="text: $root.getEducationLevel($data)"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="lighter-color" data-bind="text: $root.loc.stringCurrentLocationColon"></span>
+                            <span data-bind="text: $root.getCurrentLocationName($data)"></span>
+                        </div>
+                        <div class="col-md-3 text-right"
+                             data-bind="visible: $root.getCandidateCvUrl($data).length > 0">
+                            <a class="lighter-color" target="_blank"
+                               data-bind="attr:{ href: $root.getCandidateCvUrl($data)}">
+                                <span data-bind="text: $root.loc.stringDownloadCv"></span>
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="lighter-color" data-bind="text: $root.loc.stringEmailAddressColon"></span>
+                            <code data-bind="visible: applicantProfileContainer.owner.emailAddress, text: applicantProfileContainer.owner.emailAddress"></code>
+                            <button class="btn btn-sm btn-xs-transparent copy-applicant-email-address copy"
+                                    data-bind="attr: {'data-clipboard-text': applicantProfileContainer.owner.emailAddress }, visible: applicantProfileContainer.owner.emailAddress ">
+                                <i class="fa fa-copy"></i>
+                            </button>
+                            <a class="btn btn-xs-transparent"
+                               type="button"
+                               data-bind="attr: {href: $root.getLinkMailToCandidate($data)}, visible: applicantProfileContainer.owner.emailAddress">
+                                <i class="fa fa-envelope-o"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-4 ">
+                            <span class="lighter-color"
+                                  data-bind="text: $root.loc.stringPrimaryContactNumberColon"></span>
+                            <code data-bind="text: applicantProfileContainer.candidateProfile.primaryContactNumber"></code>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 lighter-color" data-bind="visible: applicantProfileContainer.candidateProfile.summary()">
+                    <br/>
+                    <p data-bind="text: $root.loc.stringSummaryColon"></p>
+                    <p class="" data-bind="text: applicantProfileContainer.candidateProfile.summary"></p>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <!-- /ko -->
+
+        </div>
+
+        <!-- ko compose: 'dataPaging.html' --><!-- /ko -->
+    </div>
+
+    <div id="mailSenderSection" data-bind="visible: $root.messagePanelIsShowing()">
+        <div data-bind="compose: 'homeCompanyMailToApplicants.html'"></div>
+    </div>
+</div>
+

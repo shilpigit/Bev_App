@@ -1,0 +1,36 @@
+﻿<nav class="navbar navbar-fixed-top" data-bind="visible: showNavbar">
+    <div id="header">
+        <div class="main container right-left-padding-remover">
+            <div id="brand-header-small" class="visible-xs pull-left">
+                <!--data-bind="click: navigateHome"-->
+                <a href="/">
+                    <img id="brand-logo-small" data-bind="attr: { src: config.imageCdn + 'logo/logo-solo.svg' }"
+                         class="animated fadeIn"/>
+                </a>
+            </div>
+
+            <div id="brand-header" class="hidden-xs">
+                <!--data-bind="click: navigateHome"-->
+                <a href="/">
+                    <img id="brand-logo"
+                         data-bind="attr: { src: config.imageCdn + 'logo/logo-horizontal.svg' }"
+                         class="animated fadeIn"/>
+                </a>
+            </div>
+            <div class="img-circle square-cropper pull-right" data-bind="visible: state.isAuthenticated">
+                <a href="#/account"><img
+                                         data-bind="attr: {src: $root.user.person.photoImageLocation}"/></a>
+            </div>
+            <div id="user-info" class="pull-right">
+
+                <a class="hidden-xs" data-bind="text: $root.loc.linkBackToHome, attr: { href: config.homePageUrl}"></a>
+                <span class="hidden-xs" data-bind="text: ' | '+$root.user.person.names.fullName(), visible: state.isAuthenticated"></span>
+                <a href="#/account" data-bind="visible: state.isAuthenticated"><i class="icon icon-basic-gear"></i></a>
+                <a href="#/admin" data-bind="visible: state.isAuthenticated && state.isAdministrator"></a>
+                <a data-bind="click: signout, visible: state.isAuthenticated"><i class="icon icon-basic-lock"></i></a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+

@@ -1,0 +1,234 @@
+﻿
+<div class="col-md-2">
+    <div class="form-group">
+        <img class="img-thumbnail img-responsive"
+             data-bind="attr:{ src: $root.selectedImage.fileUrl}"/>
+    </div>
+</div>
+<div class="col-md-10">
+
+    <!--begin sponsorship package-->
+
+    <div class="form-group">
+        <label for="sponsorshipPackage"
+               data-bind="text: $root.loc.stringSponsorshipPackageColon"></label>
+        <select
+                id="sponsorshipPackage"
+                class="form-control"
+                data-bind="options: $root.sponsorshipPackages.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.package, enable: $root.state.isAdministrator">
+
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sponsorshipPackageAdminCount" data-bind="text: $root.loc.stringPackageAdministratorsCountColon"></label>
+        <input
+                type="text"
+                class="form-control"
+                id="sponsorshipPackageAdminCount"
+                data-bind="value: sponsorshipPackage.administratorsCount, attr: { placeholder: $root.loc.placeholderPackageAdministratorsCount }, enable: $root.state.isAdministrator"/>
+    </div>
+
+    <div class="form-group">
+        <label for="sponsorshipPackageExecCount" data-bind="text: $root.loc.stringPackageExecutivesCountColon"></label>
+        <input
+                type="text"
+                class="form-control"
+                id="sponsorshipPackageExecCount"
+                data-bind="value: sponsorshipPackage.executivesCount, attr: { placeholder: $root.loc.placeholderPackageExecutivesCount }, enable: $root.state.isAdministrator"/>
+    </div>
+
+    <div class="form-group hidden">
+        <label for="sponsorshipPackageEmployeeCount" data-bind="text: $root.loc.stringPackageEmployeesCountColon"></label>
+        <input
+                type="text"
+                class="form-control"
+                id="sponsorshipPackageEmployeeCount"
+                data-bind="value: sponsorshipPackage.employeesCount , attr: { placeholder: $root.loc.placeholderPackageEmployeesCount }, enable: $root.state.isAdministrator"/>
+    </div>
+
+    <div class="form-group">
+        <label for="sponsorshipPackageVacanciesCount" data-bind="text: $root.loc.stringPackageVacanciesCountColon"></label>
+        <input
+                type="text"
+                class="form-control"
+                id="sponsorshipPackageVacanciesCount"
+                data-bind="value: sponsorshipPackage.vacanciesCount , attr: { placeholder: $root.loc.placeholderPackageVacanciesCount }, enable: $root.state.isAdministrator"/>
+    </div>
+
+    <!--end sponsorship package-->
+
+    <div class="form-group">
+        <label for="inputName" data-bind="text: $root.loc.stringNameColon"></label>
+        <input
+                type="text"
+                class="form-control"
+                id="inputName"
+                data-bind="value: name, attr: { placeholder: $root.loc.placeholderCompanyName }, enable: $root.state.isAdministrator"/>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="timeZone"
+               data-bind="text: $root.loc.stringTimeZoneColon"></label>
+        <select id="timeZone"
+                class="form-control"
+                data-bind="options: $root.timeZones, optionsText: 'displayName', optionsValue: 'id', value: timeZoneId">
+
+        </select>
+    </div>
+
+    <div class="form-group" data-bind="visible: !$root.selectedImage.sizeIsValid()">
+        <div class="alert-danger alert">
+            <small data-bind="text: $root.loc.textFileSizeMustBeLessThan()+ ' ' + ($root.selectedImage.size() / 1000000)+' MB'"></small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="timeZone"
+               data-bind="text: $root.loc.stringCompanyLogoColon"></label>
+
+        <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                                        <input id="input-file-select"
+                                               data-bind="fileupload: $root.selectedImage"
+                                               type="file"
+                                               name="file-select"
+                                               accept=".jpg,.jpeg,.png,.gif"
+                                               onchange='$("#upload-file-info").html($(this).val());'>
+                                    </span>
+                                </span>
+
+            <div class="form-control">
+                <span class='label label-info' id="upload-file-info"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ko if: $root.selectedImage.percentage  -->
+    <div class="form-group"
+         data-bind="visible: $root.selectedImage.percentage() && $root.selectedImage.percentage() !== 100">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                 data-bind="attr: {'aria-valuenow' :$root.selectedImage.percentage}, style: {width: $root.selectedImage.percentage() + '%' }, text: $root.selectedImage.percentage() ? $root.selectedImage.percentage() + '%' : '' "
+                 aria-valuemax="100">
+                0
+            </div>
+        </div>
+    </div>
+    <div class="form-group"
+         data-bind="visible: $root.selectedImage.percentage() && $root.selectedImage.percentage() == 100">
+
+        <!--<div class="progress" data-bind="visible: !$root.selectedImage.uploadCompleted()">
+            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                 aria-valuemin="0"
+                 data-bind="attr: {'aria-valuenow' :100}, style: {width: '100%' }, text: $root.loc.stringPleaseWaitDots "
+                 aria-valuemax="100">
+                0
+            </div>
+        </div>-->
+    </div>
+    <!-- /ko -->
+
+    <div class="form-group">
+        <label for="inputCompanyUrl" data-bind="text: $root.loc.stringUrlColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputCompanyUrl"
+               data-bind="value: companyUrl, attr: { placeholder: $root.loc.placeholderCompanyUrl }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputFacebookUrl"
+               data-bind="text: $root.loc.stringFacebookUrlColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputFacebookUrl"
+               data-bind="value: facebookUrl, attr: { placeholder: $root.loc.placeholderFacebookUrl }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputLinkedinUrl"
+               data-bind="text: $root.loc.stringLinkedinUrlColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputLinkedinUrl"
+               data-bind="value: linkedinUrl, attr: { placeholder: $root.loc.placeholderLinkedinUrl }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+        <select
+                id="inputCountry"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: countryCode">
+
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="inputCityName" data-bind="text: $root.loc.stringCityNameColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputCityName"
+               data-bind="value: cityName, attr: { placeholder: $root.loc.placeholderCityName }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputAddressOne" data-bind="text: $root.loc.stringAddressOneColon"></label>
+                <textarea
+                        class="form-control"
+                        id="inputAddressOne"
+                        data-bind="value: addressOne, attr: { placeholder: $root.loc.placeholderAddressOne }"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="inputAddressTwo" data-bind="text: $root.loc.stringAddressTwoColon"></label>
+                <textarea
+                        class="form-control"
+                        id="inputAddressTwo"
+                        data-bind="value: addressTwo, attr: { placeholder: $root.loc.placeholderAddressTwo }"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPostCode" data-bind="text: $root.loc.stringPostCodeColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputPostCode"
+               data-bind="value: postCode, attr: { placeholder: $root.loc.placeholderPostCode }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPrimaryContactNumber"
+               data-bind="text: $root.loc.stringPrimaryContactNumberColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputPrimaryContactNumber"
+               data-bind="value: primaryContactNumber, attr: { placeholder: $root.loc.placeholderPrimaryContactNumber }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputSeconadaryContactNumber"
+               data-bind="text: $root.loc.stringSecondaryContactNumberColon"></label>
+        <input type="text"
+               class="form-control"
+               id="inputSeconadaryContactNumber"
+               data-bind="value: secondaryContactNumber, attr: { placeholder: $root.loc.placeholderSecondaryContactNumber }"/>
+    </div>
+
+    <div class="form-group">
+        <label for="inputIsActive"
+               data-bind="text: $root.loc.stringActivationStatusColon"></label>
+
+        <div class="input-group" id="inputIsActive">
+                                <span class="input-group-addon beautiful">
+                                    <input type="checkbox"
+                                           data-bind="checked: isActive, enable: $root.state.isAdministrator"
+                                           class="checkbox checkbox-success">
+                                </span>
+            <input type="text" class="form-control" data-bind="value: $root.loc.stringIsActive"
+                   disabled="disabled">
+        </div>
+    </div>
+</div>

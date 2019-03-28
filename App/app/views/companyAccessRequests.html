@@ -1,0 +1,145 @@
+﻿<div class="col-md-2 right-left-padding-remover">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active">
+            <a href="#pendingUsers" data-toggle="tab">
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringPendingUsers"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#approvedUsers" data-toggle="tab">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringApprovedUsers"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="col-md-10">
+    <div class="tab-content">
+        <div id="pendingUsers" class="tab-pane fade in active">
+            <div data-bind="foreach: { data: pendingAccessRequests  }">
+
+                <div class="tile"
+                     data-bind="css: {  selected: id() === $root.selectedItemId() }, click: $root.setSelectedItem">
+
+                    <div class="tile-button-panel"
+                         data-bind="visible: id() === $root.selectedItemId() && !$root.isRejecting() && !$root.isApproving()">
+                        <button class="btn btn-success btn-xs"
+                                data-bind="enable: $root.approveRequestIsEnabled, text: $root.loc.buttonApprove, click: $root.askForApproveRequest"></button>
+                        <button class="btn btn-warning btn-xs"
+                                data-bind="text: $root.loc.buttonReject, click: $root.askForRejectRequest"></button>
+                    </div>
+
+                    <div class="tile-button-panel"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isRejecting()">
+                        <button class="btn btn-default btn-xs"
+                                data-bind="text: $root.loc.buttonCancel, click: $root.cancelOperation"></button>
+                        <button class="btn btn-warning btn-xs"
+                                data-bind="text: $root.loc.buttonReject, click: $root.rejectRequest"></button>
+                    </div>
+
+                    <div class="tile-button-panel"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isApproving()">
+                        <button class="btn btn-default btn-xs"
+                                data-bind="text: $root.loc.buttonCancel, click: $root.cancelOperation"></button>
+                        <button class="btn btn-success btn-xs"
+                                data-bind="text: $root.loc.buttonApprove, click: $root.approveRequest"></button>
+                    </div>
+
+                    <span class="tile-title" data-bind="text: user.person.names.fullName"></span>
+
+                    <div class="tile-confirmation make-warning animated flash"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isRejecting()">
+                        <i class="fa fa-ban"></i>
+                        <span data-bind="text: $root.loc.stringRejectConfirmation"></span>
+                    </div>
+
+                    <div class="tile-confirmation make-warning  animated flash"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isApproving()">
+                        <i class="fa fa-check-circle-o"></i>
+                        <span data-bind="text: $root.loc.stringApproveConfirmation"></span>
+
+                        <div>
+                            <span class="tile-label"><i class="fa fa-group"></i></span>
+                            <span data-bind="text: $root.getGroupName($data)"></span>
+                        </div>
+                    </div>
+
+                    <div data-bind="visible: !$root.isRejecting() && !$root.isApproving() || id() !== $root.selectedItemId() ">
+                        <div class="small row">
+                            <div class="col-md-4">
+                                <span class="tile-label"><i class="fa fa-envelope"></i></span>
+                                <span data-bind="text: user.emailAddress"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="tile-label"><i class="fa fa-group"></i></span>
+                                <code data-bind="text: $root.getGroupName($data)"></code>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="tile-label"><i class="fa fa-calendar"></i></span>
+                                <span data-bind="text: $root.loc.stringAccountIsCreatedOnColon"></span>
+                                <span data-bind="text: ' ' + user.formattedCreatedDateTime()"> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="approvedUsers" class="tab-pane fade">
+            <div data-bind="foreach: { data: approvedAccessRequests  }">
+                <div class="tile"
+                     data-bind="css: {  selected: id() === $root.selectedItemId() }, click: $root.setSelectedItem">
+
+                    <div class="tile-button-panel"
+                         data-bind="visible: id() === $root.selectedItemId() && !$root.isRejecting()">
+                        <button class="btn btn-warning btn-xs"
+                                data-bind="text: $root.loc.buttonReject, click: $root.askForRejectRequest"></button>
+                    </div>
+
+                    <div class="tile-button-panel"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isRejecting()">
+                        <button class="btn btn-default btn-xs"
+                                data-bind="text: $root.loc.buttonCancel, click: $root.cancelOperation"></button>
+                        <button class="btn btn-warning btn-xs"
+                                data-bind="text: $root.loc.buttonReject, click: $root.rejectRequest"></button>
+                    </div>
+
+
+                    <span class="tile-title" data-bind="text: user.person.names.fullName"></span>
+
+                    <div class="tile-confirmation make-warning animated flash"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isRejecting()">
+                        <i class="fa fa-ban"></i>
+                        <span data-bind="text: $root.loc.stringRejectConfirmation"></span>
+                    </div>
+
+                    <div class="tile-confirmation make-warning  animated flash"
+                         data-bind="visible: id() === $root.selectedItemId() && $root.isRejecting()">
+                        <div>
+                            <span class="tile-label"><i class="fa fa-group"></i></span>
+                            <span data-bind="text: $root.getGroupName($data)"></span>
+                        </div>
+                    </div>
+
+                    <div data-bind="visible: !$root.isRejecting()">
+                        <div class="small row">
+                            <div class="col-md-4">
+                                <span class="tile-label"><i class="fa fa-envelope"></i></span>
+                                <span data-bind="text: user.emailAddress"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="tile-label"><i class="fa fa-group"></i></span>
+                                <code data-bind="text: $root.getGroupName($data)"></code>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="tile-label"><i class="fa fa-calendar"></i></span>
+                                <span data-bind="text: $root.loc.stringAccountIsCreatedOnColon"></span>
+                                <span data-bind="text: ' ' + user.formattedCreatedDateTime()"> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

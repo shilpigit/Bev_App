@@ -1,0 +1,82 @@
+﻿<div class="panel panel-default" data-bind="visible: isEditing">
+
+    <div class="panel-heading">
+        <h3 class="panel-title" data-bind="text: $root.loc.stringEditCardTemplate"></h3>
+    </div>
+
+    <div class="panel-body">
+        <form class="form form-admin" data-bind="with: selectedItem">
+            <div class="form-group">
+                <label for="inputName" data-bind="text: $root.loc.stringNameColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputName"
+                       data-bind="value: name, text: $root.loc.stringNameColon, attr: { placeholder: $root.loc.placeholderTemplateName }"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputImage" data-bind="text: $root.loc.stringImageColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputImage"
+                       data-bind="value: image, text: $root.loc.stringImageColon, attr: { placeholder: $root.loc.placeholderImageFileName }"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputGender" data-bind="text: $root.loc.stringGenderColon"></label>
+                <select
+                        id="inputGender"
+                        class="form-control"
+                        data-bind="options: $root.genderSet.codes, optionsText: 'name', optionsValue: 'codeValue', value: genderCode">
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTextPositionX" data-bind="text: $root.loc.stringTextPositionXColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputTextPositionX"
+                       data-bind="value: textPositionX, text: $root.loc.stringTextPositionXColon, attr: { placeholder: $root.loc.placeholderTextPositionX }"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTextPositionY" data-bind="text: $root.loc.stringTextPositionYColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputTextPositionY"
+                       data-bind="value: textPositionY, text: $root.loc.stringTextPositionYColon, attr: { placeholder: $root.loc.placeholderTextPositionY }"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTextWidth" data-bind="text: $root.loc.stringTextWidthColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputTextWidth"
+                       data-bind="value: textWidth, text: $root.loc.stringTextWidthColon, attr: { placeholder: $root.loc.placeholderTextWidth }"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTextHeight" data-bind="text: $root.loc.stringTextHeightColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputTextHeight"
+                       data-bind="value: textHeight, text: $root.loc.stringTextHightColon, attr: { placeholder: $root.loc.placeholderTextHeight }"/>
+            </div>
+
+            <div class="form-group">
+                <label for="inputMaxTextLength" data-bind="text: $root.loc.stringMaxTextLengthColon"></label>
+                <input type="text"
+                       class="form-control"
+                       id="inputMaxTextLength"
+                       placeholder="Max Text Length"
+                       data-bind="value: maxTextLength, text: $root.loc.stringMaxTextLengthtColon, attr: { placeholder: $root.loc.placeholderMaxTextLength }"/>
+            </div>
+        </form>
+
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success" data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default" data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</div>

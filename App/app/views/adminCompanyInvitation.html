@@ -1,0 +1,62 @@
+﻿<form class="form form-admin">
+    <h4 data-bind="text: $root.loc.stringInviteYourCompanyMembers"></h4>
+
+    <p class="help">
+
+    </p>
+    <!-- ko with: company -->
+    <div class="form-group">
+        <div class="input-group merged">
+                                    <span class="input-group-addon"
+                                          data-bind="text: $root.loc.stringExecutivesColon"></span>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="executivesInviteUrl"
+                    data-bind="value: executivesGroupInvitationUrl"
+                    readonly/>
+                                    <span class="input-group-btn">
+                                        <button
+                                                class="btn btn-default copy"
+                                                type="button"
+                                                data-clipboard-target="#executivesInviteUrl">
+                                            <i class="fa fa-copy"></i>
+                                        </button>
+                                        <a
+                                                class="btn btn-default"
+                                                type="button"
+                                                data-bind="attr: {href: $root.linkMailToExecutives}">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </a>
+                                    </span>
+        </div>
+    </div>
+    <div class="form-group" style="display: none">
+        <div class="input-group merged">
+                                    <span class="input-group-addon" data-bind="text: $root.loc.stringEmployeesColon">
+                                    </span>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="employeesInviteUrl"
+                    data-bind="value: employeesGroupInvitationUrl, selected:true"
+                    readonly/>
+
+                                    <span class="input-group-btn">
+                                        <button
+                                                class="btn btn-default copy"
+                                                type="button"
+                                                data-clipboard-target="#employeesInviteUrl">
+                                            <i class="fa fa-copy"></i>
+                                        </button>
+                                        <a
+                                                class="btn btn-default"
+                                                type="button"
+                                                data-bind="attr: {href: $root.linkMailToEmployees}">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </a>
+                                    </span>
+        </div>
+    </div>
+    <!-- /ko -->
+</form>

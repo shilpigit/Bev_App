@@ -1,0 +1,53 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <button class="btn btn-success btn-sm"
+        data-bind="click: newItem,  visible: !isEditing()"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringDocumentLibraries"></h3>
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <!-- ko foreach: documentLibraries -->
+    <div class="tile row"
+         data-bind="visible: !$root.isEditing(), click: $root.setSelectedItem, css: { selected: id() === $root.selectedItemId()}">
+
+        <!-- Standard update, edit and delete options -->
+        <div class="" data-bind="compose: 'adminTileButtonPanel.html'"></div>
+
+        <div class="col-md-1 hidden-sm hidden-xs">
+            <img class="img img-responsive img-thumbnail"
+                 data-bind="attr:{ src: coverFileLocation() ? coverFileLocation : $root.config.imageCdn + 'logo/logo-solo.png'}"/>
+        </div>
+
+        <!-- ko with: documentLibrary -->
+        <div class="">
+            <span class="title" data-bind="text: title"></span>
+
+            <div class="tile-confirmation make-danger"
+                 data-bind="visible: id() === $root.selectedItemId() && $root.isDeleting()">
+                <i class="fa fa-trash-o fa-2x"></i>
+                <span data-bind="text: $root.loc.textDeleteConfirmationMessage"></span>
+            </div>
+
+            <div class="tile-body row" data-bind="visible: id() !== $root.selectedItemId() || !$root.isDeleting()">
+
+                <div class="col-md-4">
+                    <span class="tile-label"><i class="fa fa-user"></i></span>
+                    <!--<span data-bind="text: author"></span>-->
+                </div>
+                <div class="col-md-4">
+                    <span class="tile-label"><i class="fa fa-calendar"></i></span>
+                    <span data-bind="text: $root.getRelativePostedDateTime($data)"></span>
+                </div>
+
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</div>
+
+<div data-bind="compose: 'adminEditDocumentLibrary.html', visible: isEditing()" ></div>

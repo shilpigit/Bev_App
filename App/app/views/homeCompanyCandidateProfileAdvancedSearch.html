@@ -1,0 +1,169 @@
+<form class="form form-admin">
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+        <select
+                id="inputCountry"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: currentCountryCodeValue">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputNationality" data-bind="text: $root.loc.stringNationalityColon"></label>
+        <select
+                id="inputNationality"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: nationalityCodeValue">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputIndustryExperienceCodeValue"
+               data-bind="text: $root.loc.stringIndustryExperienceColon"></label>
+        <select
+                id="inputIndustryExperienceCodeValue"
+                class="form-control"
+                data-bind="options: $root.industryExperiences.codes, optionsText: 'name', optionsValue: 'codeValue', value: industryExperienceCodeValue">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputEmploymentTypeCodeValue"
+               data-bind="text: $root.loc.stringEmploymentTypeColon"></label>
+        <select
+                id="inputEmploymentTypeCodeValue"
+                class="form-control"
+                data-bind="options: $root.employmentTypes.codes, optionsText: 'name', optionsValue: 'codeValue', value: employmentTypeCodeValue">
+
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+        <label for="inputEducationCodeValue"
+               data-bind="text: $root.loc.stringEducationColon"></label>
+        <select
+                id="inputEducationCodeValue"
+                class="form-control"
+                data-bind="options: $root.educations.codes, optionsText: 'name', optionsValue: 'codeValue', value: advancedEducationCodeValue">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputCurrentAvailability"
+               data-bind="text: $root.loc.stringAvailabilityColon"></label>
+        <select
+                id="inputCurrentAvailability"
+                class="form-control"
+                data-bind="options: $root.availabilities.codes, optionsText: 'name', optionsValue: 'codeValue', value: currentAvailabilityCodeValue">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputWillingToRelocate"
+               data-bind="text: $root.loc.stringWillingToRelocateColon"></label>
+        <select
+                id="inputWillingToRelocate"
+                class="form-control"
+                data-bind="options: $root.willingToRelocates.codes, optionsText: 'name', optionsValue: 'codeValue', value: willingToRelocateCodeValue">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputAuthorizedToWork"
+               data-bind="text: $root.loc.stringAuthorizedToWorkColon"></label>
+        <select
+                id="inputAuthorizedToWork"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: authorizedToWorkCodeValue">
+
+        </select>
+    </div>
+
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputWillingToTravel"
+               data-bind="text: $root.loc.stringWillingToTravelColon"></label>
+        <select
+                id="inputWillingToTravel"
+                class="form-control"
+                data-bind="value: willingToTravel">
+            <option data-bind="text: $root.loc.stringYes, value: true"></option>
+            <option data-bind="text: $root.loc.stringNo, value: false"></option>
+            <option data-bind="text: $root.loc.stringAll, value: ''" selected="selected"></option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputSalarySoughtAmount"
+               data-bind="text: $root.loc.stringSalarySoughtAmountColon"></label>
+        <select
+                id="inputSalarySoughtAmount"
+                class="form-control"
+                data-bind="value: salarySought.amount">
+            <option value="0-99 K">0-99 K</option>
+            <option value="100-199 K">100-199 K</option>
+            <option value="200-299 K">200-299 K</option>
+            <option value="300-399 K">300-399 K</option>
+            <option value="400-499 K">400-499 K</option>
+            <option value="500+ K">500+ K</option>
+            <option value="" selected>All</option>
+        </select>
+    </div>
+    <div class="form-group col-md-4  col-sm-12  col-xs-12">
+        <label for="inputSalarySoughtCurrency"
+               data-bind="text: $root.loc.stringSalarySoughtCurrencyColon"></label>
+
+        <select
+                id="inputSalarySoughtCurrency"
+                class="form-control"
+                data-bind="options: $root.currencies.codes, optionsText: 'name', optionsValue: 'codeValue', value: salarySought.currencyCodeValue">
+        </select>
+    </div>
+
+    <div class="form-group col-md-12  col-sm-12  col-xs-12">
+        <label for="inputSummaryOfExperienceCategoryCodeValue"
+               data-bind="text: $root.loc.stringSummaryOfExperienceCategoryColon"></label>
+        <select
+                id="inputSummaryOfExperienceCategoryCodeValue"
+                class="form-control"
+                data-bind="options: $root.summaryOfExperienceCategories.codes, optionsText: 'name', optionsValue: 'codeValue', value: summaryOfExperienceCategoryCodeValue">
+
+        </select>
+    </div>
+
+    <div class="form-group col-md-12  col-sm-12  col-xs-12">
+        <select
+                id="inputExperienceDisciplineSecondLevelCodeValue"
+                class="form-control"
+                data-bind="options: $root.experienceDisciplineSecondLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: selectedExperienceDisciplineFirstLevelCodeValue">
+
+        </select>
+    </div>
+    <div class="form-group col-md-12  col-sm-12  col-xs-12" data-bind="visible: $root.showSecondLevel">
+        <select
+                id="inputExperienceDisciplineThirdLevelCodeValue"
+                class="form-control"
+                data-bind="options: $root.experienceDisciplineThirdLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: selectedExperienceDisciplineSecondLevelCodeValue">
+
+        </select>
+    </div>
+    <div class="form-group col-md-12  col-sm-12  col-xs-12">
+        <button
+                class="btn btn-success btn-block"
+                type="button"
+                data-bind="enable: !isBusy(), click: startAdvancedSearch">
+            <span data-bind="text: !isBusy() ? $root.loc.stringSearch : $root.loc.stringSearchingDots "></span>
+            <i data-bind="visible: !isBusy()" class="fa fa-search"></i>
+            <i class="fa fa-circle-o-notch fa-spin" data-bind="visible: isBusy"></i>
+        </button>
+    </div>
+
+    <div class="form-group col-md-12  col-sm-12  col-xs-12 animated fadeIn"
+         data-bind="visible: $root.isShowingGuide">
+        <div data-bind="compose: 'homeUserVacancySearchGuide.html'">
+
+        </div>
+    </div>
+</form>

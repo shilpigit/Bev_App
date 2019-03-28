@@ -1,0 +1,26 @@
+﻿<section id="section-home" class="page-section">
+    <h3>INDUSTRY AWARDS</h3>
+    <br />
+    <div data-bind="html: contentToShow, visible:showForm"></div>
+    <div id="search" data-bind="compose: { model: activeView}">
+    </div>
+</section>
+
+
+<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 remove-padding pull-left">
+    <button class="btn btn-default btn-block remove-margin"
+            data-bind="click: setSelectedView, visible:showForm " >
+        Submit Application
+    </button>
+</div>
+
+
+<div class="hidden-lg hidden-md col-sm-12 col-xs-12 spacer"></div>
+<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 remove-padding pull-right">
+    <a href="http://devapp.oildiversity.com/Download/ODG Nomination Form A4.pdf" target="_blank" class="btn btn-default btn-block remove-margin"
+            data-bind="visible:showForm" >
+        Print PDF File
+    </a>
+</div>
+
+

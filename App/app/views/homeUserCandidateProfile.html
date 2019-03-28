@@ -1,0 +1,546 @@
+<div class="row title-row">
+
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringUpdateMyProfessionalProfile"></h3>
+    </div>
+</div>
+<div class="composer-plate">
+
+    <div class="alert alert-info" data-bind="text: $root.loc.textCandidateProfileTip"></div>
+
+    <div class="panel panel-default ">
+
+        <div class="panel-heading clickable" data-bind="click: $root.wizardShowContactInformation">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringContactInformation"></h3>
+        </div>
+
+        <div id="panel-contact-information" class="panel-body collapse" data-toggle="false">
+
+            <div class="tab-pane fade in active">
+                <form class="form form-admin" data-bind="with: selectedItem">
+                    <!-- ko with: candidateProfile -->
+                    <div class="form-group">
+                        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputCountry"
+                                class="form-control"
+                                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: countryCode">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCityName" data-bind="text: $root.loc.stringCityNameColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <input type="text"
+                               class="form-control"
+                               id="inputCityName"
+                               data-bind="value: cityName, attr: { placeholder: $root.loc.placeholderCityName }"
+                               required/>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: cityName"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddressOne" data-bind="text: $root.loc.stringAddressOneColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <textarea
+                                class="form-control"
+                                id="inputAddressOne"
+                                data-bind="value: addressOne, attr: { placeholder: $root.loc.placeholderAddressOne }"></textarea>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: addressOne"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddressTwo" data-bind="text: $root.loc.stringAddressTwoColon"></label>
+                <textarea
+                        class="form-control"
+                        id="inputAddressTwo"
+                        data-bind="value: addressTwo, attr: { placeholder: $root.loc.placeholderAddressTwo }"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPostCode" data-bind="text: $root.loc.stringPostCodeColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <input type="text"
+                               class="form-control"
+                               id="inputPostCode"
+                               data-bind="value: postCode, attr: { placeholder: $root.loc.placeholderPostCode }"/>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: postCode"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPrimaryContactNumber"
+                               data-bind="text: $root.loc.stringPrimaryContactNumberColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <input type="text"
+                               class="form-control"
+                               id="inputPrimaryContactNumber"
+                               data-bind="value: primaryContactNumber, attr: { placeholder: $root.loc.placeholderPrimaryContactNumber }"/>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: primaryContactNumber"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSeconadaryContactNumber"
+                               data-bind="text: $root.loc.stringSecondaryContactNumberColon"></label>
+                        <input type="text"
+                               class="form-control"
+                               id="inputSeconadaryContactNumber"
+                               data-bind="value: secondaryContactNumber, attr: { placeholder: $root.loc.placeholderSecondaryContactNumber }"/>
+                    </div>
+
+                    <!-- /ko -->
+
+                </form>
+
+                <div class="admin-button-panel text-right">
+                    <button class="btn btn-default"
+                            data-bind="click: wizardShowSocialLinks, text: $root.loc.buttonNext"></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel panel-default ">
+
+        <div class="panel-heading clickable" data-bind="click: $root.wizardShowSocialLinks">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringSocialLinks"></h3>
+        </div>
+
+        <div id="panel-social-links" class="panel-body collapse" data-toggle="false">
+
+            <div class="tab-pane fade in active">
+                <form class="form form-admin" data-bind="with: selectedItem">
+
+                    <!-- ko with: candidateProfile -->
+                    <div class="form-group">
+                        <label for="inputPersonalWebsite"
+                               data-bind="text: $root.loc.stringPersonalWebSiteAddressColon"></label>
+                        <input type="text"
+                               class="form-control"
+                               id="inputPersonalWebsite"
+                               data-bind="value: personalWebSiteUrl, attr: { placeholder: $root.loc.placeholderPersonalWebSiteAddress }"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFacebookUrl" data-bind="text: $root.loc.stringFacebookUrlColon"></label>
+                        <input type="text"
+                               class="form-control"
+                               id="inputFacebookUrl"
+                               data-bind="value: facebookUrl, attr: { placeholder: $root.loc.placeholderFacebookUrl }"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputlinkedinUrl" data-bind="text: $root.loc.stringLinkedinUrlColon"></label>
+                        <input type="text"
+                               class="form-control"
+                               id="inputlinkedinUrl"
+                               data-bind="value: linkedinUrl, attr: { placeholder: $root.loc.placeholderLinkedinUrl }"/>
+                    </div>
+
+                    <!-- /ko -->
+
+                </form>
+
+                <div class="admin-button-panel text-right">
+                    <button class="btn btn-default"
+                            data-bind="click: wizardShowContactInformation, text: $root.loc.buttonBack"></button>
+                    <button class="btn btn-default"
+                            data-bind="click: wizardShowPrimaryInformation, text: $root.loc.buttonNext"></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel panel-default ">
+
+        <div class="panel-heading clickable" data-bind="click: $root.wizardShowPrimaryInformation">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringPrimaryInformation"></h3>
+        </div>
+
+        <div id="panel-primary-information" class="panel-body collapse" data-toggle="false">
+
+            <div class="tab-pane fade in active">
+                <form class="form form-admin" data-bind="with: selectedItem">
+
+                    <!-- ko with: candidateProfile -->
+
+                    <div class="form-group">
+                        <label for="inputCurrentCompanyName"
+                               data-bind="text: $root.loc.stringCurrentCompanyNameColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <input type="text"
+                               class="form-control"
+                               id="inputCurrentCompanyName"
+                               data-bind="value: currentCompanyName, attr: { placeholder: $root.loc.placeholderCurrentCompanyName }"/>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: currentCompanyName"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCurrentJobTitle"
+                               data-bind="text: $root.loc.stringCurrentJobTitleColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <input type="text"
+                               class="form-control"
+                               id="inputCurrentJobTitle"
+                               data-bind="value: currentJobTitle, attr: { placeholder: $root.loc.placeholderCurrentJobTitle }"/>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: currentJobTitle"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAvailabilityCodeValue"
+                               data-bind="text: $root.loc.stringAvailabilityColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputAvailabilityCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.availabilities.codes, optionsText: 'name', optionsValue: 'codeValue', value: availabilityCodeValue">
+
+                        </select>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: availabilityCodeValue"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputNationalityCodeValue"
+                               data-bind="text: $root.loc.stringNationalityColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputNationalityCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: nationalityCodeValue">
+
+                        </select>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: nationalityCodeValue"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputIsPublicProfile"
+                               data-bind="text: $root.loc.stringProfileIsPublicColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+
+                        <div class="input-group" id="inputIsPublicProfile">
+                            <span class="input-group-addon beautiful">
+                                <input type="checkbox" data-bind="checked: isPublic"
+                                       class="checkbox checkbox-success">
+                            </span>
+                            <input type="text" class="form-control" data-bind="value: $root.loc.stringYes() + ' (' + $root.loc.stringPublicProfileTip() +')'"
+                                   disabled="disabled">
+                        </div>
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: isPublic"></p>
+                    </div>
+
+                    <!-- /ko -->
+
+                </form>
+
+                <div class="admin-button-panel text-right">
+                    <button class="btn btn-default"
+                            data-bind="click: wizardShowSocialLinks, text: $root.loc.buttonBack"></button>
+                    <button class="btn btn-default"
+                            data-bind="click: wizardShowProfessionalPreferences, text: $root.loc.buttonNext"></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel panel-default ">
+
+        <div class="panel-heading clickable" data-bind="click: $root.wizardShowProfessionalPreferences">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringProfessionalPreferences"></h3>
+        </div>
+
+        <div id="panel-professional-preferences" class="panel-body collapse" data-toggle="false">
+
+            <div class="tab-pane fade in active">
+                <form class="form form-admin" data-bind="with: selectedItem">
+
+                    <!-- ko with: candidateProfile -->
+
+                    <div class="form-group">
+                        <label for="inputWillingToTravel"
+                               data-bind="text: $root.loc.stringWillingToTravelColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+
+                        <div class="input-group" id="inputWillingToTravel">
+                            <span class="input-group-addon beautiful">
+                                <input type="checkbox" data-bind="checked: willingToTravel"
+                                       class="checkbox checkbox-success">
+                            </span>
+                            <input type="text" class="form-control" data-bind="value: $root.loc.stringYes"
+                                   disabled="disabled">
+                        </div>
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: willingToTravel"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputWillingToRelocateCodeValue"
+                               data-bind="text: $root.loc.stringWillingToRelocateColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputWillingToRelocateCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.willingToRelocates.codes, optionsText: 'name', optionsValue: 'codeValue', value: willingToRelocateCodeValue">
+
+                        </select>
+
+                        <p class="small help-text validation-summary-errors"
+                           data-bind="validationMessage: willingToRelocateCodeValue"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAuthorizedToCodeValue"
+                               data-bind="text: $root.loc.stringAuthorizedToWorkColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                multiple="true"
+                                size="5"
+                                id="inputAuthorizedToCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', selectedOptions: authorisedToWorkCodeValues">
+
+                        </select>
+
+                        <p class="small help-text" data-bind="text: $root.loc.textMultiSelectHelp"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputIndustryExperienceCodeValue"
+                               data-bind="text: $root.loc.stringIndustryExperienceColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputIndustryExperienceCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.industryExperiences.codes, optionsText: 'name', optionsValue: 'codeValue', value: industryExperienceCodeValue">
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmploymentTypeCodeValue"
+                               data-bind="text: $root.loc.stringEmploymentTypeColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                multiple="true"
+                                size="3"
+                                id="inputEmploymentTypeCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.employmentTypes.codes, optionsText: 'name', optionsValue: 'codeValue', selectedOptions: employmentTypeCodeValues">
+
+                        </select>
+
+                        <p class="small help-text" data-bind="text: $root.loc.textMultiSelectHelp"></p>
+                    </div>
+
+                    <div class="form-group col-md-12 right-left-padding-remover">
+
+                        <label for="inputEmploymentTypeCodeValue"
+                               data-bind="text: $root.loc.stringSalarySoughtColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+
+                        <div>
+                            <div class="col-md-2">
+                                <select
+                                        id="inputSalarySoughtAmount"
+                                        class="form-control"
+                                        data-bind="value: salarySought.amount">
+                                    <option value="0-99 K">0-99 K</option>
+                                    <option value="100-199 K">100-199 K</option>
+                                    <option value="200-299 K">200-299 K</option>
+                                    <option value="300-399 K">300-399 K</option>
+                                    <option value="400-499 K">400-499 K</option>
+                                    <option value="500+ K">500+ K</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select
+                                        id="inputSalarySoughtCurrency"
+                                        class="form-control"
+                                        data-bind="options: $root.currencies.codes, optionsText: 'name', optionsValue: 'codeValue', value: salarySought.currencyCodeValue">
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEducationCodeValue"
+                               data-bind="text: $root.loc.stringEducationColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputEducationCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.educations.codes, optionsText: 'name', optionsValue: 'codeValue', value: educationCodeValue">
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSummaryOfExperienceCategoryCodeValue"
+                               data-bind="text: $root.loc.stringSummaryOfExperienceCategoryColon"></label>
+                        <code data-bind="text: $root.loc.stringRequired"></code>
+                        <select
+                                id="inputSummaryOfExperienceCategoryCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.summaryOfExperienceCategories.codes, optionsText: 'name', optionsValue: 'codeValue', value: summaryOfExperienceCategoryCodeValue">
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select
+                                id="inputExperienceDisciplineSecondLevelCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.experienceDisciplineSecondLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: experienceDisciplineFirstLevelCodeValue">
+
+                        </select>
+                    </div>
+
+                    <div class="form-group" data-bind="visible: $root.showSecondLevel">
+                        <select
+                                id="inputExperienceDisciplineThirdLevelCodeValue"
+                                class="form-control"
+                                data-bind="options: $root.experienceDisciplineThirdLevelCodeValue().codes, optionsText: 'name', optionsValue: 'codeValue', value: experienceDisciplineSecondLevelCodeValue">
+
+                        </select>
+                    </div>
+
+
+                    <!-- /ko -->
+
+                </form>
+
+                <div class="admin-button-panel text-right">
+                    <button class="btn btn-default"
+                            data-bind="click: wizardShowPrimaryInformation, text: $root.loc.buttonBack"></button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="spacer-row"></div>
+
+    <div class="tile row">
+        <form class="form form-admin" data-bind="with: selectedItem">
+
+            <div class="form-group" data-bind="visible: !$root.selectedCv.sizeIsValid()">
+                <div class="alert-danger alert">
+                    <small data-bind="text: $root.loc.textFileSizeMustBeLessThan()+ ' ' + ($root.selectedCv.size() / 1000000)+' MB'"></small>
+                </div>
+            </div>
+
+            <!-- ko with: candidateProfile -->
+
+            <div class="form-group">
+                <label class="control-label" for="labelLatestCvUpdate"
+                       data-bind="text: $root.loc.stringLastCvUpdateColon"></label>
+
+                            <span id="labelLatestCvUpdate"
+                                  class="lighter-color"
+                                  data-bind="text: formattedLastCvUpdateDateTime"></span>
+                <a target="_blank"
+                   data-bind="visible: $parent.cvFileLocation, attr: {href: $parent.cvFileLocation}">
+                    <i class="fa fa-external-link"></i>
+                </a>
+            </div>
+
+            <!-- /ko -->
+
+            <div class="form-group">
+                <label class="control-label" for="input-file-select"
+                       data-bind="text: $root.loc.stringCvColon"></label>
+
+                <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                                        <input id="input-file-select"
+                                               data-bind="fileupload: $root.selectedCv"
+                                               type="file"
+                                               name="file-select"
+                                               accept=".doc,.docx,.pdf"
+                                               onchange='$("#upload-file-info").html($(this).val());'>
+                                    </span>
+                                </span>
+
+                    <div class="form-control">
+                        <span class='label label-info' id="upload-file-info"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ko if: $root.selectedCv.percentage  -->
+            <div class="form-group"
+                 data-bind="visible: $root.selectedCv.percentage() && $root.selectedCv.percentage() !== 100">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                         data-bind="attr: {'aria-valuenow' :$root.selectedCv.percentage}, style: {width: $root.selectedCv.percentage() + '%' }, text: $root.selectedCv.percentage() ? $root.selectedCv.percentage() + '%' : '' "
+                         aria-valuemax="100">
+                        0
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                 data-bind="visible: $root.selectedCv.percentage() && $root.selectedCv.percentage() == 100">
+
+                <div class="progress" data-bind="visible: !$root.selectedCv.uploadCompleted()">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar"
+                         aria-valuemin="0"
+                         data-bind="attr: {'aria-valuenow' :100}, style: {width: '100%' }, text: $root.loc.stringPleaseWaitDots "
+                         aria-valuemax="100">
+                        0
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <!-- ko with: candidateProfile -->
+            <div class="form-group">
+                <label for="inputSummary" data-bind="text: $root.loc.stringSummaryColon"></label>
+                  <textarea
+                          maxlength="200"
+                          class="form-control"
+                          id="inputSummary"
+                          data-bind="value: summary, attr: { placeholder: $root.loc.placeholderSummary }"></textarea>
+            </div>
+            <!-- /ko -->
+
+        </form>
+    </div>
+
+    <div class="spacer-row"></div>
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCmd, text: $root.loc.buttonSave"
+                    type="submit"></button> <!--//, enable: !state.systemIsBusy()-->
+            <button class="btn btn-default"
+                    data-bind="click: cancelEditing, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</div>

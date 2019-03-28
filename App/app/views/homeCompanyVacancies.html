@@ -1,0 +1,68 @@
+﻿<div class="row title-row">
+    <div class="pull-right">
+        <button class="btn btn-success btn-sm"
+                data-bind="enable: createIsEnabled, click: newItem, visible: canCreate() && !isEditing()"><i class="fa fa-plus"></i>&nbsp;<span data-bind="text: $root.loc.buttonAdd"></span></button>
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringVacancies"></h3>
+    </div>
+</div>
+
+<div class="composer-plate" data-bind="visible: !isEditing()">
+    <div class="row">
+        <div class="form-group">
+            <label for="inputCompany" data-bind="text: $root.loc.stringCompanyColon"></label>
+            <select
+                    id="inputCompany"
+                    class="form-control"
+                    data-bind="options: $root.companies, optionsText: 'companyName', value: $root.selectedCompany">
+            </select>
+        </div>
+    </div>
+
+    <div class="row spacer-row"></div>
+    <div class="row help" data-bind="text: $root.loc.textVacanciesOfThisCompany"></div>
+    <div class="row spacer-row"></div>
+
+    <div data-bind="messageBox: messageDetail"></div>
+
+    <div class="inner-tile row" data-bind="visible: vacancies().length > 0">
+        <div class="col-md-4">
+            <span class="title" data-bind="text: $root.loc.stringTitle"></span>
+        </div>
+        <div class="col-md-2">
+            <span class="title" data-bind="text: $root.loc.stringExpiry"></span>
+        </div>
+        <div class="col-md-2">
+            <span class="title" data-bind="text: $root.loc.stringStartingFrom"></span>
+        </div>
+    </div>
+    <!-- ko foreach: vacancies -->
+    <div class="tile row"
+         data-bind=" click: $root.setSelectedItem, css: { 'selected' : id() === $root.selectedItemId(), 'left-bordered-danger': !$root.isVacancyActive($data)}">
+
+        <!-- Standard update, edit and delete options -->
+        <div data-bind="compose: 'adminTileButtonPanel.html'"></div>
+
+        <div class="col-md-4">
+            <span class="title" data-bind="text: jobTitle"></span>
+        </div>
+        <div class="col-md-2" data-bind="visible : !($root.isDeleting() && id() === $root.selectedItemId())">
+            <span class="title" data-bind="text: smartExpiresOn()"></span>
+        </div>
+        <div class="col-md-2" data-bind="visible : !($root.isDeleting() && id() === $root.selectedItemId())">
+            <span class="title" data-bind="text: relativeAgingEpoch()"></span>
+        </div>
+
+        <div class="tile-confirmation make-danger"
+             data-bind="visible: id() === $root.selectedItemId() && $root.isDeleting()">
+            <i class="fa fa-trash-o fa-2x"></i>
+            <span data-bind="text: $root.loc.textDeleteConfirmationMessage"></span>
+        </div>
+
+    </div>
+    <!-- /ko -->
+</div>
+
+
+<div class="composer-plate" data-bind="compose: 'homeCompanyEditVacancy.html', visible: isEditing()"></div>

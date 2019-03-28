@@ -1,0 +1,229 @@
+﻿<div data-bind="visible: !isEditing()">
+    <div class="row title-row">
+        <div class="pull-right">
+        </div>
+        <div class="pull-left">
+            <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+        </div>
+    </div>
+
+    <div class="composer-plate">
+
+        <!-- ko foreach: companies -->
+
+        <!--Admin Standard Company Tile-->
+        <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+
+        <!-- /ko -->
+
+    </div>
+</div>
+<form class="form form-admin" data-bind="visible: isEditing()">
+
+    <!-- ko with : selectedItem-->
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <h4 data-bind="text: company.name"></h4>
+
+            <p data-bind="text: $root.loc.stringRigAndVesselIntro"></p>
+            <span class="help" data-bind="text: $root.loc.stringAddOrEditRigAndVessel"></span>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- ko with: $root.selectedCompanyEquipment -->
+
+        <div class="form-group">
+            <label for="inputCompanyRequirementSubject"
+                   data-bind="text: $root.loc.stringRigAndVesselNameColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCompanyRequirementSubject"
+                   data-bind="value: equipment.name, attr: { placeholder: $root.loc.placeholderRigAndVesselName }" />
+        </div>
+        <div class="form-group">
+            <label for="inputRigAndVesselType"
+                   data-bind="text: $root.loc.stringRigAndVesselTypeColon"></label>
+            <select id="inputRigAndVesselType"
+                    class="form-control"
+                    data-bind="options: $root.rigAndVesselTypes.codes, optionsText: 'name', optionsValue: 'codeValue', value: equipment.typeCodeValue, optionsCaption: 'Select...', optionsDisableDefault: true"></select>
+        </div>
+        <div class="form-group">
+            <label for="inputRegion" data-bind="text: $root.loc.stringRegionColon"></label>
+            <select id="inputRegion"
+                    class="form-control"
+                    data-bind="options: $root.regions.codes, optionsText: 'name', optionsValue: 'codeValue', value: equipment.regionCodeValue, optionsCaption: 'Select...', optionsDisableDefault: true"></select>
+        </div>
+        <div class="form-group">
+            <label for="inputRegion" data-bind="text: $root.loc.yearQuarters"></label>
+            <select id="inputRegion"
+                    class="form-control"
+                    data-bind="options: $root.yearQuarters.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.yearQuartersCodeValue, optionsCaption: 'Select...', optionsDisableDefault: false"></select>
+        </div>
+        <div class="form-group">
+            <label for="inputRegion" data-bind="text: $root.loc.year"></label>
+            <select id="inputRegion"
+                    class="form-control"
+                    data-bind="options: $root.year.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.regionCodeValue, optionsCaption: 'Select...', optionsDisableDefault: false"></select>
+        </div>
+        <div class="form-group">
+            <label for="inputRigAndVesselFeatures"
+                   data-bind="text: $root.loc.stringRigAndVesselFeaturesColon"></label>
+            <textarea class="form-control"
+                      id="inputRigAndVesselFeatures"
+                      data-bind="value: equipment.features, attr: { placeholder: $root.loc.placeholderRigAndVesselFeatures }, event: { focus: function(data, event) { $root.textAreaGotFocus('inputRigAndVesselFeatures') }, blur: function(data, event) { $root.textAreaLostFocus('inputRigAndVesselFeatures') } }"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="inputRigAndVesselContactPersonFullName"
+                   data-bind="text: $root.loc.stringRigAndVesselContactPersonFullNameColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputRigAndVesselContactPersonFullName"
+                   data-bind="value: equipment.contactPersonFullName, attr: { placeholder: $root.loc.placeholderRigAndVesselContactPersonFullName }" />
+        </div>
+        <div class="form-group">
+            <label for="inputRigAndVesselContactPersonEmailAddress"
+                   data-bind="text: $root.loc.stringRigAndVesselContactPersonEmailAddressColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputRigAndVesselContactPersonEmailAddress"
+                   data-bind="value: equipment.contactPersonEmailAddress, attr: { placeholder: $root.loc.placeholderRigAndVesselContactPersonEmailAddress }" />
+        </div>
+        <div class="form-group">
+            <label for="inputRigAndVesselContactPersonPhoneNumber"
+                   data-bind="text: $root.loc.stringRigAndVesselContactPersonPhoneNumberColon"></label>
+            <input type="text"
+                   class="form-control"
+                   id="inputRigAndVesselContactPersonPhoneNumber"
+                   data-bind="value: equipment.contactPersonPhoneNumber, attr: { placeholder: $root.loc.placeholderRigAndVesselContactPersonPhoneNumber}" />
+        </div>
+
+        <!--catalogue file begin-->
+        <div class="form-group" data-bind="visible: !$root.selectedCatalogue.sizeIsValid()">
+            <div class="alert-danger alert">
+                <small data-bind="text: $root.loc.textFileSizeMustBeLessThan()+ ' ' + ($root.selectedCatalogue.size() / 1000000)+' MB'"></small>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <a class="small pull-right" target="_blank"
+               data-bind="visible: $root.getFileUrl($data).length > 0, attr: {href: $root.getFileUrl($data)}">
+                <span data-bind="text: $root.loc.linkDownloadRigAndVesselCatalouge"></span>&nbsp;&nbsp;<i class="fa fa-external-link"></i>
+            </a>
+
+            <label class="control-label"
+                   data-bind="text: $root.loc.stringRigAndVesselCatalogueColon"></label>
+
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                        <input id="input-cover-select"
+                               data-bind="fileupload: $root.selectedCatalogue"
+                               type="file"
+                               name="file-select"
+                               accept=".pdf,.doc,.docx,.ppt,.pptx"
+                               onchange='$("#upload-catalogue-info").html($(this).val());'>
+                    </span>
+                </span>
+
+                <div class="form-control">
+                    <span class='label label-info' id="upload-catalogue-info"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ko if: $root.selectedCatalogue.percentage  -->
+        <!--<div class="form-group"
+             data-bind="visible: $root.selectedCatalogue.percentage() && $root.selectedCatalogue.percentage() !== 100">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                     data-bind="attr: {'aria-valuenow' :$root.selectedCatalogue.percentage}, style: {width: $root.selectedCatalogue.percentage() + '%' }, text: $root.selectedCatalogue.percentage() ? $root.selectedCatalogue.percentage() + '%' : '' "
+                     aria-valuemax="100">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="form-group"
+             data-bind="visible: $root.selectedCatalogue.percentage() && $root.selectedCatalogue.percentage() == 100">
+
+            <div class="progress" data-bind="visible: !$root.selectedCatalogue.uploadCompleted()">
+                <div class="progress-bar progress-bar-striped active" role="progressbar"
+                     aria-valuemin="0"
+                     data-bind="attr: {'aria-valuenow' :100}, style: {width: '100%' }, text: $root.loc.stringPleaseWaitDots "
+                     aria-valuemax="100">
+                    0
+                </div>
+            </div>
+        </div>-->
+        <!-- /ko -->
+        <!--catalogue file end-->
+        <!-- /ko -->
+
+    </div>
+
+    <div class="row text-right">
+        <button class="btn btn-success"
+                data-bind="visible: !$root.companyEquipmentIsSelected(),click: $root.addEquipment, text: $root.loc.buttonAdd"></button>
+        <button class="btn btn-default"
+                data-bind="click: $root.newEquipment, visible: $root.companyEquipmentIsSelected(), text: $root.loc.buttonNew"></button>
+    </div>
+
+    <div class="row title-row">
+        <div class="pull-left">
+            <span data-bind="text: $root.loc.stringRequirementsList"></span>
+        </div>
+    </div>
+    <div class="row top-pad-10">
+
+        <!-- ko foreach: company.equipmentContainers -->
+
+        <div class="row inner-tile"
+             data-bind="click: $root.setSelectedCompanyEquipmentItem, css: { selected: $data === $root.selectedCompanyEquipment()}">
+
+            <div class="inner-tile-button-panel"
+                 data-bind="visible: $data === $root.selectedCompanyEquipment()">
+
+                <div data-bind="visible : !$root.companyEquipmentIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="click: $root.deleteCompanyEquipmentItem"><i
+                            class="fa fa-trash"></i></button>
+                </div>
+
+                <div data-bind="visible : $root.companyEquipmentIsDeleting()">
+                    <button class="btn btn-danger btn-xs"
+                            data-bind="command: $root.deleteEquipmentItemCommand, text: $root.loc.buttonDelete"></button>
+
+                    <button class="btn btn-default btn-xs"
+                            data-bind="click: $root.cancelDeleteEquipment, text: $root.loc.buttonCancel"></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <span data-bind="text: equipment.name"></span>
+            </div>
+            <div class="col-md-9">
+                <span class="small" data-bind="text: equipment.type"></span>
+            </div>
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+
+    <!-- /ko -->
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+
+</form>
+

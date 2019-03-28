@@ -1,0 +1,76 @@
+﻿<div class="composer-plate" data-bind="visible: isEditing">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title" data-bind="text: $root.loc.stringEditCompany"></h3>
+        </div>
+
+        <div class="panel-body">
+
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="#editCompanyProfile" data-toggle="tab">
+                        <span class="fa fa-edit" aria-hidden="true"></span>
+                        <span class="tab-header-label" data-bind="text: $root.loc.stringCompanyProfile"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#invitation" data-toggle="tab">
+                        <span class="fa fa-share-alt" aria-hidden="true"></span>
+                        <span class="tab-header-label" data-bind="text: $root.loc.stringInvitation"></span>
+                    </a>
+                </li>
+                <li data-bind="visible: state.isAdministrator()">
+                    <a href="#accessRequests" data-toggle="tab">
+                        <span class="fa fa-users" aria-hidden="true"></span>
+                        <span class="tab-header-label" data-bind="text: $root.loc.stringUsers"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#communityNetwork" data-toggle="tab">
+                        <span class="fa fa-comments-o" aria-hidden="true"></span>
+                        <span class="tab-header-label" data-bind="text: $root.loc.stringCommunityNetwork"></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="editCompanyProfile" class="tab-pane fade in active">
+                    <form class="form form-admin" data-bind="with: selectedItem">
+                        <!-- ko with: company -->
+                        <!-- ko compose: 'adminCompanyProfile.html' --><!-- /ko -->
+                        <!-- /ko -->
+                    </form>
+
+                </div>
+
+                <!-- ko with : selectedItem-->
+                <div id="accessRequests"
+                     class="tab-pane fade"
+                     data-bind="compose: { model: 'viewmodels/companyAccessRequests', activationData: { companyId: organizationId, companyContainer: $data} }">
+                </div>
+
+                <div id="invitation"
+                     class="tab-pane fade">
+                    <!-- ko compose: 'adminCompanyInvitation.html' --><!-- /ko -->
+                </div>
+
+                <div id="communityNetwork"
+                     class="tab-pane fade">
+                    <!-- ko compose: 'adminCompanyCommunityNetwork.html' --><!-- /ko -->
+                </div>
+
+                <!-- /ko -->
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tile row">
+        <div class="admin-button-panel text-right">
+            <button class="btn btn-success"
+                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>
+            <button class="btn btn-default"
+                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
+        </div>
+    </div>
+</div>
