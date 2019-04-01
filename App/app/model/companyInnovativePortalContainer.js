@@ -12,7 +12,7 @@
                 self.innovativePortal = new companyInnovativePortal();
                 self.catalogueFileLocation = ko.observable();
                 self.catalogueFileReference = ko.observable();
-
+                self.categories = [];
             };
 
             ko.utils.extend(CompanyInnovativePortalContainer.prototype, Item);

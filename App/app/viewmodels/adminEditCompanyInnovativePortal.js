@@ -15,7 +15,7 @@
         'services/core/localization',
         'viewmodels/behaviors/editor',
         'model/model',
-        'services/core/instrumentation',
+        'services/core/instrumentation', 
         'services/core/code'
     ],
         function (app, router, logger, config, security, state, dataservice, datacontext, utilities, Clipboard, localization, editor, model, instrumentationSrv) {
@@ -42,14 +42,7 @@
                     sizeIsValid: ko.observable(true)
                 };
                 this.selectedCatalogue.fileUrl.subscribe(catalogueMediaChange, this);               
-                this.companyInnovativePortalIsDeleting = ko.observable(false);
-                //this.companyRequirementSections = localization.getLocalizedCodeSet('companyRequirementSection');
-
-                //this.regions = localization.getLocalizedCodeSet('region');
-                //this.expertiseIndustries = localization.getLocalizedCodeSet('expertiseIndustryCategory');
-                // todo: refine ko.detePicker.binding to get rid of this mess
-                //this.localExpireDateTime = ko.observable(new Date());
-                //this.localExpireDateTime.subscribe(dateChange, this);
+                this.companyInnovativePortalIsDeleting = ko.observable(false);                
                 this.reloadData = reloadData;
                 this.enterSave = enterSave;
                 this.enterEdit = enterEdit;
@@ -59,20 +52,14 @@
                 this.deleteCompanyInnovativePortalItem = deleteCompanyInnovativePortalItem;
                 this.cancelDeleteInnovativePortal = cancelDeleteInnovativePortal;
                 this.setSelectedCompanyInnovativePortal = setSelectedCompanyInnovativePortal;
-                //this.textAreaGotFocus = textAreaGotFocus;
-                //this.textAreaLostFocus = textAreaLostFocus;
-                //this.regionCodeValue.subscribe(filterCompanies, this);
-                //this.expertiseIndustryCodeValue.subscribe(filterCompanies, this);
-                //this.filterCompanies = filterCompanies;
 
-
+                this.categoryList = ko.observableArray();
+                this.categoryList1 = ko.observableArray();
+              
             };
 
             var vm = new Model();
-
-            //vm.searchPhrase.subscribe(filterCompanies, this);
-            //vm.sectionCodeValue.subscribe(filterCompanies, this);
-
+           
             vm.messageDetail = {
                 message: ko.observable(),
                 type: ko.observable()
@@ -98,8 +85,9 @@
                 return vm.selectedCompanyInnovativePortal().id() ? true : false;
             }, this);
             
-            editor.extend(vm, datacontext.companies);
+            editor.extend(vm, datacontext.companies);         
 
+                  
             return vm;
 
             function catalogueMediaChange(newValue) {
@@ -119,7 +107,8 @@
                 }
             }
             
-            function activate() {   
+            function activate() {
+                debugger
                 vm.countries.codes.sort(function (left, right) {
                     return left.name() < right.name() ? -1 : 1;
                 });
@@ -128,8 +117,7 @@
                 vm.selectedItem(undefined);
                 vm.canDelete(false);
                 vm.companies(security.listCompanyAccess());
-                //filterCompanies();
-                
+                //filterCompanies();                
             }
 
             function reloadData() {                
@@ -148,6 +136,8 @@
             }
 
             function enterEdit() {
+                debugger
+                getlist();
             }
 
             function cancelEdit() {
@@ -164,8 +154,6 @@
                     vm.selectedItem().company.innovativePortalContainers.push(vm.selectedCompanyInnovativePortal());
                 }
 
-                //vm.selectedCompanyInnovativePortal().createdDateTime(new Date());
-
                 newRequirement();
             }
 
@@ -176,9 +164,7 @@
                 });
 
                 vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
-                //vm.localExpireDateTime(new Date());
-                //vm.selectedCompanyInnovativePortal().expireDateTime(new Date());
-
+               
             }
 
             function deleteCompanyInnovativePortalItem() {
@@ -195,5 +181,28 @@
             }
 
 
+            function getlist() {                              
+                vm.categoryList([]);
+                let list = [];
+                for (var c = 0; c < vm.companies().length; c++) {
+                    var company = vm.companies()[c].company;
+                    if (company.innovativePortalContainers) {
+                        for (var d = 0; d < company.innovativePortalContainers().length; d++) {
+                            debugger
+                            if (company.innovativePortalContainers()[d].innovativePortal.category()) {
+                                vm.categoryList.push(company.innovativePortalContainers()[d].innovativePortal);
+                            
+                           list.push(vm.categoryList()[d].category());
+                            //alert(vm.categoryList()[d].category());
+                                vm.selectedCompanyInnovativePortal().categories.push(vm.categoryList()[d].category());
+                            }
+                        }
+                    }
+                }
+                console.dir(list);
+                vm.categoryList1 = list;
+            }
+
         });
 }());
+

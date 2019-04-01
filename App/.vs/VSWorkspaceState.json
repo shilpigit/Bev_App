@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\app\\viewmodels",
+    "\\app\\views"
   ],
-  "SelectedNode": "\\index.html",
+  "SelectedNode": "\\app\\viewmodels\\adminCompanyInnovativePortalSearch.js",
   "PreviewInSolutionExplorer": false
 }

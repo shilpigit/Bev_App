@@ -1,4 +1,4 @@
-<div data-bind="visible: !isEditing()">
+﻿<div data-bind="visible: !isEditing()">
     <div class="row title-row">
         <div class="pull-right">
         </div>
@@ -35,14 +35,31 @@
                 class="form-control"
                 data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: innovativePortal.countryCode,optionsCaption: 'Select...', optionsDisableDefault: true"></select>
     </div>
+   
     <div class="form-group">
         <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>
-        <input type="text"
+        <!--<input type="text"
+       class="form-control"
+       id="inputCategory"
+       data-bind="value: innovativePortal.categoryList, attr: { placeholder: $root.loc.placeholderCategory }"
+       required />-->
+
+        <!--<input type="text"
                class="form-control"
-               id="inputEmail"
-               data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
-               required />
+               id="inputCategory"
+               data-bind="value: innovativePortal.categoryList, attr: { placeholder: $root.loc.placeholderCategory }"
+               required />-->
+        
+        <input data-bind="autocomplete: { data: categories, maxItems: 6 }" value="" class="form-control"/>
+        <!--<input data-bind="autocomplete: { data: innovativePortal.categoryList, minLength: 0, target: 'targetSuggestions', onSelect: function (item) { flashWord(item); return ''; } }">
+    <b><span data-bind="text: flashWord"></span></b>
+    <div id="targetSuggestions"></div>-->
     </div>
+
+
+
+
+
     <div class="form-group">
         <label for="inputCompanyIdea"
                data-bind="text: $root.loc.stringCompanyInnovationIdea"></label>

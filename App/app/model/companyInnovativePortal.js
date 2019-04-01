@@ -20,6 +20,7 @@
                 self.contactPerson = ko.observable();
                 self.email = ko.observable();
                 self.telephoneNumber = ko.observable();
+                self.categoryList = ko.observableArray([]);
             };
             ko.utils.extend(companyInnovativePortal.prototype, Item);
 

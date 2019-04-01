@@ -21032,6 +21032,7 @@ define("modernizr", function(){});
                 self.contactPerson = ko.observable();
                 self.email = ko.observable();
                 self.telephoneNumber = ko.observable();
+                self.categoryList = ko.observableArray([]);
             };
             ko.utils.extend(companyInnovativePortal.prototype, Item);
 
@@ -21052,7 +21053,7 @@ define("modernizr", function(){});
                 self.innovativePortal = new companyInnovativePortal();
                 self.catalogueFileLocation = ko.observable();
                 self.catalogueFileReference = ko.observable();
-
+                self.categories = ko.observableArray();
             };
 
             ko.utils.extend(CompanyInnovativePortalContainer.prototype, Item);
@@ -62418,9 +62419,9 @@ define("model/adminQuaterlyAwardsNomination", function(){});
                 this.state = state;
                 this.currentUser = datacontext.user.item.user;
                 this.companies = datacontext.companies.items;
-                this.filteredCompanies = ko.observableArray();
-                this.countryCode = ko.observable('');
+                this.filteredCompanies = ko.observableArray();               
                 this.countries = localization.getLocalizedCodeSet('country');
+                this.countryCode = ko.observable();
                 this.seekingCodeValues = ko.observable(''); 
                 this.seeking = localization.getLocalizedCodeSet('seeking');
                 this.parent = ko.observable();
@@ -62431,7 +62432,7 @@ define("model/adminQuaterlyAwardsNomination", function(){});
                 this.hasResult = ko.observable();
                 this.filterCompanies = filterCompanies;
                 this.filteredRedundantProfile = ko.observableArray();                
-                this.searchPhrase = ko.observable();
+                this.searchPhrase = ko.observable('');
                 this.startSearch = startSearch;
 
                 this.resourceTypeCodeValue = getResourceValue;
@@ -62538,13 +62539,23 @@ define("model/adminQuaterlyAwardsNomination", function(){});
 
                         for (var d = 0; d < company.innovativePortalContainers().length; d++) {
                             var innovativePortalContainers = company.innovativePortalContainers()[d];
-                            //innovativePortal                             
+                            //innovativePortal                               
                             if (!vm.countryCode() && !vm.searchPhrase()) {
                                 vm.filteredCompanies.push(vm.companies()[c]);
                                 vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
                             }
-                            if ((innovativePortalContainers.innovativePortal.description() && innovativePortalContainers.innovativePortal.description().length > 0 && innovativePortalContainers.innovativePortal.description().indexOf(vm.searchPhrase()) > -1) ||
-                                (innovativePortalContainers.innovativePortal.idea() && innovativePortalContainers.innovativePortal.idea().length > 0 && innovativePortalContainers.innovativePortal.idea().indexOf(vm.searchPhrase()) > -1) ||
+                            else if (!vm.searchPhrase()) {
+                                if ((innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode())
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
+                                    //break;
+                                }
+                            }
+                           else if ((innovativePortalContainers.innovativePortal.description()
+                                && innovativePortalContainers.innovativePortal.description().length > 0
+                                && innovativePortalContainers.innovativePortal.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1) ||
+                                (innovativePortalContainers.innovativePortal.idea() && innovativePortalContainers.innovativePortal.idea().length > 0 && innovativePortalContainers.innovativePortal.idea().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1) ||
                                 (innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode())
                             ) 
                             {
@@ -62564,8 +62575,7 @@ define("model/adminQuaterlyAwardsNomination", function(){});
                 }
             }
 
-            function startSearch() {
-                debugger
+            function startSearch() {                
                 filterCompanies();
                 utilities.scrollToElement($('#searchResult'));
             }
@@ -65402,7 +65412,7 @@ define("model/adminQuaterlyAwardsNomination", function(){});
         'services/core/localization',
         'viewmodels/behaviors/editor',
         'model/model',
-        'services/core/instrumentation',
+        'services/core/instrumentation', 
         'services/core/code'
     ],
         function (app, router, logger, config, security, state, dataservice, datacontext, utilities, Clipboard, localization, editor, model, instrumentationSrv) {
@@ -65428,53 +65438,53 @@ define("model/adminQuaterlyAwardsNomination", function(){});
                     size: ko.observable(20000000),
                     sizeIsValid: ko.observable(true)
                 };
-                this.selectedCatalogue.fileUrl.subscribe(catalogueMediaChange, this);
-                //this.searchPhrase = ko.observable('');
-                //this.sectionCodeValue = ko.observable();
-                             
-                //this.expertiseIndustryCodeValue = ko.observable();
-                //this.companyRequirementIsDeleting = ko.observable(false);
-                //this.companyRequirementSections = localization.getLocalizedCodeSet('companyRequirementSection');
-
-                //this.regions = localization.getLocalizedCodeSet('region');
-                //this.expertiseIndustries = localization.getLocalizedCodeSet('expertiseIndustryCategory');
-                // todo: refine ko.detePicker.binding to get rid of this mess
-                //this.localExpireDateTime = ko.observable(new Date());
-                //this.localExpireDateTime.subscribe(dateChange, this);
+                this.selectedCatalogue.fileUrl.subscribe(catalogueMediaChange, this);               
+                this.companyInnovativePortalIsDeleting = ko.observable(false);                
                 this.reloadData = reloadData;
                 this.enterSave = enterSave;
                 this.enterEdit = enterEdit;
-                //this.cancelEdit = cancelEdit;
+                this.cancelEdit = cancelEdit;
                 this.addRequirement = addRequirement;
                 this.newRequirement = newRequirement;
-                //this.deleteCompanyRequirementItem = deleteCompanyRequirementItem;
-                //this.cancelDeleteRequirement = cancelDeleteRequirement;
+                this.deleteCompanyInnovativePortalItem = deleteCompanyInnovativePortalItem;
+                this.cancelDeleteInnovativePortal = cancelDeleteInnovativePortal;
                 this.setSelectedCompanyInnovativePortal = setSelectedCompanyInnovativePortal;
-                //this.textAreaGotFocus = textAreaGotFocus;
-                //this.textAreaLostFocus = textAreaLostFocus;
-                //this.regionCodeValue.subscribe(filterCompanies, this);
-                //this.expertiseIndustryCodeValue.subscribe(filterCompanies, this);
-                //this.filterCompanies = filterCompanies;
 
-
+                this.categoryList = ko.observableArray();
+                this.categoryList1 = ko.observableArray();
+              
             };
 
             var vm = new Model();
-
-            //vm.searchPhrase.subscribe(filterCompanies, this);
-            //vm.sectionCodeValue.subscribe(filterCompanies, this);
-
+           
             vm.messageDetail = {
                 message: ko.observable(),
                 type: ko.observable()
             };
 
+            vm.deleteCompanyInnovativePortalItemCommand = ko.command({
+                execute: function (item) {
+
+                    instrumentationSrv.trackEvent('CompanyProfile', {
+                        'Command': 'DeleteInnovativePortal',
+                        'Company': vm.selectedItem().company.name()
+                    });
+
+                    vm.selectedItem().company.innovativePortalContainers.remove(item);
+
+                },
+                canExecute: function () {
+                    return true;
+                }
+            });
+
             vm.companyInnovativeIsSelected = ko.pureComputed(function () {
                 return vm.selectedCompanyInnovativePortal().id() ? true : false;
             }, this);
             
-            editor.extend(vm, datacontext.companies);
+            editor.extend(vm, datacontext.companies);         
 
+                  
             return vm;
 
             function catalogueMediaChange(newValue) {
@@ -65494,17 +65504,19 @@ define("model/adminQuaterlyAwardsNomination", function(){});
                 }
             }
             
-            function activate() {   
+            function activate() {
+                debugger
                 vm.countries.codes.sort(function (left, right) {
                     return left.name() < right.name() ? -1 : 1;
                 });
+                vm.companyInnovativePortalIsDeleting(false);
                 vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
                 vm.selectedItem(undefined);
                 vm.canDelete(false);
                 vm.companies(security.listCompanyAccess());
-                //filterCompanies();
-                
+                //filterCompanies();                
             }
+
             function reloadData() {                
                 state.systemIsBusy(true);
                 datacontext.companies.getData(state.userId).then(function () {
@@ -65521,11 +65533,17 @@ define("model/adminQuaterlyAwardsNomination", function(){});
             }
 
             function enterEdit() {
+                debugger
+                getlist();
+            }
+
+            function cancelEdit() {
+                vm.isEditing(false);
             }
 
             function addRequirement() {
                 instrumentationSrv.trackEvent('CompanyProfile', {
-                    'Command': 'SaveRequirement',
+                    'Command': 'SaveInnovativePortal',
                     'Company': vm.selectedItem().company.name()
                 });
 
@@ -65533,31 +65551,57 @@ define("model/adminQuaterlyAwardsNomination", function(){});
                     vm.selectedItem().company.innovativePortalContainers.push(vm.selectedCompanyInnovativePortal());
                 }
 
-                //vm.selectedCompanyInnovativePortal().createdDateTime(new Date());
-
                 newRequirement();
             }
 
             function newRequirement() {
                 instrumentationSrv.trackEvent('CompanyProfile', {
-                    'Command': 'NewRequirement',
+                    'Command': 'NewInnovativePortal',
                     'Company': vm.selectedItem().company.name()
                 });
 
                 vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
-                //vm.localExpireDateTime(new Date());
-                //vm.selectedCompanyInnovativePortal().expireDateTime(new Date());
+               
+            }
 
+            function deleteCompanyInnovativePortalItem() {
+                vm.companyInnovativePortalIsDeleting(true);
+            }
+
+            function cancelDeleteInnovativePortal() {
+                vm.companyInnovativePortalIsDeleting(false);
             }
 
             function setSelectedCompanyInnovativePortal(item) {                
-                var index = vm.selectedItem().company.innovativePortal().indexOf(item);
-                vm.selectedCompanyInnovativePortal(vm.selectedItem().company.innovativePortal()[index]);
+                var index = vm.selectedItem().company.innovativePortalContainers().indexOf(item);
+                vm.selectedCompanyInnovativePortal(vm.selectedItem().company.innovativePortalContainers()[index]);
             }
 
 
+            function getlist() {                              
+                vm.categoryList([]);
+                let list = [];
+                for (var c = 0; c < vm.companies().length; c++) {
+                    var company = vm.companies()[c].company;
+                    if (company.innovativePortalContainers) {
+                        for (var d = 0; d < company.innovativePortalContainers().length; d++) {
+                            if (company.innovativePortalContainers()[d].innovativePortal.category()) {
+                                vm.categoryList.push(company.innovativePortalContainers()[d].innovativePortal);
+                            
+                           list.push(vm.categoryList()[d].category());
+                            //alert(vm.categoryList()[d].category());
+                                vm.selectedCompanyInnovativePortal().innovativePortal.categoryList.push(vm.categoryList()[d].category());
+                            }
+                        }
+                    }
+                }
+                console.dir(list);
+                vm.categoryList1 = list;
+            }
+
         });
 }());
+
 
 (function () {
     'use strict';
@@ -73787,7 +73831,7 @@ define('text!views/adminEditCompanyGraduateRecruitment.html',[],function () { re
 define('text!views/adminEditCompanyGraduateShareScheme.html',[],function () { return '<div data-bind="visible: !isEditing()">\r\n    <div class="row title-row">\r\n        <div class="pull-right">\r\n        </div>\r\n        <div class="pull-left">\r\n            <h3 data-bind="text: $root.loc.stringCompanies"></h3>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="composer-plate">\r\n\r\n        <!-- ko foreach: companies -->\r\n\r\n        <!--Admin Standard Company Tile-->\r\n        <div class="" data-bind="compose: \'adminCompanyTile.html\'"></div>\r\n\r\n        <!-- /ko -->\r\n    </div>\r\n</div>\r\n\r\n<form class="form form-admin" data-bind="visible: isEditing()">\r\n\r\n    <!-- ko with : selectedItem-->\r\n\r\n    <div class="row title-row">\r\n        <div class="pull-left">\r\n            <h4 data-bind="text: company.name"></h4>\r\n\r\n            <p data-bind="text: $root.loc.stringGraduateShareSchemeIntro"></p>\r\n            <span class="help" data-bind="text: $root.loc.stringEnableOrDisableGraduateShareScheme"></span>\r\n        </div>\r\n    </div>\r\n    <div class="row top-pad-10">\r\n        <p data-bind="html: $root.introductionText"></p>\r\n    </div>\r\n    <div class="row">\r\n        <div class="form-group">\r\n\r\n            <div class="input-group" id="inputIsActive">\r\n                                <span class="input-group-addon beautiful">\r\n                                    <input type="checkbox"\r\n                                           data-bind="checked: company.isParticipatingInGraduateShareScheme"\r\n                                           class="checkbox checkbox-success">\r\n                                </span>\r\n                <input type="text" class="form-control" data-bind="value: $root.loc.stringWeWantToParticipate"\r\n                       disabled="disabled">\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="row" data-bind="visible: company.isParticipatingInGraduateShareScheme">\r\n\r\n        <div class="form-group">\r\n            <label for="inputContactPersonFullName"\r\n                   data-bind="text: $root.loc.stringContactPersonFullNameColon"></label>\r\n            <input\r\n                    type="text"\r\n                    class="form-control"\r\n                    id="inputContactPersonFullName"\r\n                    data-bind="value: company.graduateShareScheme.contactPersonFullName, attr: { placeholder: $root.loc.placeholderContactPersonFullName }"/>\r\n        </div>\r\n\r\n        <div class="form-group">\r\n            <label for="inputContactPersonTitle"\r\n                   data-bind="text: $root.loc.stringContactPersonTitleColon"></label>\r\n            <input\r\n                    type="text"\r\n                    class="form-control"\r\n                    id="inputContactPersonTitle"\r\n                    data-bind="value: company.graduateShareScheme.contactPersonTitle, attr: { placeholder: $root.loc.placeholderContactPersonTitle }"/>\r\n        </div>\r\n\r\n        <div class="form-group">\r\n            <label for="inputContactPersonEmailAddress"\r\n                   data-bind="text: $root.loc.stringContactPersonEmailAddressColon"></label>\r\n            <input\r\n                    type="text"\r\n                    class="form-control"\r\n                    id="inputContactPersonEmailAddress"\r\n                    data-bind="value: company.graduateShareScheme.contactPersonEmailAddress, attr: { placeholder: $root.loc.placeholderContactPersonEmailAddress }"/>\r\n        </div>\r\n\r\n        <div class="form-group">\r\n            <label for="inputContactPersonPhone"\r\n                   data-bind="text: $root.loc.stringContactPersonPhoneNumberColon"></label>\r\n            <input\r\n                    type="text"\r\n                    class="form-control"\r\n                    id="inputContactPersonPhone"\r\n                    data-bind="value: company.graduateShareScheme.contactPersonNumber, attr: { placeholder: $root.loc.placeholderContactPersonPhoneNumber}"/>\r\n        </div>\r\n\r\n    </div>\r\n\r\n    <!-- /ko -->\r\n\r\n    <div class="tile row">\r\n        <div class="admin-button-panel text-right">\r\n            <button class="btn btn-success"\r\n                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>\r\n            <button class="btn btn-default"\r\n                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>\r\n        </div>\r\n    </div>\r\n</form>\r\n';});
 
 
-define('text!views/adminEditCompanyInnovativePortal.html',[],function () { return '<div data-bind="visible: !isEditing()">\r\n    <div class="row title-row">\r\n        <div class="pull-right">\r\n        </div>\r\n        <div class="pull-left">\r\n            <h3 data-bind="text: $root.loc.stringCompanies"></h3>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="composer-plate">\r\n\r\n        <!-- ko foreach: companies -->\r\n        <!--Admin Standard Company Tile-->\r\n        <div class="" data-bind="compose: \'adminCompanyTile.html\'"></div>\r\n        <!-- /ko -->\r\n    </div>\r\n</div>\r\n<form class="form form-admin" data-bind="visible: isEditing()">\r\n\r\n    <!-- ko with : selectedItem-->\r\n\r\n    <div class="row title-row">\r\n        <div class="pull-left">\r\n            <h4 data-bind="text: company.name"></h4>\r\n            <span class="help" data-bind="text: $root.loc.stringAddOrEditInnovationPortal"></span>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- ko with: $root.selectedCompanyInnovativePortal -->\r\n    \r\n    <div class="form-group">\r\n        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>\r\n        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->\r\n        <select id="inputCountry"\r\n                class="form-control"\r\n                data-bind="options: $root.countries.codes, optionsText: \'name\', optionsValue: \'codeValue\', value: innovativePortal.countryCode,optionsCaption: \'Select...\', optionsDisableDefault: true"></select>\r\n    </div>\r\n    <div class="form-group">\r\n        <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputEmail"\r\n               data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"\r\n               required />\r\n    </div>\r\n    <div class="form-group">\r\n        <label for="inputCompanyIdea"\r\n               data-bind="text: $root.loc.stringCompanyInnovationIdea"></label>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputCompanyIdea"\r\n               data-bind="value: innovativePortal.idea, attr: { placeholder: $root.loc.placeholderCompanyInnovationIdeaColon }" />\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputSeekingCodeValue"\r\n               data-bind="text: $root.loc.stringSeeking"></label>\r\n        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->\r\n        <select multiple="true"\r\n                size="5"\r\n                id="inputSeekingCodeValue"\r\n                class="form-control"\r\n                data-bind="options: $root.seeking.codes, optionsText: \'name\', optionsValue: \'codeValue\', selectedOptions: innovativePortal.seekingCodeValues"></select>\r\n\r\n        <p class="small help-text" data-bind="text: $root.loc.textMultiSelectHelp"></p>\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>\r\n        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputDescription"\r\n               data-bind="value: innovativePortal.description, attr: { placeholder: $root.loc.placeholderDescription }"\r\n               required />\r\n        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: descriptionOfPersonnelAvailable"></p>-->\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <!--<a class="small pull-right" target="_blank"\r\n           data-bind="visible: $root.getFileUrl($data).length > 0, attr: {href: $root.getFileUrl($data)}">\r\n            <span data-bind="text: $root.loc.linkDownloadRigAndVesselCatalouge"></span>&nbsp;&nbsp;<i class="fa fa-external-link"></i>\r\n        </a>-->\r\n\r\n        <label class="control-label"\r\n               data-bind="text: $root.loc.stringBrochure"></label>\r\n\r\n        <div class="input-group">\r\n            <span class="input-group-btn">\r\n                <span class="btn btn-primary btn-file">\r\n                    <span data-bind="html: $root.loc.htmlBrowse"> </span>\r\n                    <input id="input-cover-select"\r\n                           data-bind="fileupload: $root.selectedCatalogue"\r\n                           type="file"\r\n                           name="file-select"\r\n                           accept=".pdf,.doc,.docx,.ppt,.pptx"\r\n                           onchange=\'$("#upload-catalogue-info").html($(this).val());\'>\r\n                </span>\r\n            </span>\r\n\r\n            <div class="form-control">\r\n                <span class=\'label label-info\' id="upload-catalogue-info"></span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>\r\n        <code data-bind="text: $root.loc.stringRequired"></code>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputContactPerson"\r\n               data-bind="value: innovativePortal.contactPerson, attr: { placeholder: $root.loc.placeholderEnterContactPersonName }"\r\n               required />\r\n        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: contactPerson"></p>-->\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>\r\n        <code data-bind="text: $root.loc.stringRequired"></code>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputEmail"\r\n               data-bind="value: innovativePortal.email, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"\r\n               required />\r\n       <!-- <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>-->\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>\r\n        <code data-bind="text: $root.loc.stringRequired"></code>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputTelephoneNumber"\r\n               data-bind="value: innovativePortal.telephoneNumber, attr: { placeholder: $root.loc.placeholderEnterTelephoneNumber }" />\r\n        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: telephoneNumber"></p>-->\r\n    </div>\r\n\r\n\r\n    <!-- /ko -->\r\n\r\n\r\n    <div class="row text-right">\r\n        <button class="btn btn-success"\r\n                data-bind="click: $root.addRequirement, text: $root.loc.buttonAdd"></button>\r\n        <button class="btn btn-default"\r\n                data-bind="click: $root.newRequirement, text: $root.loc.buttonNew"></button>\r\n    </div>\r\n\r\n    <!-- /ko -->\r\n\r\n    <div class="tile row">\r\n        <div class="admin-button-panel text-right">\r\n            <button class="btn btn-success"\r\n                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>\r\n            <button class="btn btn-default"\r\n                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>\r\n        </div>\r\n    </div>\r\n</form>\r\n';});
+define('text!views/adminEditCompanyInnovativePortal.html',[],function () { return '<div data-bind="visible: !isEditing()">\r\n    <div class="row title-row">\r\n        <div class="pull-right">\r\n        </div>\r\n        <div class="pull-left">\r\n            <h3 data-bind="text: $root.loc.stringCompanies"></h3>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="composer-plate">\r\n\r\n        <!-- ko foreach: companies -->\r\n        <!--Admin Standard Company Tile-->\r\n        <div class="" data-bind="compose: \'adminCompanyTile.html\'"></div>\r\n        <!-- /ko -->\r\n    </div>\r\n</div>\r\n<form class="form form-admin" data-bind="visible: isEditing()">\r\n\r\n    <!-- ko with : selectedItem-->\r\n\r\n    <div class="row title-row">\r\n        <div class="pull-left">\r\n            <h4 data-bind="text: company.name"></h4>\r\n            <span class="help" data-bind="text: $root.loc.stringAddOrEditInnovationPortal"></span>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- ko with: $root.selectedCompanyInnovativePortal -->\r\n\r\n    <div class="form-group">\r\n        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>\r\n        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->\r\n        <select id="inputCountry"\r\n                class="form-control"\r\n                data-bind="options: $root.countries.codes, optionsText: \'name\', optionsValue: \'codeValue\', value: innovativePortal.countryCode,optionsCaption: \'Select...\', optionsDisableDefault: true"></select>\r\n    </div>\r\n   \r\n    <div class="form-group">\r\n        <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>\r\n        <!--<input type="text"\r\n       class="form-control"\r\n       id="inputCategory"\r\n       data-bind="value: innovativePortal.categoryList, attr: { placeholder: $root.loc.placeholderCategory }"\r\n       required />-->\r\n\r\n        <!--<input type="text"\r\n               class="form-control"\r\n               id="inputCategory"\r\n               data-bind="value: innovativePortal.categoryList, attr: { placeholder: $root.loc.placeholderCategory }"\r\n               required />-->\r\n        \r\n        <input data-bind="autocomplete: { data: innovativePortal.categoryList, maxItems: 6 }" value="" />\r\n        {{innovativePortal.categoryList}}\r\n        <!--<input data-bind="autocomplete: { data: innovativePortal.categoryList, minLength: 0, target: \'targetSuggestions\', onSelect: function (item) { flashWord(item); return \'\'; } }">\r\n    <b><span data-bind="text: flashWord"></span></b>\r\n    <div id="targetSuggestions"></div>-->\r\n    </div>\r\n\r\n\r\n\r\n\r\n\r\n    <div class="form-group">\r\n        <label for="inputCompanyIdea"\r\n               data-bind="text: $root.loc.stringCompanyInnovationIdea"></label>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputCompanyIdea"\r\n               data-bind="value: innovativePortal.idea, attr: { placeholder: $root.loc.placeholderCompanyInnovationIdeaColon }" />\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputSeekingCodeValue"\r\n               data-bind="text: $root.loc.stringSeeking"></label>\r\n        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->\r\n        <select multiple="true"\r\n                size="5"\r\n                id="inputSeekingCodeValue"\r\n                class="form-control"\r\n                data-bind="options: $root.seeking.codes, optionsText: \'name\', optionsValue: \'codeValue\', selectedOptions: innovativePortal.seekingCodeValues"></select>\r\n\r\n        <p class="small help-text" data-bind="text: $root.loc.textMultiSelectHelp"></p>\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>\r\n        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputDescription"\r\n               data-bind="value: innovativePortal.description, attr: { placeholder: $root.loc.placeholderDescription }"\r\n               required />\r\n        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: descriptionOfPersonnelAvailable"></p>-->\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <!--<a class="small pull-right" target="_blank"\r\n           data-bind="visible: $root.getFileUrl($data).length > 0, attr: {href: $root.getFileUrl($data)}">\r\n            <span data-bind="text: $root.loc.linkDownloadRigAndVesselCatalouge"></span>&nbsp;&nbsp;<i class="fa fa-external-link"></i>\r\n        </a>-->\r\n\r\n        <label class="control-label"\r\n               data-bind="text: $root.loc.stringBrochure"></label>\r\n\r\n        <div class="input-group">\r\n            <span class="input-group-btn">\r\n                <span class="btn btn-primary btn-file">\r\n                    <span data-bind="html: $root.loc.htmlBrowse"> </span>\r\n                    <input id="input-cover-select"\r\n                           data-bind="fileupload: $root.selectedCatalogue"\r\n                           type="file"\r\n                           name="file-select"\r\n                           accept=".pdf,.doc,.docx,.ppt,.pptx"\r\n                           onchange=\'$("#upload-catalogue-info").html($(this).val());\'>\r\n                </span>\r\n            </span>\r\n\r\n            <div class="form-control">\r\n                <span class=\'label label-info\' id="upload-catalogue-info"></span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>\r\n        <code data-bind="text: $root.loc.stringRequired"></code>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputContactPerson"\r\n               data-bind="value: innovativePortal.contactPerson, attr: { placeholder: $root.loc.placeholderEnterContactPersonName }"\r\n               required />\r\n        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: contactPerson"></p>-->\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>\r\n        <code data-bind="text: $root.loc.stringRequired"></code>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputEmail"\r\n               data-bind="value: innovativePortal.email, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"\r\n               required />\r\n        <!-- <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>-->\r\n    </div>\r\n\r\n    <div class="form-group">\r\n        <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>\r\n        <code data-bind="text: $root.loc.stringRequired"></code>\r\n        <input type="text"\r\n               class="form-control"\r\n               id="inputTelephoneNumber"\r\n               data-bind="value: innovativePortal.telephoneNumber, attr: { placeholder: $root.loc.placeholderEnterTelephoneNumber }" />\r\n        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: telephoneNumber"></p>-->\r\n    </div>\r\n\r\n\r\n    <!-- /ko -->\r\n\r\n\r\n    <div class="row text-right">\r\n        <button class="btn btn-success"\r\n                data-bind="click: $root.addRequirement, text: $root.loc.buttonAdd"></button>\r\n        <button class="btn btn-default"\r\n                data-bind="click: $root.newRequirement, text: $root.loc.buttonNew"></button>\r\n    </div>\r\n\r\n    <div class="row title-row">\r\n        <div class="pull-left">\r\n            <span data-bind="text: $root.loc.stringRequirementsList"></span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="row top-pad-10">\r\n        <!-- ko foreach: company.innovativePortalContainers -->\r\n        <div class="row inner-tile"\r\n             data-bind="click: $root.setSelectedCompanyInnovativePortal, css: { selected: $data === $root.selectedCompanyInnovativePortal()}">\r\n\r\n            <div class="inner-tile-button-panel"\r\n                 data-bind="visible: $data === $root.selectedCompanyInnovativePortal()">\r\n\r\n                <div data-bind="visible : !$root.companyInnovativePortalIsDeleting()">\r\n                    <button class="btn btn-danger btn-xs"\r\n                            data-bind="click: $root.deleteCompanyInnovativePortalItem">\r\n                        <i class="fa fa-trash"></i>\r\n                    </button>\r\n                </div>\r\n\r\n                <div data-bind="visible : $root.companyInnovativePortalIsDeleting()">\r\n                    <button class="btn btn-danger btn-xs"\r\n                            data-bind="command: $root.deleteCompanyInnovativePortalItemCommand, text: $root.loc.buttonDelete"></button>\r\n\r\n                    <button class="btn btn-default btn-xs"\r\n                            data-bind="click: $root.cancelDeleteInnovativePortal, text: $root.loc.buttonCancel"></button>\r\n                </div>\r\n\r\n            </div>\r\n\r\n            <div class="col-md-11">\r\n                <!--<code class="small pull-right" data-bind="text: $root.getRelativeExpiresOnDateTime($data)"></code>-->\r\n                <!--<span class="small pull-right" data-bind="text: $root.loc.stringValidUntilColon"></span>-->\r\n                <span data-bind="text: innovativePortal.category"></span>\r\n            </div>\r\n            <!--<div class="col-md-12">\r\n                <span class="small" data-bind="text: description"></span>\r\n            </div>-->\r\n        </div>\r\n        <!-- /ko -->\r\n    </div>\r\n\r\n    <!-- /ko -->\r\n\r\n    <div class="tile row">\r\n        <div class="admin-button-panel text-right">\r\n            <button class="btn btn-success"\r\n                    data-bind="command: saveCommand, text: $root.loc.buttonSave"></button>\r\n            <button class="btn btn-default"\r\n                    data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>\r\n        </div>\r\n    </div>\r\n</form>\r\n';});
 
 
 define('text!views/adminEditCompanyRedundantProfile.html',[],function () { return '<div data-bind="visible: !isEditing()">\r\n    <div class="row title-row">\r\n        <div class="pull-right">\r\n        </div>\r\n        <div class="pull-left">\r\n            <h3 data-bind="text: $root.loc.stringCompanies"></h3>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="composer-plate">\r\n\r\n        <!-- ko foreach: companies -->\r\n\r\n        <!--Admin Standard Company Tile-->\r\n        <div class="" data-bind="compose: \'adminCompanyTile.html\'"></div>\r\n\r\n        <!-- /ko -->\r\n    </div>\r\n</div>\r\n\r\n<div data-bind="visible: isEditing()">\r\n    <div id="redundantProfile" class="tab-pane" data-bind="compose: \'adminEditCompanyRedundantProfileDetail.html\'">\r\n    </div>\r\n</div>';});

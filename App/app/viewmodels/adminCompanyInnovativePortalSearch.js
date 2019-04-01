@@ -150,8 +150,7 @@
 
                         for (var d = 0; d < company.innovativePortalContainers().length; d++) {
                             var innovativePortalContainers = company.innovativePortalContainers()[d];
-                            //innovativePortal   
-                            debugger
+                            //innovativePortal                               
                             if (!vm.countryCode() && !vm.searchPhrase()) {
                                 vm.filteredCompanies.push(vm.companies()[c]);
                                 vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
@@ -187,8 +186,7 @@
                 }
             }
 
-            function startSearch() {
-                debugger
+            function startSearch() {                
                 filterCompanies();
                 utilities.scrollToElement($('#searchResult'));
             }
