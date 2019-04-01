@@ -3,8 +3,10 @@
     "",
     "\\app",
     "\\app\\viewmodels",
-    "\\app\\views"
+    "\\dist",
+    "\\scripts",
+    "\\styles"
   ],
-  "SelectedNode": "\\app\\viewmodels\\adminCompanyInnovativePortalSearch.js",
+  "SelectedNode": "\\app\\viewmodels\\adminEditCompanyInnovativePortal.js",
   "PreviewInSolutionExplorer": false
 }

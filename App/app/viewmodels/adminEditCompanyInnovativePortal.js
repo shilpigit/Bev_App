@@ -107,8 +107,7 @@
                 }
             }
             
-            function activate() {
-                debugger
+            function activate() {                
                 vm.countries.codes.sort(function (left, right) {
                     return left.name() < right.name() ? -1 : 1;
                 });
@@ -135,8 +134,7 @@
                 return true;
             }
 
-            function enterEdit() {
-                debugger
+            function enterEdit() {                
                 getlist();
             }
 
@@ -149,7 +147,7 @@
                     'Command': 'SaveInnovativePortal',
                     'Company': vm.selectedItem().company.name()
                 });
-
+                debugger
                 if (!vm.selectedCompanyInnovativePortal().id()) {
                     vm.selectedItem().company.innovativePortalContainers.push(vm.selectedCompanyInnovativePortal());
                 }
@@ -162,7 +160,7 @@
                     'Command': 'NewInnovativePortal',
                     'Company': vm.selectedItem().company.name()
                 });
-
+                debugger
                 vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
                
             }
@@ -187,19 +185,16 @@
                 for (var c = 0; c < vm.companies().length; c++) {
                     var company = vm.companies()[c].company;
                     if (company.innovativePortalContainers) {
-                        for (var d = 0; d < company.innovativePortalContainers().length; d++) {
-                            debugger
+                        for (var d = 0; d < company.innovativePortalContainers().length; d++) {                            
                             if (company.innovativePortalContainers()[d].innovativePortal.category()) {
                                 vm.categoryList.push(company.innovativePortalContainers()[d].innovativePortal);
-                            
-                           list.push(vm.categoryList()[d].category());
-                            //alert(vm.categoryList()[d].category());
+                            debugger
+                           list.push(vm.categoryList()[d].category());                           
                                 vm.selectedCompanyInnovativePortal().categories.push(vm.categoryList()[d].category());
                             }
                         }
                     }
-                }
-                console.dir(list);
+                }              
                 vm.categoryList1 = list;
             }
 

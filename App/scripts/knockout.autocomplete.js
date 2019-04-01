@@ -97,8 +97,7 @@
     };
 
     ko.bindingHandlers.autocomplete = {
-        init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-            debugger
+        init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {            
             var value = valueAccessor();
             var options = unwrapObservable(value);
 
@@ -156,8 +155,7 @@
 
             var selectedIndex = -1;
 
-            var suggestions = ko.computed(function () {
-                debugger
+            var suggestions = ko.computed(function () {                
                 var data = unwrapObservable(options.data);
                 var queryText = (unwrapObservable(query) || '').trim().toLowerCase();
                 if (queryText.length < minLength) {

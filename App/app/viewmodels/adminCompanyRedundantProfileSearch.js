@@ -324,8 +324,7 @@
                     return 'https://www.google.com.my/maps/place/' + (item.cityName() ? matches[0].name() + ' ' + item.cityName() : matches[0].name()) + ' ' + item.addressOne();
                 }
             };
-            vm.getCompanyProfileUrl = function (item) {
-                debugger
+            vm.getCompanyProfileUrl = function (item) {                
                 return '#/viewcompanyprofile/' + item.id();
             };
 
