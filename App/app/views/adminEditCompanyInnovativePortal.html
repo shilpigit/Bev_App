@@ -41,15 +41,20 @@
         <!--<input type="text"
     class="form-control"
     id="inputCategory"
-    data-bind="value: innovativePortal.categoryList, attr: { placeholder: $root.loc.placeholderCategory }"
+    data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
     required />-->
-        <!--<input type="text"
-           class="form-control"
-           id="inputCategory"
-           data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
-           required />-->
+        <div data-bind="if: innovativePortal.isflag">
+            <input id="inputCategory" data-bind="autocomplete: { data:categories }, value: innovativePortal.category" value="" class="form-control" />
+        </div>
 
-        <input id="inputCategory" data-bind="autocomplete: { data:categories, maxItems: 6 }, value: innovativePortal.category" value="" class="form-control" />
+        <div data-bind="ifnot: innovativePortal.isflag">
+            <input type="text"
+                   class="form-control"
+                   id="inputCategory"
+                   data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
+                   required />
+        </div>
+
     </div>
     
     <div class="form-group">

@@ -21,6 +21,7 @@
                 self.email = ko.observable();
                 self.telephoneNumber = ko.observable();
                 self.categoryList = ko.observableArray([]);
+                self.isflag = ko.observable();
             };
             ko.utils.extend(companyInnovativePortal.prototype, Item);
 

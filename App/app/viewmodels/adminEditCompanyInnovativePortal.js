@@ -55,6 +55,7 @@
 
                 this.categoryList = ko.observableArray();
                 this.categoryList1 = ko.observableArray();
+                this.isflag = ko.observable(false);
               
             };
 
@@ -66,8 +67,7 @@
             };
 
             vm.deleteCompanyInnovativePortalItemCommand = ko.command({
-                execute: function (item) {
-
+                execute: function (item) {   
                     instrumentationSrv.trackEvent('CompanyProfile', {
                         'Command': 'DeleteInnovativePortal',
                         'Company': vm.selectedItem().company.name()
@@ -91,7 +91,6 @@
             return vm;
 
             function catalogueMediaChange(newValue) {
-
                 if (newValue) {
 
                     var container = vm.selectedCompanyInnovativePortal();
@@ -107,7 +106,7 @@
                 }
             }
             
-            function activate() {                
+            function activate() {   
                 vm.countries.codes.sort(function (left, right) {
                     return left.name() < right.name() ? -1 : 1;
                 });
@@ -119,7 +118,7 @@
                 //filterCompanies();                
             }
 
-            function reloadData() {                
+            function reloadData() {   
                 state.systemIsBusy(true);
                 datacontext.companies.getData(state.userId).then(function () {
                     var searchVm = require('viewmodels/adminCompanyInnovativePortalSearch');
@@ -130,11 +129,12 @@
                 return true;
             }
 
-            function enterSave() {                
+            function enterSave() {     
                 return true;
             }
 
-            function enterEdit() {                
+            function enterEdit() {
+                vm.selectedCompanyInnovativePortal().innovativePortal.isflag(true);
                 getlist();
             }
 
@@ -147,7 +147,7 @@
                     'Command': 'SaveInnovativePortal',
                     'Company': vm.selectedItem().company.name()
                 });
-                debugger
+                
                 if (!vm.selectedCompanyInnovativePortal().id()) {
                     vm.selectedItem().company.innovativePortalContainers.push(vm.selectedCompanyInnovativePortal());
                 }
@@ -160,42 +160,42 @@
                     'Command': 'NewInnovativePortal',
                     'Company': vm.selectedItem().company.name()
                 });
-                debugger
+                
                 vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
                
             }
 
             function deleteCompanyInnovativePortalItem() {
-                vm.companyInnovativePortalIsDeleting(true);
+                vm.companyInnovativePortalIsDeleting(true);                
             }
 
             function cancelDeleteInnovativePortal() {
                 vm.companyInnovativePortalIsDeleting(false);
             }
 
-            function setSelectedCompanyInnovativePortal(item) {                
+            function setSelectedCompanyInnovativePortal(item) {   
+                vm.selectedCompanyInnovativePortal().innovativePortal.isflag=false;                
                 var index = vm.selectedItem().company.innovativePortalContainers().indexOf(item);
-                vm.selectedCompanyInnovativePortal(vm.selectedItem().company.innovativePortalContainers()[index]);
+                if (index > -1) {                   
+                    vm.selectedCompanyInnovativePortal(vm.selectedItem().company.innovativePortalContainers()[index]);
+                }
             }
 
 
-            function getlist() {                              
-                vm.categoryList([]);
-                let list = [];
+            function getlist() {                   
+                vm.categoryList([]);     
+                vm.selectedCompanyInnovativePortal().categories([]);
                 for (var c = 0; c < vm.companies().length; c++) {
                     var company = vm.companies()[c].company;
                     if (company.innovativePortalContainers) {
                         for (var d = 0; d < company.innovativePortalContainers().length; d++) {                            
-                            if (company.innovativePortalContainers()[d].innovativePortal.category()) {
-                                vm.categoryList.push(company.innovativePortalContainers()[d].innovativePortal);
-                            debugger
-                           list.push(vm.categoryList()[d].category());                           
-                                vm.selectedCompanyInnovativePortal().categories.push(vm.categoryList()[d].category());
+                            if (company.innovativePortalContainers()[d].innovativePortal.category()) {                                
+                                if (company.innovativePortalContainers()[d].innovativePortal.category())
+                                    vm.selectedCompanyInnovativePortal().categories.push(company.innovativePortalContainers()[d].innovativePortal.category());
                             }
                         }
                     }
                 }              
-                vm.categoryList1 = list;
             }
 
         });

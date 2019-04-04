@@ -2,11 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\viewmodels",
-    "\\dist",
-    "\\scripts",
     "\\styles"
   ],
-  "SelectedNode": "\\app\\viewmodels\\adminEditCompanyInnovativePortal.js",
+  "SelectedNode": "\\styles\\knockout.autocomplete.css",
   "PreviewInSolutionExplorer": false
 }

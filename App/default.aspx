@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="styles/ie10mobile.css"/>
     <link rel="stylesheet" href="styles/bootstrap.theme.min.css"/>
     <link rel="stylesheet" href="dist/styles.css"/>
+    <link rel="stylesheet" href="styles/knockout.autocomplete.css" />
 
     <script src="bower_components/knockout/dist/knockout.js"></script>
 
