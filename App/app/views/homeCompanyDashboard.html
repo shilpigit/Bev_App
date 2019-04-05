@@ -2,17 +2,15 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'company', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'company', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'company', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'company')">
             <div class="col-md-12 ">
                 <div class="img img-responsive icon icon-company"></div>
             </div>
 
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringCompanyProfile"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringCompanyProfile"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardCompanyDescription">
 
         </div>
@@ -21,17 +19,14 @@
     <div class="col-md-4 item-panel-holder"
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'vacancy', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'vacancy', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'vacancy', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'vacancies')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-vacancy" data-bind=""></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringVacancies"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringVacancies"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardVacanciesDescription">
         </div>
 
@@ -39,17 +34,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'vacancyApplicant', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'vacancyApplicant', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'vacancyApplicant', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'applications')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-application"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringApplications"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringApplications"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardApplicationsDescription">
         </div>
 
@@ -59,18 +51,15 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'candidateProfile', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'candidateProfile', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'candidateProfile', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'candidateProfileSearch')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-search-candidate"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringCandidateSearch"></span>
-            <span class="badge small" data-bind="text: $root.loc.stringPreview() + ' 2'"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringCandidateSearch"></span>
+        <span class="badge small" data-bind="text: $root.loc.stringPreview() + ' 2'"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardCandidateSearchDescription">
         </div>
 
@@ -78,17 +67,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'communityNetwork', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'communityNetwork', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'communityNetwork', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'communityNetworkSearch')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-search-community-network"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringCommunityNetwork"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringCommunityNetwork"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardCommunityNetworkSearchDescription">
         </div>
 
@@ -96,17 +82,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'industryAwards', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'industryAwards', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'industryAwards', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'industryAward')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-industry-award"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringIndustryAward"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringIndustryAward"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardIndustryAwardDescription">
         </div>
 
@@ -116,17 +99,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'graduateShareScheme', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'graduateShareScheme', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'graduateShareScheme', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'graduateShareScheme')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-graduate-share-scheme"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringGraduateShareScheme"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringGraduateShareScheme"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardGraduateShareSchemeDescription">
         </div>
 
@@ -134,17 +114,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'hRSharePeoplePortal', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'hRSharePeoplePortal', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'hRSharePeoplePortal', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'redundancyPortal')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-redundancy-portal"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringRedundancyPortal"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringRedundancyPortal"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardRedundancyPortalDescription">
         </div>
 
@@ -152,17 +129,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'businessCoOperation', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'businessCoOperation', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'businessCoOperation', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'businessCoOperation')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-business-co-operation"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringBusinessCoOperation"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringBusinessCoOperation"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textBusinessCoOperationDescription">
         </div>
 
@@ -172,17 +146,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'graduateRecruitment', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'graduateRecruitment', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'graduateRecruitment', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'graduateRecruitment')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-graduate-recruitment"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringGraduateRecruitment"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringGraduateRecruitment"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardGraduateRecruitmentDescription">
         </div>
 
@@ -190,17 +161,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'rigAndVessel', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'rigAndVessel', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'rigAndVessel', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'equipment')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-equipment"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringRigAndVessel"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringRigAndVessel"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardRigAndVesselDescription">
         </div>
 
@@ -208,7 +176,7 @@
     <!--<div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'documentLibrary', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'documentLibrary', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'documentLibrary', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'documentLibrary')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-documents-library"></div>
@@ -227,17 +195,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'mentoringPortal', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'mentoringPortal', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'mentoringPortal', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'mentoringPortal')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-mentoring-portal"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringMentoringPortal"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringMentoringPortal"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textMentoringPortalDescription">
         </div>
 
@@ -246,17 +211,14 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'technologyShowcase', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'technologyShowcase', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'technologyShowcase', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'technologyShowcasePortal')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-technology-showcase"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringTechnologyShowcasePortal"></span>
-
         </div>
-
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringTechnologyShowcasePortal"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textTechnologyShowcaseDescription">
         </div>
 
@@ -264,32 +226,28 @@
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'innovation', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'innovation', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'innovation', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'innovationPortal')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-innovative-showcase"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringInnovationPortal"></span>
-
         </div>
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringInnovationPortal"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardInnovativePortalDescription">
         </div>
     </div>
     <div class="col-md-4 item-panel-holder "
          data-bind="enable: $root.security.checkAccess({objectTypeCode: 'userAssistance', operationTypeCode: 'view'}), css: {'desaturate' : !$root.security.checkAccess({objectTypeCode: 'userAssistance', operationTypeCode: 'view'})}">
 
-        <div class="col-md-8 col-md-offset-2 icon-panel-holder"
+        <div class="col-md-6 col-md-offset-3 icon-panel-holder"
              data-bind="click: !$root.security.checkAccess({objectTypeCode: 'userAssistance', operationTypeCode: 'view'}) ? showHelp : setSelectedView.bind($data,'userAssistance')">
             <div class="col-md-12">
                 <div class="img img-responsive icon icon-user-assistance"></div>
             </div>
-
-            <div class="col-md-12 "></div>
-            <span class="icon-title" data-bind="text: loc.stringUserAssistance"></span>
-
         </div>
+        <div class="clearfix"></div>
+        <span class="icon-title" data-bind="text: loc.stringUserAssistance"></span>
         <div class="col-md-12 text-center help" data-bind="text: loc.textCompanyDashboardUserAssistanceDescription">
         </div>
 

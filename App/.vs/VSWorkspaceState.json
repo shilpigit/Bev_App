@@ -1,9 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\styles"
+    "\\fonts",
+    "\\fonts\\linea",
+    "\\fonts\\linea\\_basic",
+    "\\fonts\\linea\\_basic\\_ICONFONT",
+    "\\fonts\\linea\\_basic_elaboration",
+    "\\fonts\\linea\\_basic_elaboration\\_ICONFONT",
+    "\\fonts\\linea\\_ecommerce",
+    "\\fonts\\linea\\_ecommerce\\_ICONFONT",
+    "\\fonts\\linea\\_music"
   ],
-  "SelectedNode": "\\styles\\knockout.autocomplete.css",
   "PreviewInSolutionExplorer": false
 }
