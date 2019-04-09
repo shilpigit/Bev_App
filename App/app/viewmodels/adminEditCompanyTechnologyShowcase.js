@@ -26,143 +26,126 @@
                 this.state = state;
                 this.activate = activate;
                 this.utilities = utilities;
-                this.title = 'Companies';
-                this.filteredCompanies = ko.observableArray();
+                this.title = 'Technology Showcase Portal';
                 this.companies = ko.observableArray();
-                this.selectedCompanyRequirement = ko.observable();
-                this.searchPhrase = ko.observable('');
-                this.sectionCodeValue = ko.observable();
-                this.regionCodeValue = ko.observable();
-                this.expertiseIndustryCodeValue = ko.observable();
-                this.companyRequirementIsDeleting = ko.observable(false);
-                this.companyRequirementSections = localization.getLocalizedCodeSet('companyRequirementSection');
-                this.regions = localization.getLocalizedCodeSet('region');
-                this.expertiseIndustries = localization.getLocalizedCodeSet('expertiseIndustryCategory');
-                // todo: refine ko.detePicker.binding to get rid of this mess
-                this.localExpireDateTime = ko.observable(new Date());
-                this.localExpireDateTime.subscribe(dateChange, this);
+                this.countries = localization.getLocalizedCodeSet('country');
+                this.selectedCompanyTechnologyPortal = ko.observable();
+                this.selectedImage = {
+                    fileUrl: ko.observable(),
+                    fileReference: ko.observable(),
+                    contentType: ko.observable(),
+                    percentage: ko.observable(),
+                    uploadCompleted: ko.observable(),
+                    size: ko.observable(20000000),
+                    sizeIsValid: ko.observable(true)
+                };
+                this.selectedImage.fileUrl.subscribe(mediaChange, this);
+                this.selectedCatalogue = {
+                    fileUrl: ko.observable(),
+                    fileReference: ko.observable(),
+                    contentType: ko.observable(),
+                    percentage: ko.observable(),
+                    uploadCompleted: ko.observable(),
+                    size: ko.observable(20000000),
+                    sizeIsValid: ko.observable(true)
+                };
+                this.selectedCatalogue.fileUrl.subscribe(catalogueMediaChange, this);  
+                this.companyTechnologyPortalIsDeleting = ko.observable(false);   
                 this.reloadData = reloadData;
                 this.enterSave = enterSave;
                 this.enterEdit = enterEdit;
                 this.cancelEdit = cancelEdit;
                 this.addRequirement = addRequirement;
                 this.newRequirement = newRequirement;
-                this.deleteCompanyRequirementItem = deleteCompanyRequirementItem;
-                this.cancelDeleteRequirement = cancelDeleteRequirement;
-                this.setSelectedCompanyRequirementItem = setSelectedCompanyRequirementItem;
-                this.textAreaGotFocus = textAreaGotFocus;
-                this.textAreaLostFocus = textAreaLostFocus;
-                this.regionCodeValue.subscribe(filterCompanies, this);
-                this.expertiseIndustryCodeValue.subscribe(filterCompanies, this);
-                this.filterCompanies = filterCompanies;
-
-
+                this.deleteCompanyTechnologyPortalItem = deleteCompanyTechnologyPortalItem;
+                this.cancelDeleteTechnologyPortal = cancelDeleteTechnologyPortal;
+                this.setSelectedCompanyTechnologyPortal = setSelectedCompanyTechnologyPortal;
+                this.isflag = ko.observable(false);
             };
 
             var vm = new Model();
-
-            vm.searchPhrase.subscribe(filterCompanies, this);
-            vm.sectionCodeValue.subscribe(filterCompanies, this);
 
             vm.messageDetail = {
                 message: ko.observable(),
                 type: ko.observable()
             };
 
-            // todo: work on knockout mappings to bind inner computed observables too
-
-            vm.getRegionName = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.regions.codes, function (el) {
-                    return el.codeValue() === item.regionCodeValue();
-                });
-
-                if (matches.length > 0) {
-                    return matches[0].name();
-                } else {
-                    return vm.loc.stringUnknown();
-                }
-
-            };
-            vm.getExpertiseIndustryName = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.expertiseIndustries.codes, function (el) {
-                    return el.codeValue() === item.expertiseIndustryCodeValue();
-                });
-
-                if (matches.length > 0) {
-                    return matches[0].name();
-                } else {
-                    return vm.loc.stringUnknown();
-                }
-
-            };
-            vm.getRelativePostedDateTime = function (item) {
-                if (item.createdDateTime()) {
-                    return moment(item.createdDateTime()).fromNow();
-                }
-                else {
-                    return 'Who Knows!';
-                }
-
-            };
-            vm.getRelativeExpiresOnDateTime = function (item) {
-
-                if (item.expireDateTime()) {
-                    return moment(item.expireDateTime()).fromNow();
-                }
-                else {
-                    return 'Who Knows!';
-                }
-
-            };
-
-            vm.getFormattedExpiresDate = function (item) {
-
-                if (item.expireDateTime()) {
-                    return moment(item.expireDateTime()).format(config.dateFormat);
-                }
-                else {
-                    return moment(new Date()).format(config.dateFormat);
-                }
-
-            };
-
-            vm.deleteRequirementItemCommand = ko.command({
+            vm.deleteCompanyTechnologyPortalItemCommand = ko.command({
                 execute: function (item) {
-
                     instrumentationSrv.trackEvent('CompanyProfile', {
-                        'Command': 'DeleteRequirement',
+                        'Command': 'DeleteTechnologyPortal',
                         'Company': vm.selectedItem().company.name()
                     });
 
-                    vm.selectedItem().company.requirements.remove(item);
-
+                    vm.selectedItem().company.technologyPortalContainers.remove(item);
+                    vm.companyTechnologyPortalIsDeleting(false);
                 },
                 canExecute: function () {
                     return true;
                 }
             });
-            vm.companyRequirementIsSelected = ko.pureComputed(function () {
-                return vm.selectedCompanyRequirement().id() ? true : false;
+           
+            vm.companyTechnologyIsSelected = ko.pureComputed(function () {
+                return vm.selectedCompanyTechnologyPortal().id() ? true : false;
             }, this);
+          
 
             editor.extend(vm, datacontext.companies);
 
             return vm;
 
+            function catalogueMediaChange(newValue) {                
+                if (newValue) {
+
+                    var container = vm.selectedCompanyTechnologyPortal();
+                    if (!container.catalogueFileLocation) {
+                        container.catalogueFileLocation = ko.observable();
+                    }
+                    if (!container.catalogueFileReference) {
+                        container.catalogueFileReference = ko.observable();
+                    }
+                    container.catalogueFileLocation(vm.selectedCatalogue.fileUrl());
+                    container.catalogueFileReference(vm.selectedCatalogue.fileReference());
+
+                }
+            }
+
+            function getSelectedContainer() {                
+                for (var i = 0; i < vm.companies().length; i++) {
+                    if (vm.companies()[i].id() === vm.selectedItemId()) {
+                        return vm.companies()[i];
+                    }
+                }
+            }
+
+            function mediaChange(newValue) {
+                if (newValue) {
+                    var container = getSelectedContainer();
+                    container.logoImageLocation(vm.selectedImage.fileUrl());
+                    container.logoImageReference(vm.selectedImage.fileReference());
+                }
+            }
+
             function activate() {
-                vm.selectedCompanyRequirement(new model.CompanyRequirement());
+                vm.countries.codes.sort(function (left, right) {
+                    return left.name() < right.name() ? -1 : 1;
+                });
+                vm.companyTechnologyPortalIsDeleting(false);
+                vm.selectedCompanyTechnologyPortal(new model.CompanyTechnologyPortalContainer());                
                 vm.selectedItem(undefined);
                 vm.canDelete(false);
+
                 vm.companies(security.listCompanyAccess());
-                filterCompanies();
+
+                $('.nav-pills a').removeClass('active');
+                $('.nav-pills a[href="#editCompanyProfile"]').addClass('active');
+                //filterCompanies();                
             }
 
             function reloadData() {
                 state.systemIsBusy(true);
                 datacontext.companies.getData(state.userId).then(function () {
-                    var searchVm = require('viewmodels/adminCompanyBusinessCoOperationSearch');
+                    var searchVm = require('viewmodels/adminCompanyTechnologyShowcaseSearch');
                     searchVm.filterCompanies();
                     state.systemIsBusy(false);
                 });
@@ -171,112 +154,80 @@
             }
 
             function enterSave() {
+                debugger
                 return true;
             }
 
-            function enterEdit() {
+            function enterEdit() {                
+                var container = getSelectedContainer();
+                if (container.company.logoImageId()) {
+                    vm.selectedImage.fileUrl(utilities.resolveFileUrl(container.company.logoImageId()));
+                }
+                else {
+                    vm.selectedImage.fileUrl(config.imageCdn + 'logo/logo-solo.png');
+                }
+                newRequirement();
             }
 
             function cancelEdit() {
                 vm.isEditing(false);
             }
 
-            function dateChange(newValue) {
-                if (newValue) {
-                    if (newValue !== vm.selectedCompanyRequirement().expireDateTime()) {
-                        vm.selectedCompanyRequirement().expireDateTime(new Date(newValue));
-                    }
-                }
-            }
-
-            function addRequirement() {
-
+            function addRequirement() {                
                 instrumentationSrv.trackEvent('CompanyProfile', {
-                    'Command': 'SaveRequirement',
+                    'Command': 'SaveTechnologyShowcasePortal',
                     'Company': vm.selectedItem().company.name()
                 });
-
-                if (!vm.selectedCompanyRequirement().id()) {
-                    vm.selectedItem().company.requirements.push(vm.selectedCompanyRequirement());
+                
+                if (!vm.selectedCompanyTechnologyPortal().id()) {
+                vm.selectedItem().company.technologyPortalContainers.push(vm.selectedCompanyTechnologyPortal());
                 }
-
-                vm.selectedCompanyRequirement().createdDateTime(new Date());
 
                 newRequirement();
             }
 
             function newRequirement() {
-
                 instrumentationSrv.trackEvent('CompanyProfile', {
-                    'Command': 'NewRequirement',
+                    'Command': 'NewTechnologyShowcasePortal',
                     'Company': vm.selectedItem().company.name()
                 });
 
-                vm.selectedCompanyRequirement(new model.CompanyRequirement());
-                vm.localExpireDateTime(new Date());
-                vm.selectedCompanyRequirement().expireDateTime(new Date());
-
+                vm.selectedCompanyTechnologyPortal(new model.CompanyTechnologyPortalContainer());
+                vm.selectedCompanyTechnologyPortal().technologyPortal.isflag = true;
+                getlist();
             }
 
-            function deleteCompanyRequirementItem() {
-                vm.companyRequirementIsDeleting(true);
+            function deleteCompanyTechnologyPortalItem() {
+                vm.companyTechnologyPortalIsDeleting(true);
             }
 
-            function cancelDeleteRequirement() {
-                vm.companyRequirementIsDeleting(false);
+            function cancelDeleteTechnologyPortal() {
+                vm.companyTechnologyPortalIsDeleting(false);
             }
 
-            function setSelectedCompanyRequirementItem(item) {
-
-                var index = vm.selectedItem().company.requirements().indexOf(item);
-                vm.selectedCompanyRequirement(vm.selectedItem().company.requirements()[index]);
-                vm.localExpireDateTime(new Date(vm.selectedCompanyRequirement().expireDateTime()));
+            function setSelectedCompanyTechnologyPortal(item) { 
+                vm.selectedCompanyTechnologyPortal().technologyPortal.isflag = false;   
+                var index = vm.selectedItem().company.technologyPortalContainers().indexOf(item);
+                if (index > -1) {
+                    vm.selectedCompanyTechnologyPortal(vm.selectedItem().company.technologyPortalContainers()[index]);
+                }
             }
 
-            function textAreaGotFocus(elementId) {
-                var el = $('#' + elementId);
-
-                autosize(el);  // jshint ignore:line
-                utilities.scrollToElement(el);
-            }
-
-            function textAreaLostFocus(elementId) {
-                var el = $('#' + elementId);
-                autosize.destroy(el);  // jshint ignore:line
-            }
-
-            function filterCompanies() {
-
-                vm.filteredCompanies([]);
-
+            function getlist() {
+                //vm.categoryList([]);     
+                vm.selectedCompanyTechnologyPortal().categories = [];
                 for (var c = 0; c < vm.companies().length; c++) {
-
                     var company = vm.companies()[c].company;
-
-                    if (company.requirements && company.isActive()) {
-
-                        for (var d = 0; d < company.requirements().length; d++) {
-
-                            var requirement = company.requirements()[d];
-
-                            if ((!vm.sectionCodeValue() || requirement.sectionCodeValue() === vm.sectionCodeValue()) &&
-                                ((!vm.searchPhrase() || (requirement.description() && requirement.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1)) ||
-                                    (!vm.searchPhrase() || (requirement.subject() && requirement.subject().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1)))) {
-
-                                vm.filteredCompanies.push(vm.companies()[c]);
-                                break;
-
+                    if (company.technologyPortalContainers) {
+                        for (var d = 0; d < company.technologyPortalContainers().length; d++) {
+                            if (company.technologyPortalContainers()[d].technologyPortal.category()) {
+                                if (company.technologyPortalContainers()[d].technologyPortal.category())
+                                    vm.selectedCompanyTechnologyPortal().categories.push(company.technologyPortalContainers()[d].technologyPortal.category());
                             }
                         }
                     }
                 }
-
-                if (vm.filteredCompanies().length === 0) {
-                    vm.messageDetail.type('info');
-                    vm.messageDetail.message(vm.loc.stringCompanyRequirementSearchHasNoResult());
-                } else {
-                    vm.messageDetail.message('');
-                }
             }
+            
         });
 }());

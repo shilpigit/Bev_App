@@ -6,10 +6,35 @@
     </div>
 </div>
 
-<div style="text-align:center; margin-top:200px;margin-bottom:200px">
+<!--<div style="text-align:center; margin-top:200px;margin-bottom:200px">
     <p> Show your products off on a Global platform, educate potential Clients on your technologies and let interested parties contact you to discuss.</p><br /><br/>
 
     <h3> <strong>*Launches April 2019*</strong></h3><br /><br/>
 
     <p> Our representatives will be in contact with all affiliated partners to discuss further.<p>
+</div>-->
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#search" data-toggle="tab">
+                <span class="fa fa-edit" aria-hidden="true"></span>
+                <span class="tab-header-label"
+                      data-bind="text: $root.loc.stringSearchTechnologyShowcase"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#businessCoOperation" data-toggle="tab">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringAddTechnologyShowcase"></span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyTechnologyShowcaseSearch'}">
+        </div>
+        <div id="businessCoOperation" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyTechnologyShowcase'}">
+        </div>
+
+    </div>
 </div>

@@ -10,8 +10,9 @@
             'model/companyGraduateShareScheme',
             'model/companyGraduateRecruitment',
             'model/companyEquipmentContainer',
-            'model/companyInnovativePortalContainer'],
-        function (Item, CompanyDiscipline, CompanyRequirement, CompanyRedundantProfile, CompanySponsorshipPackage, CompanyGraduateShareScheme, CompanyGraduateRecruitment, CompanyEquipmentContainer, CompanyInnovativePortalContainer) {
+            'model/companyInnovativePortalContainer',
+            'model/companyTechnologyPortalContainer'],
+        function (Item, CompanyDiscipline, CompanyRequirement, CompanyRedundantProfile, CompanySponsorshipPackage, CompanyGraduateShareScheme, CompanyGraduateRecruitment, CompanyEquipmentContainer, CompanyInnovativePortalContainer, CompanyTechnologyPortalContainer) {
 
             var Company = function () {
                 var self = this;
@@ -50,6 +51,7 @@
                 self.executivesGroupInvitationUrl = ko.observable();
                 self.employeesGroupInvitationUrl = ko.observable();
                 self.innovativePortalContainers = ko.observableArray();
+                self.technologyPortalContainers = ko.observableArray();
 
                 self.state.mapping = {
                     'disciplines': {
@@ -104,6 +106,15 @@
                             ko.mapping.fromJS(options.data, innovativeProfile.mapping || {}, innovativeProfile);
 
                             return innovativeProfile;
+                        }
+                    },
+                    'technologyPortalContainers': {
+                        create: function (options) {
+                            var technologyProfile = new CompanyTechnologyPortalContainer();
+
+                            ko.mapping.fromJS(options.data, technologyProfile.mapping || {}, technologyProfile);
+
+                            return technologyProfile;
                         }
                     },
                 };

@@ -27,7 +27,6 @@
                 this.activate = activate;
                 this.utilities = utilities;
                 this.title = 'Innovative Portal';
-                //this.filteredCompanies = ko.observableArray();
                 this.companies = ko.observableArray();
                 this.countries = localization.getLocalizedCodeSet('country');
                 this.selectedCompanyInnovativePortal = ko.observable();
@@ -114,7 +113,6 @@
                 vm.selectedItem(undefined);
                 vm.canDelete(false);
                 vm.companies(security.listCompanyAccess());
-                //filterCompanies();                
             }
 
             function reloadData() {                  
@@ -128,7 +126,7 @@
                 return true;
             }
 
-            function enterSave() {  
+            function enterSave() {                
                 return true;
             }
 
@@ -160,8 +158,7 @@
                 instrumentationSrv.trackEvent('CompanyProfile', {
                     'Command': 'NewInnovativePortal',
                     'Company': vm.selectedItem().company.name()
-                });
-                
+                });                
                 vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
                 vm.selectedCompanyInnovativePortal().innovativePortal.isflag = true; 
                 getlist();

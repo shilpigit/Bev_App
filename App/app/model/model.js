@@ -46,7 +46,9 @@
             'model/adminQuaterlyAwardsNominationForm',
             'model/pagedVacancy',
             'model/companyInnovativePortal',
-            'model/companyInnovativePortalContainer'],
+            'model/companyInnovativePortalContainer',
+            'model/companyTechnologyShowcasePortal',
+            'model/companyTechnologyPortalContainer'],
         function (AccessListOperation,
                   AccessRequest,
                   CodeMapping,
@@ -89,9 +91,12 @@
                   PagedCandidateProfileContainer,
                   PagedVacancyApplication,
                   AdminQuaterlyAwardsNominationForm,
-                PagedVacancy,
-                companyInnovativePortal,
-                CompanyInnovativePortalContainer) {
+                  PagedVacancy,
+                  companyInnovativePortal,
+                  CompanyInnovativePortalContainer,
+                  companyTechnologyPortal,
+                  CompanyTechnologyPortalContainer
+            ) {
 
             var model = {
                 AccessListOperation: AccessListOperation,
@@ -139,7 +144,9 @@
                 AdminQuaterlyAwardsNominationForm: AdminQuaterlyAwardsNominationForm,
                 PagedVacancy: PagedVacancy,
                 companyInnovativePortal: companyInnovativePortal,
-                CompanyInnovativePortalContainer: CompanyInnovativePortalContainer
+                CompanyInnovativePortalContainer: CompanyInnovativePortalContainer,
+                companyTechnologyPortal: companyTechnologyPortal,
+                CompanyTechnologyPortalContainer: CompanyTechnologyPortalContainer
             };
 
             return model;

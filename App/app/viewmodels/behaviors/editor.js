@@ -90,7 +90,8 @@
                     });
                 }
 
-                function saveCommand() {                    
+                function saveCommand() {
+                    debugger
                     return ko.asyncCommand({
                         execute: function (callback) {
                             var args = vm.enterSave();

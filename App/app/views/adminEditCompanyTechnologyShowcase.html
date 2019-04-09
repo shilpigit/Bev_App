@@ -12,142 +12,179 @@
         <!-- ko foreach: companies -->
         <!--Admin Standard Company Tile-->
         <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
-
         <!-- /ko -->
     </div>
 </div>
+
 <form class="form form-admin" data-bind="visible: isEditing()">
-
     <!-- ko with : selectedItem-->
-
     <div class="row title-row">
         <div class="pull-left">
             <h4 data-bind="text: company.name"></h4>
-            <p>Ask for Advice, post tender, no-tender requirement(s), procure suppliers, equipment, products, services and know how within the industry .&nbsp;&nbsp; Business Collaborate with your industry peers.</p>
-            <span class="help" data-bind="text: $root.loc.stringAddOrEditRequirement"></span>
+            <span class="help" data-bind="text: $root.loc.stringAddOrEditTechnologyShowcasePortal"></span>
         </div>
     </div>
-    <div class="row">
-
-        <!-- ko with: $root.selectedCompanyRequirement -->
-
+    <!-- /ko -->
+    <div class="col-md-2">
         <div class="form-group">
-            <label for="inputCompanyRequirementSubject"
-                   data-bind="text: $root.loc.stringCompanyRequirementSubjectColon"></label>
-            <input type="text"
-                   class="form-control"
-                   id="inputCompanyRequirementSubject"
-                   data-bind="value: subject, attr: { placeholder: $root.loc.placeholderCompanyRequirementSubjectColon }" />
+            <img class="img-thumbnail img-responsive"
+                 data-bind="attr:{ src: $root.selectedImage.fileUrl}" />
         </div>
-        <div class="form-group">
-            <label for="inputCompanyRequirementDescription"
-                   data-bind="text: $root.loc.stringDescriptionOfCompanyRequirementColon"></label>
-            <textarea class="form-control"
-                      id="inputCompanyRequirementDescription"
-                      data-bind="value: description, attr: { placeholder: $root.loc.placeholderDescriptionOfCompanyRequirementColon }, event: { focus: function(data, event) { $root.textAreaGotFocus('inputCompanyRequirementDescription') }, blur: function(data, event) { $root.textAreaLostFocus('inputCompanyRequirementDescription') } }"></textarea>
-        </div>
-        <div class="form-group">
-            <div class="form-group">
-                <label for="inputRegion" data-bind="text: $root.loc.stringRegionColon"></label>
-                <select id="inputRegion"
-                        class="form-control"
-                        data-bind="options: $root.regions.codes, optionsText: 'name', optionsValue: 'codeValue',optionsCaption: 'All'"></select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="timeZone"
+               data-bind="text: $root.loc.stringCompanyLogoColon"></label>
+
+        <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-primary btn-file">
+                    <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                    <input id="input-file-select"
+                           data-bind="fileupload: $root.selectedImage"
+                           type="file"
+                           name="file-select"
+                           accept=".jpg,.jpeg,.png,.gif"
+                           onchange='$("#upload-file-info").html($(this).val());'>
+                </span>
+            </span>
+
+            <div class="form-control">
+                <span class='label label-info' id="upload-file-info"></span>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="inputExpertiseIndustry"
-                   data-bind="text: $root.loc.stringExpertiseIndustryColon"></label>
-            <select id="inputExpertiseIndustry"
-                    class="form-control"
-                    data-bind="options: $root.expertiseIndustries.codes, optionsText: 'name', optionsValue: 'codeValue', optionsCaption: 'All'"></select>
+
+    <!-- ko with : selectedItem-->
+    <!-- ko with: $root.selectedCompanyTechnologyPortal -->
+
+    <div class="form-group" style="padding-top:84px;">
+        <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
+        <select id="inputCountry"
+                class="form-control"
+                data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: technologyPortal.countryCode,optionsCaption: 'Select...', optionsDisableDefault: true"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>
+        <div data-bind="if: technologyPortal.isflag">
+            <input id="inputCategory" data-bind="autocomplete: { data:categories }, value: technologyPortal.category" value="" class="form-control" />
         </div>
 
-        <div class="form-group">
-            <label for="inputSectionCodeValue"
-                   data-bind="text: $root.loc.stringSectionColon"></label>
-            <select id="inputSectionCodeValue"
-                    class="form-control"
-                    data-bind="options: $root.companyRequirementSections.codes, optionsText: 'name', optionsValue: 'codeValue', value: sectionCodeValue"></select>
-        </div>
-
-        <!--<div class="form-group">-->
-        <!--<label for="inputValidUntil" data-bind="text: $root.loc.stringCompanyRequirementExpireDateColon"> </label>-->
-        <!--<div id="expireDateTime" class="input-append">-->
-        <!--<div class="input-group">-->
-        <!--<input class="form-control" id="inputValidUntil" type="text"-->
-        <!--data-bind="datepicker: $root.localExpireDateTime"/>-->
-        <!--<span class="input-group-addon add-on">-->
-        <!--<span class="fa fa-calendar"/>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <div class="form-group">
-            <label for="inputCompanyRequirementContactPersonFullName"
-                   data-bind="text: $root.loc.stringContactPersonFullNameColon"></label>
+        <div data-bind="ifnot: technologyPortal.isflag">
             <input type="text"
                    class="form-control"
-                   id="inputCompanyRequirementContactPersonFullName"
-                   data-bind="value: contactPersonFullName, attr: { placeholder: $root.loc.placeholderContactPersonFullName }" />
+                   id="inputCategory"
+                   data-bind="value: technologyPortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
+                   required />
         </div>
 
-        <div class="form-group">
-            <label for="inputCompanyRequirementContactPersonEmailAddress"
-                   data-bind="text: $root.loc.stringContactPersonEmailAddressColon"></label>
-            <input type="text"
-                   class="form-control"
-                   id="inputCompanyRequirementContactPersonEmailAddress"
-                   data-bind="value: contactPersonEmailAddress, attr: { placeholder: $root.loc.placeholderContactPersonEmailAddress }" />
-        </div>
-
-        <div class="form-group">
-            <label for="inputCompanyRequirementContactPersonPhoneNumber"
-                   data-bind="text: $root.loc.stringContactPersonPhoneNumberColon"></label>
-            <input type="text"
-                   class="form-control"
-                   id="inputCompanyRequirementContactPersonPhoneNumber"
-                   data-bind="value: contactPersonPhoneNumber, attr: { placeholder: $root.loc.PlaceholderContactPersonPhoneNumber}" />
-        </div>
-
-        <!-- /ko -->
 
     </div>
+
+    <div class="form-group">
+        <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>
+        <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
+        <input type="text"
+               class="form-control"
+               id="inputDescription"
+               data-bind="value: technologyPortal.description, attr: { placeholder: $root.loc.placeholderDescription }"
+               required />
+        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: descriptionOfPersonnelAvailable"></p>-->
+    </div>
+
+    <div class="form-group">
+        <!--<a class="small pull-right" target="_blank"
+           data-bind="visible: $root.getFileUrl($data).length > 0, attr: {href: $root.getFileUrl($data)}">
+            <span data-bind="text: $root.loc.linkDownloadRigAndVesselCatalouge"></span>&nbsp;&nbsp;<i class="fa fa-external-link"></i>
+        </a>-->
+
+        <label class="control-label"
+               data-bind="text: $root.loc.stringBrochure"></label>
+
+        <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-primary btn-file">
+                    <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                    <input id="input-cover-select"
+                           data-bind="fileupload: $root.selectedCatalogue"
+                           type="file"
+                           name="file-select"
+                           accept=".pdf,.doc,.docx,.ppt,.pptx"
+                           onchange='$("#upload-catalogue-info").html($(this).val());'>
+                </span>
+            </span>
+
+            <div class="form-control">
+                <span class='label label-info' id="upload-catalogue-info"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>
+        <code data-bind="text: $root.loc.stringRequired"></code>
+        <input type="text"
+               class="form-control"
+               id="inputContactPerson"
+               data-bind="value: technologyPortal.contactPerson, attr: { placeholder: $root.loc.placeholderEnterContactPersonName }"
+               required />
+        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: contactPerson"></p>-->
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>
+        <code data-bind="text: $root.loc.stringRequired"></code>
+        <input type="text"
+               class="form-control"
+               id="inputEmail"
+               data-bind="value: technologyPortal.email, attr: { placeholder: $root.loc.placeholderEnterEmailAddress }"
+               required />
+        <!-- <p class="small help-text validation-summary-errors" data-bind="validationMessage: email"></p>-->
+    </div>
+
+    <div class="form-group">
+        <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>
+        <code data-bind="text: $root.loc.stringRequired"></code>
+        <input type="text"
+               class="form-control"
+               id="inputTelephoneNumber"
+               data-bind="value: technologyPortal.telephoneNumber, attr: { placeholder: $root.loc.placeholderEnterTelephoneNumber }" />
+        <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: telephoneNumber"></p>-->
+    </div>
+
+    <!-- /ko -->
 
     <div class="row text-right">
         <button class="btn btn-success"
-                data-bind="visible: !$root.companyRequirementIsSelected(),click: $root.addRequirement, text: $root.loc.buttonAdd"></button>
+                data-bind="click: $root.addRequirement, text: $root.loc.buttonAdd"></button>
         <button class="btn btn-default"
-                data-bind="click: $root.newRequirement, visible: $root.companyRequirementIsSelected(), text: $root.loc.buttonNew"></button>
+                data-bind="click: $root.newRequirement, text: $root.loc.buttonNew"></button>
     </div>
 
-    <div class="row title-row">
-        <div class="pull-left">
-            <span data-bind="text: $root.loc.stringRequirementsList"></span>
-        </div>
-    </div>
+
     <div class="row top-pad-10">
-        <!-- ko foreach: company.requirements -->
+        <!-- ko foreach: company.technologyPortalContainers -->
         <div class="row inner-tile"
-             data-bind="click: $root.setSelectedCompanyRequirementItem, css: { selected: $data === $root.selectedCompanyRequirement()}">
+             data-bind="click: $root.setSelectedCompanyTechnologyPortal, css: { selected: $data === $root.selectedCompanyTechnologyPortal()}">
 
             <div class="inner-tile-button-panel"
-                 data-bind="visible: $data === $root.selectedCompanyRequirement()">
+                 data-bind="visible: $data === $root.selectedCompanyTechnologyPortal()">
 
-                <div data-bind="visible : !$root.companyRequirementIsDeleting()">
+                <div data-bind="visible : !$root.companyTechnologyPortalIsDeleting()">
                     <button class="btn btn-danger btn-xs"
-                            data-bind="click: $root.deleteCompanyRequirementItem">
+                            data-bind="click: $root.deleteCompanyTechnologyPortalItem">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>
-
-                <div data-bind="visible : $root.companyRequirementIsDeleting()">
+                <div data-bind="visible : $root.companyTechnologyPortalIsDeleting()">
                     <button class="btn btn-danger btn-xs"
-                            data-bind="command: $root.deleteRequirementItemCommand, text: $root.loc.buttonDelete"></button>
+                            data-bind="command: $root.deleteCompanyTechnologyPortalItemCommand, text: $root.loc.buttonDelete"></button>
 
                     <button class="btn btn-default btn-xs"
-                            data-bind="click: $root.cancelDeleteRequirement, text: $root.loc.buttonCancel"></button>
+                            data-bind="click: $root.cancelDeleteTechnologyPortal, text: $root.loc.buttonCancel"></button>
                 </div>
 
             </div>
@@ -155,16 +192,22 @@
             <div class="col-md-11">
                 <!--<code class="small pull-right" data-bind="text: $root.getRelativeExpiresOnDateTime($data)"></code>-->
                 <!--<span class="small pull-right" data-bind="text: $root.loc.stringValidUntilColon"></span>-->
-                <span data-bind="text: subject"></span>
+                <span data-bind="text:technologyPortal.category"></span>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-11">
+                <!--<code class="small pull-right" data-bind="text: $root.getRelativeExpiresOnDateTime($data)"></code>-->
+                <!--<span class="small pull-right" data-bind="text: $root.loc.stringValidUntilColon"></span>-->
+                <span data-bind="text:technologyPortal.description"></span>
+            </div>
+            <!--<div class="col-md-12">
                 <span class="small" data-bind="text: description"></span>
-            </div>
+            </div>-->
         </div>
         <!-- /ko -->
     </div>
 
-    <!-- /ko -->
+
+    <!-- /ko --> <!--Selected Item-->
 
     <div class="tile row">
         <div class="admin-button-panel text-right">
@@ -174,4 +217,5 @@
                     data-bind="click: cancelEdit, text: $root.loc.buttonCancel"></button>
         </div>
     </div>
+
 </form>

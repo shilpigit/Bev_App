@@ -1,6 +1,38 @@
-﻿<section id="section-home" class="page-section">
-    <h2>MENTORING PORTAL</h2>
-    <br />
+﻿<!--<section id="section-home" class="page-section">
 
     <div data-bind="html: contentToShow"></div>
-</section>
+</section>-->
+
+<div class="row title-row">
+    <div class="pull-right">
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringMentoringPortal"></h3>
+    </div>
+</div>
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#search" data-toggle="tab">
+                <span class="fa fa-edit" aria-hidden="true"></span>
+                <span class="tab-header-label"
+                      data-bind="text: $root.loc.stringParticipatingCompanies"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#businessCoOperation" data-toggle="tab">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringAddCompany"></span>
+            </a>
+        </li>
+    </ul><br />
+    <p> <div data-bind="html: contentToShow"></div></p><br /><br />
+    <div class="tab-content">
+        <!--<div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyMentoringPortalSearch'}">
+        </div>-->
+        <div id="businessCoOperation" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyMentoringPortalScheme'}">
+        </div>
+
+    </div>
+</div>

@@ -44,6 +44,7 @@
             return vm;
 
             function activate() {
+                debugger
                 vm.selectedItem(undefined);
                 vm.canDelete(false);
                 vm.companies(security.listCompanyAccess());

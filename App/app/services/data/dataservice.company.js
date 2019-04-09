@@ -42,6 +42,7 @@
             }
 
             function saveItem(callbacks, data) {
+                debugger
                 return dataaccess.save(data.id ? 'putCompany' : 'postCompany', callbacks, data);
             }
 

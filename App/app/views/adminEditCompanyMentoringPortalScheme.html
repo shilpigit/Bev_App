@@ -1,0 +1,18 @@
+﻿<div data-bind="visible: !isEditing()">
+    <div class="row title-row">
+        <div class="pull-right">
+        </div>
+        <div class="pull-left">
+            <h3 data-bind="text: $root.loc.stringCompanies"></h3>
+        </div>
+    </div>
+
+    <div class="composer-plate">
+
+        <!-- ko foreach: companies -->
+        <!--Admin Standard Company Tile-->
+        <div class="" data-bind="compose: 'adminCompanyTile.html'"></div>
+
+        <!-- /ko -->
+    </div>
+</div>

@@ -4,16 +4,14 @@
     define(['model/item'],
         function (Item) {
 
-            var companyInnovativePortal = function () {
+            var companyTechnologyPortal = function () {
                 var self = this;
 
                 self.id = ko.observable();
                 self.state = function () { };
-                self.token = ko.observable();               
+                self.token = ko.observable();
                 self.countryCode = ko.observable();
-                self.category = ko.observable();
-                self.idea = ko.observable();
-                self.seekingCodeValues = ko.observableArray([]);
+                self.category = ko.observable();    
                 self.description = ko.observable();
                 self.catalogueFileId = ko.observable();
                 self.contactPerson = ko.observable();
@@ -22,8 +20,8 @@
                 self.categoryList = ko.observableArray([]);
                 self.isflag = ko.observable();
             };
-            ko.utils.extend(companyInnovativePortal.prototype, Item);
+            ko.utils.extend(companyTechnologyPortal.prototype, Item);
 
-            return companyInnovativePortal;
+            return companyTechnologyPortal;
         });
 })();
