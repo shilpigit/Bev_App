@@ -3,3 +3,81 @@
         <h4 data-bind="text: $root.loc.stringTechnologyShowcasePortalSearch"></h4>
     </div>
 </div>
+<div class="row">
+    <div class="composer-plate">
+        <div class="form form-admin">
+            <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+                <label for="inputCountry" data-bind="text: $root.loc.stringCountryColon"></label>
+                <select id="inputCountry"
+                        class="form-control"
+                        data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: $root.countryCode, optionsCaption: 'All', optionsDisableDefault: false"></select>
+            </div>
+            <div class="form-group col-md-4  col-sm-12  col-xs-12 ">
+                <label for="inputCategory"
+                       data-bind="text: $root.loc.stringInnovationCategory"></label>
+                <input id="inputCategory"
+                        type="text"
+                        class="form-control"
+                        data-bind="textInput: $root.category"/>
+            </div>
+
+            <div class="form-group col-md-12 right-left-padding-remover">
+                <label class="control-label" for="inputSearchPhrase"
+                       data-bind="text: $root.loc.stringJobSearchPhraseColon"></label>
+
+                <div class="input-group merged">
+                    <input id="inputSearchPhrase"
+                           type="text"
+                           class="form-control"
+                           data-bind="textInput: $root.searchPhrase, attr: {placeholder: $root.loc.placeholderJobSearch}, executeOnEnter: startSearch" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success"
+                                type="button"
+                                data-bind="click: startSearch">
+                            <span data-bind="text: $root.loc.stringSearch"></span>                          
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row" id="searchResult">
+    <div class="composer-plate">
+        <!-- ko foreach: filteredTechnologyProfile -->
+        <div class="inner-tile row small">            
+            <div class="col-md-9">
+                <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>
+                <span data-bind="text: category()"></span>
+            </div>
+            <div class="col-md-3 text-right"
+                 data-bind="visible: catalogueFileId() != null ">                 
+                <a target="_blank" data-bind="attr:{ href: $root.attach + catalogueFileId()}">
+                    <!--<span data-bind="text: $root.loc.stringDownloadCv"></span>-->
+                    <span data-bind="Download Attachment">Download Attachment</span>
+                    <i class="fa fa-external-link"></i>
+                </a>
+            </div>
+            <div class="col-md-5">
+                <label for="inputContactPerson" data-bind="text: $root.loc.stringContactPersonColon"></label>
+                <span data-bind="text: contactPerson()"></span>
+            </div>
+            <div class="col-md-4">
+                <label for="inputEmail" data-bind="text: $root.loc.stringEmailAddressColon"></label>
+                <span data-bind="text: email()"></span>
+            </div>
+            <div class="col-md-3 text-right">
+                <label for="inputTelephoneNumber" data-bind="text: $root.loc.stringTelephoneNumberColon"></label>
+                <span data-bind="text: telephoneNumber()"></span>
+            </div>
+            <div class="col-md-12">
+                <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>
+                <span data-bind="text: description()"></span>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

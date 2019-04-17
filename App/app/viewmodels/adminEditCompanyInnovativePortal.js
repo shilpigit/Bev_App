@@ -31,6 +31,16 @@
                 this.countries = localization.getLocalizedCodeSet('country');
                 this.selectedCompanyInnovativePortal = ko.observable();
                 this.seeking = localization.getLocalizedCodeSet('seeking');
+                this.selectedImage = {
+                    fileUrl: ko.observable(),
+                    fileReference: ko.observable(),
+                    contentType: ko.observable(),
+                    percentage: ko.observable(),
+                    uploadCompleted: ko.observable(),
+                    size: ko.observable(20000000),
+                    sizeIsValid: ko.observable(true)
+                };
+                this.selectedImage.fileUrl.subscribe(mediaChange, this);
                 this.selectedCatalogue = {
                     fileUrl: ko.observable(),
                     fileReference: ko.observable(),
@@ -54,6 +64,8 @@
 
                 //this.categoryList = ko.observableArray();
                 this.isflag = ko.observable(false);
+                this.textAreaGotFocus = textAreaGotFocus;
+                this.textAreaLostFocus = textAreaLostFocus;
               
             };
 
@@ -88,6 +100,14 @@
                   
             return vm;
 
+            function getSelectedContainer() {
+                for (var i = 0; i < vm.companies().length; i++) {
+                    if (vm.companies()[i].id() === vm.selectedItemId()) {
+                        return vm.companies()[i];
+                    }
+                }
+            }
+
             function catalogueMediaChange(newValue) {
                 if (newValue) {
 
@@ -101,6 +121,14 @@
                     container.catalogueFileLocation(vm.selectedCatalogue.fileUrl());
                     container.catalogueFileReference(vm.selectedCatalogue.fileReference());
 
+                }
+            }
+
+            function mediaChange(newValue) {
+                if (newValue) {
+                    var container = getSelectedContainer();
+                    container.logoImageLocation(vm.selectedImage.fileUrl());
+                    container.logoImageReference(vm.selectedImage.fileReference());
                 }
             }
             
@@ -134,6 +162,13 @@
                 //vm.selectedCompanyInnovativePortal(new model.CompanyInnovativePortalContainer());
                 //vm.selectedCompanyInnovativePortal().innovativePortal.isflag = true;
                 //getlist();
+                var container = getSelectedContainer();
+                if (container.company.logoImageId()) {
+                    vm.selectedImage.fileUrl(utilities.resolveFileUrl(container.company.logoImageId()));
+                }
+                else {
+                    vm.selectedImage.fileUrl(config.imageCdn + 'logo/logo-solo.png');
+                }
                 newRequirement();
             }
 
@@ -195,6 +230,18 @@
                         }
                     }
                 }              
+            }
+
+            function textAreaGotFocus(elementId) {
+                var el = $('#' + elementId);
+
+                autosize(el);  // jshint ignore:line
+                utilities.scrollToElement(el);
+            }
+
+            function textAreaLostFocus(elementId) {
+                var el = $('#' + elementId);
+                autosize.destroy(el);  // jshint ignore:line
             }
 
         });

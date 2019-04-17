@@ -24,138 +24,55 @@
                 this.activate = activate;
                 this.canActivate = canActivate;
                 this.utilities = utilities;
-                this.title = 'Technology Showcase Portal Search';
+                this.title = 'Technology Portal Search';
                 this.config = config;
                 this.loc = datacontext.translations.item;
                 this.state = state;
                 this.currentUser = datacontext.user.item.user;
                 this.companies = datacontext.companies.items;
-                this.countries = localization.getLocalizedCodeSet('country');
-                this.companyRequirementSections = localization.getLocalizedCodeSet('companyRequirementSection');
                 this.filteredCompanies = ko.observableArray();
+                this.countries = localization.getLocalizedCodeSet('country');
+                this.countryCode = ko.observable();                            
+                this.parent = ko.observable();
+                this.userId = ko.observable();
+
                 this.isBusy = ko.observable(false);
-                this.searchPhrase = ko.observable('');
-                this.sectionCodeValue = ko.observable();
-                this.regionCodeValue = ko.observable();
-                this.expertiseIndustryCodeValue = ko.observable();
-                this.dataIsBound = ko.observable(false);
-                this.regions = localization.getLocalizedCodeSet('region');
-                this.expertiseIndustries = localization.getLocalizedCodeSet('expertiseIndustryCategory');
-                this.regionCodeValue.subscribe(filterCompanies, this);
-                this.expertiseIndustryCodeValue.subscribe(filterCompanies, this);
+                this.hasResult = ko.observable();
                 this.filterCompanies = filterCompanies;
+                this.filteredTechnologyProfile = ko.observableArray();
+                this.searchPhrase = ko.observable('');
+                this.startSearch = startSearch;
+                this.category = ko.observable('');
+                this.attach = ko.observable();
 
+                this.resourceTypeCodeValue = getResourceValue;
             };
-            var vm = new Model();
 
+            var vm = new Model();
+            vm.countryCode.subscribe(filterCompanies, this);
             vm.searchPhrase.subscribe(filterCompanies, this);
-            vm.sectionCodeValue.subscribe(filterCompanies, this);
+            vm.category.subscribe(filterCompanies, this);
+            vm.attach.subscribe(filterCompanies, this);
+
 
             vm.messageDetail = {
                 message: ko.observable(),
                 type: ko.observable()
             };
+            
+            function getResourceValue() {
+                //if (datacontext.candidateProfiles.items.length != 0)
+                if (vm.companies.length != 0)
+                    return 'candidateProfile';
+                else
+                    return 'company';
+            }  
 
-            vm.getRegionName = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.regions.codes, function (el) {
-                    return el.codeValue() === item.regionCodeValue();
-                });
-
-                if (matches.length > 0) {
-                    return matches[0].name();
-                } else {
-                    return vm.loc.stringUnknown();
-                }
-
-            };
-            vm.getExpertiseIndustryName = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.expertiseIndustries.codes, function (el) {
-                    return el.codeValue() === item.expertiseIndustryCodeValue();
-                });
-
-                if (matches.length > 0) {
-                    return matches[0].name();
-                } else {
-                    return vm.loc.stringUnknown();
-                }
-
-            };
-            vm.summarizeDescription = function (item) {
-
-                if (item.description()) {
-                    return utilities.trimByWord(item.description(), 20);
-                }
-                else {
-                    return 'Who Knows!';
-                }
-
-            };
-            vm.getRelativePostedDateTime = function (item) {
-
-                if (item.createdDateTime()) {
-                    return moment(item.createdDateTime()).fromNow();
-                }
-                else {
-                    return 'Who Knows!';
-                }
-
-            };
-            vm.getRelativeExpiresOnDateTime = function (item) {
-
-                if (item.expireDateTime()) {
-                    return moment(item.expireDateTime()).fromNow();
-                }
-                else {
-                    return 'Who Knows!';
-                }
-
-            };
-            vm.getLocationName = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.countries.codes, function (el) {
-                    return el.codeValue() === item.countryCode();
-                });
-
-                if (matches.length > 0) {
-                    return item.cityName() ? matches[0].name() + '/' + item.cityName() : matches[0].name();
-                }
-            };
-            vm.getCompanyRequirementSectionName = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.companyRequirementSections.codes, function (el) {
-                    return el.codeValue() === item.sectionCodeValue();
-                });
-
-                if (matches.length > 0) {
-                    return matches[0].name();
-                }
-            };
-            vm.getLinkMailToCompanyOwner = function (emailAddress) {
-
-                return 'mailto:' + emailAddress;
-            };
-            vm.getGoogleMapLink = function (item) {
-
-                var matches = ko.utils.arrayFilter(vm.countries.codes, function (el) {
-                    return el.codeValue() === item.countryCode();
-                });
-
-                if (matches.length > 0) {
-
-                    return 'https://www.google.com.my/maps/place/' + (item.cityName() ? matches[0].name() + ' ' + item.cityName() : matches[0].name()) + ' ' + item.addressOne();
-                }
-            };
-            vm.getCompanyProfileUrl = function (item) {
-                return '#/viewcompanyprofile/' + item.id();
-            };
             vm.includeSearchPhrase = function (item) {
-                return ((!vm.sectionCodeValue() || item.sectionCodeValue() === vm.sectionCodeValue()) &&
-                    ((!vm.searchPhrase() || (item.description() && item.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1)) ||
-                        (!vm.searchPhrase() || (item.subject() && item.subject().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1))));
-                //return (item.description() && item.description().length > 0 && item.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1
-                //|| item.subject() && item.subject().length > 0 && item.subject().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1);
+                if ((item.technologyPortal.description() === '' && item.technologyPortal.description().length > 0 && item.technologyPortal.description.toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1)
+                ) {
+                    return true;
+                }
             };
 
             return vm;
@@ -173,9 +90,9 @@
                     logger.logInfo(vm.loc.stringEmailAddressCopiedToClipboard());
                 });
 
-                vm.companyRequirementSections.codes.push({
+                vm.countries.codes.push({
                     codeValue: ko.observable(''),
-                    name: ko.observable('All'),
+                    //name: ko.observable(vm.loc.stringAll()),
                     codeSetId: ko.observable(''),
                     sortOrder: ko.observable(-1)
                 });
@@ -188,35 +105,70 @@
             function filterCompanies() {
 
                 vm.filteredCompanies([]);
+                vm.filteredTechnologyProfile([]);
 
                 for (var c = 0; c < vm.companies().length; c++) {
 
                     var company = vm.companies()[c].company;
-
-                    if (company.requirements && company.isActive()) {
-
-                        for (var d = 0; d < company.requirements().length; d++) {
-
-                            var requirement = company.requirements()[d];
-
-                            if ((!vm.sectionCodeValue() || requirement.sectionCodeValue() === vm.sectionCodeValue()) &&
-                                ((!vm.searchPhrase() || (requirement.description() && requirement.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1)) ||
-                                    (!vm.searchPhrase() || (requirement.subject() && requirement.subject().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1)))) {
-
+                    if (company.technologyPortalContainers) {
+                        
+                        for (var d = 0; d < company.technologyPortalContainers().length; d++) {
+                            var technologyPortalContainers = company.technologyPortalContainers()[d];
+                                                       
+                            if (!vm.countryCode() && !vm.searchPhrase() && !vm.category()) {                                
                                 vm.filteredCompanies.push(vm.companies()[c]);
-                                break;
+                                vm.filteredTechnologyProfile.push(company.technologyPortalContainers()[d].technologyPortal);
+                            }
+                            else if (!vm.searchPhrase() && !vm.category()) {
+                                if ((technologyPortalContainers.technologyPortal.countryCode() === vm.countryCode())
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredTechnologyProfile.push(company.technologyPortalContainers()[d].technologyPortal);
+                                }
+                            }
+                            else if (!vm.countryCode() && !vm.searchPhrase())
+                            {
+                                if (technologyPortalContainers.technologyPortal.category().toLowerCase().indexOf(vm.category().toLowerCase()) > -1
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredTechnologyProfile.push(company.technologyPortalContainers()[d].technologyPortal);
+                                }
+                            }
+                            else if (!vm.searchPhrase()) {
+                                if (technologyPortalContainers.technologyPortal.countryCode() === vm.countryCode() 
+                                    && technologyPortalContainers.technologyPortal.category().toLowerCase().indexOf(vm.category().toLowerCase()) > -1
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredTechnologyProfile.push(company.technologyPortalContainers()[d].technologyPortal);
+                                }
+                            }
+                            else if ((technologyPortalContainers.technologyPortal.description()
+                                && technologyPortalContainers.technologyPortal.description().length > 0
+                                && technologyPortalContainers.technologyPortal.description().toLowerCase().indexOf(vm.searchPhrase().toLowerCase()) > -1) ||                                
+                                (technologyPortalContainers.technologyPortal.countryCode() === vm.countryCode())
+                            ) {
+                                vm.filteredCompanies.push(vm.companies()[c]);
+                                vm.filteredTechnologyProfile.push(company.technologyPortalContainers()[d].technologyPortal);
 
                             }
+                            
+                            if (company.technologyPortalContainers()[d].technologyPortal.catalogueFileId())
+                                vm.attach = config.root + 'api/storage/redirect?id=';// + company.technologyPortalContainers()[d].technologyPortal.catalogueFileId();
                         }
                     }
                 }
-
-                if (vm.filteredCompanies().length === 0) {
+                if (vm.filteredTechnologyProfile().length === 0) {
                     vm.messageDetail.type('info');
                     vm.messageDetail.message(vm.loc.stringCompanyRequirementSearchHasNoResult());
                 } else {
                     vm.messageDetail.message('');
                 }
             }
+
+            function startSearch() {
+                filterCompanies();
+                utilities.scrollToElement($('#searchResult'));
+            }
+
         });
 }());

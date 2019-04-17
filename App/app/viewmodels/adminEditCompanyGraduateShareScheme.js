@@ -43,8 +43,7 @@
 
             return vm;
 
-            function activate() {
-                debugger
+            function activate() {                
                 vm.selectedItem(undefined);
                 vm.canDelete(false);
                 vm.companies(security.listCompanyAccess());

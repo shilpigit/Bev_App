@@ -16,15 +16,43 @@
 </div>
 <form class="form form-admin" data-bind="visible: isEditing()">
 
-    <!-- ko with : selectedItem-->
+    <div class="col-md-2">
+        <div class="form-group">
+            <img class="img-thumbnail img-responsive"
+                 data-bind="attr:{ src: $root.selectedImage.fileUrl}" />
+        </div>
+    </div>
 
+    <div class="form-group">
+        <label class="control-label" for="timeZone"
+               data-bind="text: $root.loc.stringCompanyLogoColon"></label>
+
+        <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-primary btn-file">
+                    <span data-bind="html: $root.loc.htmlBrowse"> </span>
+                    <input id="input-file-select"
+                           data-bind="fileupload: $root.selectedImage"
+                           type="file"
+                           name="file-select"
+                           accept=".jpg,.jpeg,.png,.gif"
+                           onchange='$("#upload-file-info").html($(this).val());'>
+                </span>
+            </span>
+
+            <div class="form-control">
+                <span class='label label-info' id="upload-file-info"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ko with : selectedItem-->
     <div class="row title-row">
         <div class="pull-left">
             <h4 data-bind="text: company.name"></h4>
             <span class="help" data-bind="text: $root.loc.stringAddOrEditInnovationPortal"></span>
         </div>
     </div>
-
     <!-- ko with: $root.selectedCompanyInnovativePortal -->
 
     <div class="form-group">
@@ -34,9 +62,9 @@
                 class="form-control"
                 data-bind="options: $root.countries.codes, optionsText: 'name', optionsValue: 'codeValue', value: innovativePortal.countryCode,optionsCaption: 'Select...', optionsDisableDefault: true"></select>
     </div>
-   
+
     <div class="form-group">
-        <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>      
+        <label for="inputCategory" data-bind="text: $root.loc.stringInnovationCategory"></label>
         <div data-bind="if: innovativePortal.isflag">
             <input id="inputCategory" data-bind="autocomplete: { data:categories }, value: innovativePortal.category" value="" class="form-control" />
         </div>
@@ -48,9 +76,9 @@
                    data-bind="value: innovativePortal.category, attr: { placeholder: $root.loc.placeholderCategory }"
                    required />
         </div>
-
+        <p class="small help-text" data-bind="text: $root.loc.textMultiCategoryHelp"></p>
     </div>
-    
+
     <div class="form-group">
         <label for="inputCompanyIdea"
                data-bind="text: $root.loc.stringCompanyInnovationIdea"></label>
@@ -76,11 +104,9 @@
     <div class="form-group">
         <label for="inputDescription" data-bind="text: $root.loc.stringCompanyDescriptionColon"></label>
         <!--<code data-bind="text: $root.loc.stringRequired"></code>-->
-        <input type="text"
-               class="form-control"
-               id="inputDescription"
-               data-bind="value: innovativePortal.description, attr: { placeholder: $root.loc.placeholderDescription }"
-               required />
+        <textarea class="form-control"
+                  id="inputDescription"
+                  data-bind="value: innovativePortal.description, attr: { placeholder: $root.loc.placeholderDescriptionOfInnovativeRequirementColon }, event: { focus: function(data, event) { $root.textAreaGotFocus('inputDescription') }, blur: function(data, event) { $root.textAreaLostFocus('inputDescription') } }"></textarea>
         <!--<p class="small help-text validation-summary-errors" data-bind="validationMessage: descriptionOfPersonnelAvailable"></p>-->
     </div>
 

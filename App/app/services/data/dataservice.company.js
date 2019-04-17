@@ -41,8 +41,7 @@
                 dataaccess.request('deleteCompany', callbacks, {id: id});
             }
 
-            function saveItem(callbacks, data) {
-                debugger
+            function saveItem(callbacks, data) {                
                 return dataaccess.save(data.id ? 'putCompany' : 'postCompany', callbacks, data);
             }
 

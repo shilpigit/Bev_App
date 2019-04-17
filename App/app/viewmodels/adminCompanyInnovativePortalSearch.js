@@ -37,7 +37,8 @@
                 this.seeking = localization.getLocalizedCodeSet('seeking');
                 this.parent = ko.observable();
                 this.userId = ko.observable();
-
+                this.category = ko.observable('');
+                this.attach = ko.observable();
 
                 this.isBusy = ko.observable(false);
                 this.hasResult = ko.observable();
@@ -54,7 +55,8 @@
            
             vm.countryCode.subscribe(filterCompanies, this);
             vm.searchPhrase.subscribe(filterCompanies, this);
-            
+            vm.category.subscribe(filterCompanies, this);
+            vm.attach.subscribe(filterCompanies, this);
 
             vm.messageDetail = {
                 message: ko.observable(),
@@ -151,16 +153,30 @@
                         for (var d = 0; d < company.innovativePortalContainers().length; d++) {
                             var innovativePortalContainers = company.innovativePortalContainers()[d];
                             //innovativePortal                               
-                            if (!vm.countryCode() && !vm.searchPhrase()) {
+                            if (!vm.countryCode() && !vm.searchPhrase() && !vm.category()) {
                                 vm.filteredCompanies.push(vm.companies()[c]);
                                 vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
                             }
-                            else if (!vm.searchPhrase()) {
+                            else if (!vm.searchPhrase() && !vm.category()) {
                                 if ((innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode())
                                 ) {
                                     vm.filteredCompanies.push(vm.companies()[c]);
                                     vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
-                                    //break;
+                                }
+                            }
+                            else if (!vm.countryCode() && !vm.searchPhrase()) {
+                                if (innovativePortalContainers.innovativePortal.category().toLowerCase().indexOf(vm.category().toLowerCase()) > -1
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
+                                }
+                            }
+                            else if (!vm.searchPhrase()) {
+                                if (innovativePortalContainers.innovativePortal.countryCode() === vm.countryCode() 
+                                    && innovativePortalContainers.innovativePortal.category().toLowerCase().indexOf(vm.category().toLowerCase()) > -1
+                                ) {
+                                    vm.filteredCompanies.push(vm.companies()[c]);
+                                    vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
                                 }
                             }
                            else if ((innovativePortalContainers.innovativePortal.description()
@@ -172,9 +188,10 @@
                             {
                                 vm.filteredCompanies.push(vm.companies()[c]);
                                 vm.filteredRedundantProfile.push(company.innovativePortalContainers()[d].innovativePortal);
-                                //break;
-
                             }
+
+                            if (company.innovativePortalContainers()[d].innovativePortal.catalogueFileId())
+                                vm.attach = config.root + 'api/storage/redirect?id=';// + company.innovativePortalContainers()[d].innovativePortal.catalogueFileId();
                         }
                     }
                 }                

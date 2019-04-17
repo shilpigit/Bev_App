@@ -217,7 +217,7 @@
 
                 return config.imageCdn + 'logo/logo-solo.png';
             };
-
+            
             vm.getCandidateCvUrl = function (item) {
 
                 if (item.candidateProfile.cvFileId()) {

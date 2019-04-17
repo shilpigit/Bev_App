@@ -61,6 +61,10 @@
                 this.cancelDeleteTechnologyPortal = cancelDeleteTechnologyPortal;
                 this.setSelectedCompanyTechnologyPortal = setSelectedCompanyTechnologyPortal;
                 this.isflag = ko.observable(false);
+                this.startSearch = startSearch;
+
+                this.textAreaGotFocus = textAreaGotFocus;
+                this.textAreaLostFocus = textAreaLostFocus;
             };
 
             var vm = new Model();
@@ -88,6 +92,16 @@
             vm.companyTechnologyIsSelected = ko.pureComputed(function () {
                 return vm.selectedCompanyTechnologyPortal().id() ? true : false;
             }, this);
+            
+            vm.getCandidateCvUrl = function (item) {
+
+                if (item.candidateProfile.cvFileId()) {
+                    return config.root + 'api/storage/redirect?id=' + item.candidateProfile.cvFileId();
+                }
+
+                return '';
+            };
+
           
 
             editor.extend(vm, datacontext.companies);
@@ -153,8 +167,7 @@
                 return true;
             }
 
-            function enterSave() {
-                debugger
+            function enterSave() {                
                 return true;
             }
 
@@ -227,6 +240,38 @@
                         }
                     }
                 }
+            }
+
+
+            function startSearch(item) {
+
+                instrumentationSrv.trackEvent('CompanyLogo', {
+                    'Command': 'StartDownload'                   
+                });
+
+                vm.messageDetail.message('');                
+                if (item.candidateProfile.cvFileId()) {
+                    return config.root + 'api/storage/redirect?id=' + item.candidateProfile.cvFileId();
+                }
+                //vm.isBusy(true);
+                //vm.isShowingGuide(false);
+
+                //vm.pagingTokens(['', '']);
+
+                //loadSearchPage();
+
+            }
+
+            function textAreaGotFocus(elementId) {
+                var el = $('#' + elementId);
+
+                autosize(el);  // jshint ignore:line
+                utilities.scrollToElement(el);
+            }
+
+            function textAreaLostFocus(elementId) {
+                var el = $('#' + elementId);
+                autosize.destroy(el);  // jshint ignore:line
             }
             
         });

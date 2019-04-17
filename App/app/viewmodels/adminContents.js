@@ -34,8 +34,7 @@
             });
 
             vm.contentKeys = ko.pureComputed({
-                read: function () {
-                   
+                read: function () {                   
                     var keys = localization.getLocalizedCodeSet(vm.selectedItem().categoryCodeValue() + 'Key');
                     return keys;
                 }
@@ -80,19 +79,17 @@
                 return true;
             }
 
-            function getContentCategory(typeCode, keyCode) {
-
+            function getContentCategory(typeCode, keyCode) {                
                 var keys = localization.getLocalizedCodeSet(typeCode + 'Key');
                 return vm.contentCategorySet.getById(typeCode).name() + ' - ' + keys.getById(keyCode).name();
 
             }
 
-            function getLanguage(languageCode) {
+            function getLanguage(languageCode) {                
                 return vm.languageSet.getById(languageCode).name;
             }
 
-            function selectedContentCategoryChanged() {
-
+            function selectedContentCategoryChanged() {                
                 instrumentationSrv.trackEvent('Contents', {'Command': 'ListContent'});
 
                 vm.filteredCompanies.removeAll();
