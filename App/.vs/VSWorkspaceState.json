@@ -4,7 +4,10 @@
     "\\app",
     "\\app\\model",
     "\\app\\viewmodels",
-    "\\app\\views"
+    "\\app\\views",
+    "\\dist",
+    "\\images",
+    "\\images\\icons"
   ],
   "PreviewInSolutionExplorer": false
 }

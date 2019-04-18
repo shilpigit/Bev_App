@@ -2,8 +2,7 @@
 
     <div data-bind="html: contentToShow"></div>
 </section>-->
-
-<div class="row title-row">
+<!--<div class="row title-row">
     <div class="pull-right">
     </div>
     <div class="pull-left">
@@ -29,8 +28,50 @@
     </ul><br />
     <p> <div data-bind="html: contentToShow"></div></p><br /><br />
     <div class="tab-content">
-        <!--<div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyMentoringPortalSearch'}">
-        </div>-->
+        <div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyMentoringPortalSearch'}">
+        </div>
+        <div id="businessCoOperation" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyMentoringPortalScheme'}">
+        </div>
+
+    </div>
+</div>-->
+<div class="row title-row">
+    <div class="pull-right">
+    </div>
+    <div class="pull-left">
+        <h3 data-bind="text: $root.loc.stringMentoringPortal"></h3>
+
+    </div>
+</div>
+
+<div class="composer-plate">
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#search" data-toggle="tab">
+                <span class="fa fa-edit" aria-hidden="true"></span>
+                <span class="tab-header-label"
+                      data-bind="text: $root.loc.stringParticipatingCompanies"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#businessCoOperation" data-toggle="tab">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                <span class="tab-header-label" data-bind="text: $root.loc.stringAddCompany"></span>
+            </a>
+        </li>
+    </ul><br />
+    <p>
+        Our Employee Internationalisation Programme is a new initiative and the first of its kind in the world. It is an inter-company initiative managed
+        byOil Diversity Global encouraging companies to multi train and Internationalise their personnel in order to fast track them through their
+        organisation and gain invaluable International experience. This not only encourages multi-discipline training but encourages companies to work
+        in business collaboration together. This will all be facilitated and candidates matched with companies based on our clients requirements and
+        end goal. We will follow these journeys and promote through the homepage of our website as well as International press when the initiative launches in
+        July 2019. Simply register your company and relevant contact below, and one of our advisors will be in direct contact with you.
+    </p><br /><br />
+    <div class="tab-content">
+        <div id="search" class="tab-pane fade in active" data-bind="compose: { model: 'viewmodels/adminCompanyMentoringPortalSearch'}">
+        </div>
         <div id="businessCoOperation" class="tab-pane" data-bind="compose: { model: 'viewmodels/adminEditCompanyMentoringPortalScheme'}">
         </div>
 

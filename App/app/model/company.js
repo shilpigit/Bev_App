@@ -11,8 +11,9 @@
             'model/companyGraduateRecruitment',
             'model/companyEquipmentContainer',
             'model/companyInnovativePortalContainer',
-            'model/companyTechnologyPortalContainer'],
-        function (Item, CompanyDiscipline, CompanyRequirement, CompanyRedundantProfile, CompanySponsorshipPackage, CompanyGraduateShareScheme, CompanyGraduateRecruitment, CompanyEquipmentContainer, CompanyInnovativePortalContainer, CompanyTechnologyPortalContainer) {
+            'model/companyTechnologyPortalContainer',
+            'model/companyMentoring',],
+        function (Item, CompanyDiscipline, CompanyRequirement, CompanyRedundantProfile, CompanySponsorshipPackage, CompanyGraduateShareScheme, CompanyGraduateRecruitment, CompanyEquipmentContainer, CompanyInnovativePortalContainer, CompanyTechnologyPortalContainer, CompanyMentoring) {
 
             var Company = function () {
                 var self = this;
@@ -52,6 +53,8 @@
                 self.employeesGroupInvitationUrl = ko.observable();
                 self.innovativePortalContainers = ko.observableArray();
                 self.technologyPortalContainers = ko.observableArray();
+                self.isParticipatingInMentoring = ko.observable();
+                self.mentoringPortal = new CompanyMentoring();
 
                 self.state.mapping = {
                     'disciplines': {
